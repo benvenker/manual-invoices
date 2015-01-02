@@ -1,0 +1,22 @@
+<template name="invoiceLinesTable">
+  <table class="flakes-table">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>STORE</td>
+        <td>CLASS</td>
+        <td>UNIT CST</td>
+        <td>QTY</td>
+        <td>STYLE</td>
+        <td>SKU</td>
+        <td>DESC.</td>
+        <td>LINE TOTAL</td>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each invoiceLines}}
+      {{> invoiceLineEdit}}
+      {{/each}}
+    </tbody>
+  </table>
+</template>

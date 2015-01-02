@@ -1,0 +1,65 @@
+<template name="invoiceHeaderForm">
+  <fieldset>
+    <legend>Invoice Header</legend>
+    <div data-row-span="4">
+      <div data-field-span="1">
+        <label>PO</label>
+        <input type="text" name="PO" >
+      </div>
+      <div data-field-span="1">
+        <label>BOL</label>
+        <input type="text" name="BOL">
+      </div>
+      <div data-field-span="1">
+        <label>TOTAL QUANTITY</label>
+        <input type="text" name="totalQuantity">
+      </div>
+      <div data-field-span="1">
+        <label>TOTAL COST</label>
+        <input type="text" name="totalCost">
+      </div>
+    </div>
+    <div data-row-span="5">
+      <div data-field-span="1">
+        <label>OPCO</label>
+        <select name="OPCO"></select>
+      </div>
+      <div data-field-span="1">
+        <label>Department</label>
+        <select class="department-select" name="department"></select>
+      </div>
+      <div data-field-span="1">
+        <label>Manufacturer</label>
+        <select class="" name="manufacturer"></select>
+      </div>
+      <div data-field-span="2">
+        <label>Vendor Name</label>
+        <select name="vendorName"></select>
+      </div>
+    </div>
+    <div data-row-span="5">
+      <div data-field-span="1">
+        <label>INVOICE NUMBER</label>
+        <input type="text" name="invoiceNumber">
+      </div>
+      <div data-field-span="1">
+        <label>TRANSACTION CODE</label>
+        <select class="trans-code-select" name="transactionCode"></select>
+      </div>
+      <div data-field-span="1"  class="">
+        <label>SOURCE</label>
+        <select class="source-select" name="source"></select>
+      </div>
+      <div data-field-span="1">
+        <label>INVOICE DATE</label>
+        <input type="text" name="invoiceDate">
+      </div>
+    </div>
+    <div data-row-span="12">
+      <div data-field-span="" style="width:100%;" >
+        <label>DESCRIPTION</label>
+        <textarea name="description"></textarea>
+      </div>
+    </div>
+  </fieldset>
+</template>

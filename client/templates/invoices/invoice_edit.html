@@ -1,0 +1,23 @@
+<template name="invoiceEdit">
+  <form class="grid-form">
+    {{> invoiceHeader}}
+    <br>
+    <br>
+    <fieldset>
+      <legend>Invoice Lines <small><a href="#" class=" add-invoice-line"><b>Add Lines</b></a></small>
+      </legend>
+    </fieldset>
+    {{> invoiceLinesTable}}
+    <hr>
+    <br>
+    <div class="grid-8 gutter-10">
+      <div class="span-6"></div>
+      <div class="span-1">
+        <a class="button-green confirm-changes"><b>Confirm</b></a>
+      </div>
+      <div class="span-1">
+        <a class="button-red edit-invoice" href="{{pathFor 'invoiceEdit'}}"><b>Edit</b></a>
+      </div>
+    </div>
+  </form>
+</template>

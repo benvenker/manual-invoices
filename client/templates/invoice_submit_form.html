@@ -1,0 +1,38 @@
+<template name="invoiceSubmitForm">
+  <form class="grid-form">
+    {{> invoiceHeaderForm}}
+    <br>
+    <br>
+    <fieldset>
+      <legend>Invoice Lines <small><a href="#" class=" add-invoice-line"><b>Add Lines</b></a></small>
+      </legend>
+    </fieldset>
+    <table class="flakes-table">
+      <thead>
+        <tr>
+          <td>#</td>
+          <td>STORE</td>
+          <td>CLASS</td>
+          <td>UNIT CST</td>
+          <td>QTY</td>
+          <td>STYLE</td>
+          <td>SKU</td>
+          <td>DESC.</td>
+          <td>LINE TOTAL</td>
+        </tr>
+      </thead>
+      <tbody>
+        {{> invoiceLine}}
+      </tbody>
+    </table>
+    <hr>
+    <br>
+    <div class="grid-12 gutter-20" >
+      <div class="span-10"></div>
+      <div clas="span-2">
+        <a class="button-darkblue add-invoice"><b>Submit</b></a>
+      </div>
+    </div>
+    <br>
+  </form>
+</template>

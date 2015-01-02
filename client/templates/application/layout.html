@@ -1,0 +1,26 @@
+<template name="layout">
+  <div class="flakes-frame">
+    <div class="flakes-navigation">
+      <ul>
+        <li><a href="index.html" title="Getting Started">Getting Started</a>
+        </li>
+        <li><a href="{{pathFor 'invoiceSubmitForm'}}" title="Enter Invoices">Enter Manual Invoices</a>
+        </li>
+      </ul>
+      <ul>
+      </ul>
+    </div>
+    <div class="flakes-content">
+      <div class="flakes-mobile-top-bar">
+        <a href="" class="logo-wrap">HBC AP
+        </a>
+
+        <a href="" class="navigation-expand-target">Nav
+        </a>
+      </div>
+      <div class="view-wrap">
+        {{> yield}}
+      </div>
+    </div>
+  </div>
+</template>

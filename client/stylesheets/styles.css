@@ -1,0 +1,7 @@
+body {
+  overflow: auto;
+}
+
+td .invoiceLineNumber {
+  width: 20px;
+}
