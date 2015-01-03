@@ -44,40 +44,26 @@ Template.invoiceEdit.events({
 
     // Update all the invoice lines
     table.find('tr').each(function(i, el) {
+      var $tds = $(this).find('td input');
+      var invoiceLine = {
+        invoiceId: currentInvoiceId,
+        invoiceLineNumber: $tds.eq(0).val(),
+        store: $tds.eq(1).val(),
+        itemClass: $tds.eq(2).val(),
+        unitCost: $tds.eq(3).val(),
+        quantity: $tds.eq(4).val(),
+        style: $tds.eq(5).val(),
+        sku: $tds.eq(6).val(),
+        description: $tds.eq(7).val(),
+        lineTotal: $tds.eq(8).val()
+      }
+
       if ($(this).attr('id')) {
         // Update existing invoice line
         currentInvoiceLineId = $(this).attr('id');
-
-        var $tds = $(this).find('td input');
-        var invoiceLineProperties = {
-          // invoiceId: invoice._id,
-          invoiceLineNumber: $tds.eq(0).val(),
-          store: $tds.eq(1).val(),
-          itemClass: $tds.eq(2).val(),
-          unitCost: $tds.eq(3).val(),
-          quantity: $tds.eq(4).val(),
-          style: $tds.eq(5).val(),
-          sku: $tds.eq(6).val(),
-          description: $tds.eq(7).val(),
-          lineTotal: $tds.eq(8).val()
-        }
-        InvoiceLines.update(currentInvoiceLineId, {$set: invoiceLineProperties});
-
+        InvoiceLines.update(currentInvoiceLineId, {$set: invoiceLine});
       } else {
         // Create new invoice line
-        var $tds = $(this).find('td input');
-        var invoiceLine = {
-          invoiceId: currentInvoiceId,
-          invoiceLineNumber: $tds.eq(0).val(),
-          store: $tds.eq(1).val(),
-          itemClass: $tds.eq(2).val(),
-          unitCost: $tds.eq(3).val(),
-          quantity: $tds.eq(4).val(),
-          style: $tds.eq(5).val(),
-          sku: $tds.eq(6).val(),
-          description: $tds.eq(7).val(),
-          lineTotal: $tds.eq(8).val()
-        }
         InvoiceLines.insert(invoiceLine);
       }
     });
