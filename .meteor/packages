@@ -12,4 +12,5 @@ iron:router
 coffeescript
 bdunnette:flakes
 sacha:spin
+accounts-password
 

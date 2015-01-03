@@ -42,7 +42,7 @@ Template.invoiceEdit.events({
 
     Invoices.update(currentInvoiceId, {$set: invoiceProperties});
 
-    // Update all the invoice lines
+    // Get all the invoice lines
     table.find('tr').each(function(i, el) {
       var $tds = $(this).find('td input');
       var invoiceLine = {
@@ -59,7 +59,7 @@ Template.invoiceEdit.events({
       }
 
       if ($(this).attr('id')) {
-        // Update existing invoice line
+        // Update if existing invoice line
         currentInvoiceLineId = $(this).attr('id');
         InvoiceLines.update(currentInvoiceLineId, {$set: invoiceLine});
       } else {
