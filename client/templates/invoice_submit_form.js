@@ -4,14 +4,15 @@ Template.invoiceSubmitForm.rendered = function(){
   $('.add-invoice-line').click(function(event){
     event.preventDefault();
     counter++;
-    var newRow = $('<tr><td><input type="text" class="invoiceLineNumber" value="' + counter + '" disabled="true"></td><td><input type="text" class="store"></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost"></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" value=""></td><td><input type="text" class="sku" value=""></td><td><input type="text" class="description" value=""></td><td><input type="text" class="lineTotal" value=""></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
+    var newRow = $('<tr><td><input type="text" class="store"></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost"></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" value=""></td><td><input type="text" class="sku" value=""></td><td><input type="text" class="description" value=""></td><td><input type="text" class="lineTotal" value=""></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
+
     $('table.flakes-table').append(newRow);
   });
 
   // Remove an invoice line from the table
-  $('.remove-invoice-line').click(function(event) {
-    $(this).closest('tr').remove();
-  });
+  // $('a.remove-invoice-line').click(function(event) {
+  //   $(this).closest('tr').remove();
+  // });
 }
 
 Template.invoiceSubmitForm.events({
@@ -36,23 +37,34 @@ Template.invoiceSubmitForm.events({
     console.log(invoice._id);
 
     // Get all the invoice lines
+    var invoiceLineNum = 1;
     table.find('tr').each(function(i, el) {
       var $tds = $(this).find('td input');
       var invoiceLine = {
         invoiceId: invoice._id,
-        invoiceLineNumber: $tds.eq(0).val(),
-        store: $tds.eq(1).val(),
-        itemClass: $tds.eq(2).val(),
-        unitCost: $tds.eq(3).val(),
-        quantity: $tds.eq(4).val(),
-        style: $tds.eq(5).val(),
-        sku: $tds.eq(6).val(),
-        description: $tds.eq(7).val(),
-        lineTotal: $tds.eq(8).val()
+        invoiceLineNumber: invoiceLineNum,
+        store: $tds.eq(0).val(),
+        itemClass: $tds.eq(1).val(),
+        unitCost: $tds.eq(2).val(),
+        quantity: $tds.eq(3).val(),
+        style: $tds.eq(4).val(),
+        sku: $tds.eq(5).val(),
+        description: $tds.eq(6).val(),
+        lineTotal: $tds.eq(7).val()
       }
       InvoiceLines.insert(invoiceLine);
+      // Increment the invoice line number
+      invoiceLineNum++;
     });
     Router.go('invoicePage', invoice);
 
+  },
+
+  'click .remove-invoice-line': function(e) {
+    e.preventDefault();
+    $('.remove-invoice-line').click(function(event) {
+      $(this).closest('tr').remove();
+      Session.set("invoiceLines", counter - 1);
+    });
   }
 });
