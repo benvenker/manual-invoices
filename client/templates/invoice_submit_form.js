@@ -1,25 +1,13 @@
 Template.invoiceSubmitForm.rendered = function(){
-  // Add an invoice line to the table
-  var counter = 1;
-  $('.add-invoice-line').click(function(event){
-    event.preventDefault();
-    counter++;
-    var newRow = $('<tr><td><input type="text" class="store"></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost"></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" value=""></td><td><input type="text" class="sku" value=""></td><td><input type="text" class="description" value=""></td><td><input type="text" class="lineTotal" value=""></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
-
-    $('table.flakes-table').append(newRow);
-  });
-
-  // Remove an invoice line from the table
-  // $('a.remove-invoice-line').click(function(event) {
-  //   $(this).closest('tr').remove();
-  // });
+  // On-rendered code here
 }
 
 Template.invoiceSubmitForm.events({
-  'click .add-invoice-line': function() {
-    // set the invoice line count to 1 and create counting variable
-    var counter = 1;
-    Session.set("invoiceLines", counter + 1);
+  'click .add-invoice-line': function(e) {
+    e.preventDefault();
+      var newRow = $('<tr><td><input type="text" class="store"></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost"></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" value=""></td><td><input type="text" class="sku" value=""></td><td><input type="text" class="description" value=""></td><td><input type="text" class="lineTotal" value=""></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
+
+      $('table.flakes-table').append(newRow);
   },
 
   'click .add-invoice': function(){
@@ -38,7 +26,7 @@ Template.invoiceSubmitForm.events({
       invoiceDate: form.find('[name=invoiceDate]').val(),
       description: form.find('[name=description]').val(),
       submitted: moment(new Date()).format('L'),
-      
+
     }
 
     invoice._id = Invoices.insert(invoice);
@@ -80,7 +68,6 @@ Template.invoiceSubmitForm.events({
     e.preventDefault();
     $('.remove-invoice-line').click(function(event) {
       $(this).closest('tr').remove();
-      Session.set("invoiceLines", counter - 1);
     });
   }
 });
