@@ -30,15 +30,30 @@ Template.invoiceSubmitForm.events({
     var invoice = {
       PO: form.find('[name=PO]').val(),
       BOL: form.find('[name=BOL]').val(),
-      totalQuantity: form.find('[name=totalQuantity]').val()
+      totalQuantity: form.find('[name=totalQuantity]').val(),
+      totalCost: form.find('[name=totalCost]').val(),
+      // TODO: add dropdowns here
+      invoiceNumber: form.find('[name=invoiceNumber]').val(),
+      // TODO: add rest of dropdowns here
+      invoiceDate: form.find('[name=invoiceDate]').val(),
+      description: form.find('[name=description]').val(),
+      submitted: moment(new Date()).format('L'),
+      
     }
 
     invoice._id = Invoices.insert(invoice);
     console.log(invoice._id);
 
-    // Get all the invoice lines
-    var invoiceLineNum = 1;
+    /************ Get all the invoice lines ***************/
+
+    // Count the invoice lines
+    var invoiceLineNum = InvoiceLines.find({InvoiceId: invoice._id}).count();
+    console.log(invoiceLineNum);
+
     table.find('tr').each(function(i, el) {
+      // Increment the invoice line number
+      invoiceLineNum++;
+
       var $tds = $(this).find('td input');
       var invoiceLine = {
         invoiceId: invoice._id,
@@ -50,11 +65,12 @@ Template.invoiceSubmitForm.events({
         style: $tds.eq(4).val(),
         sku: $tds.eq(5).val(),
         description: $tds.eq(6).val(),
-        lineTotal: $tds.eq(7).val()
+        lineTotal: $tds.eq(7).val(),
+        submitted: moment(new Date()).format('L'),
       }
       InvoiceLines.insert(invoiceLine);
-      // Increment the invoice line number
-      invoiceLineNum++;
+
+      console.log(invoiceLineNum);
     });
     Router.go('invoicePage', invoice);
 
