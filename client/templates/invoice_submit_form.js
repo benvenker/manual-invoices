@@ -1,16 +1,17 @@
 Template.invoiceSubmitForm.rendered = function(){
+  // Add an invoice line to the table
   var counter = 1;
   $('.add-invoice-line').click(function(event){
     event.preventDefault();
     counter++;
-    var newRow = $('<tr><td><input type="text" class="invoiceLineNumber" value="' + counter + '" disabled="true"></td><td><input type="text" class="store"></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost"></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" value=""></td><td><input type="text" class="sku" value=""></td><td><input type="text" class="description" value=""></td><td><input type="text" class="lineTotal" value=""></td></tr>');
+    var newRow = $('<tr><td><input type="text" class="invoiceLineNumber" value="' + counter + '" disabled="true"></td><td><input type="text" class="store"></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost"></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" value=""></td><td><input type="text" class="sku" value=""></td><td><input type="text" class="description" value=""></td><td><input type="text" class="lineTotal" value=""></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
     $('table.flakes-table').append(newRow);
   });
 
+  // Remove an invoice line from the table
   $('.remove-invoice-line').click(function(event) {
-    event.preventDefault();
     $(this).closest('tr').remove();
-  })
+  });
 }
 
 Template.invoiceSubmitForm.events({
