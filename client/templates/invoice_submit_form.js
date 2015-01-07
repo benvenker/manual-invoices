@@ -20,9 +20,13 @@ Template.invoiceSubmitForm.events({
       BOL: form.find('[name=BOL]').val(),
       totalQuantity: form.find('[name=totalQuantity]').val(),
       totalCost: form.find('[name=totalCost]').val(),
-      // TODO: add dropdowns here
+      OPCO: form.find('[name=OPCOs]').val(),
+      department: form.find('[name=departments]').val(),
+      manufacturer: form.find('[name=manufacturers]').val(),
+      vendorName: form.find('[name=vendorNames]').val(),
       invoiceNumber: form.find('[name=invoiceNumber]').val(),
-      // TODO: add rest of dropdowns here
+      transactionCode: form.find('[name=transactionCodes]').val(),
+      // TODO: add SOURCE dropdown here
       invoiceDate: form.find('[name=invoiceDate]').val(),
       description: form.find('[name=description]').val(),
       submitted: moment(new Date()).format('L'),
