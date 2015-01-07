@@ -6,8 +6,8 @@
 Template.vendorNames.helpers({
   vendorNames: function() {
     // TODO: Probably need to make a new collection that has vendor names + dept. mfg.
-    var everything = Suppliers.find({department: parseInt(Session.get('department'))}, {sort: {vndrLongNm:1}}).fetch();
-    var justVendors = _.pluck(everything,"vndrLongNm");
+    var everything = Manufacturers.find({department: parseInt(Session.get('department'))}, {manufacturer: parseInt(Session.get('manufacturer'))}, {sort: {manufacturerName:1}}).fetch();
+    var justVendors = _.pluck(everything,"manufacturerName");
     return _.uniq(justVendors);
   }
 });
