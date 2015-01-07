@@ -1,0 +1,12 @@
+<template name="opcos">
+  <select name="OPCOs" class="opco-selection">
+    <option>Select</option>
+    {{#each opcos}}
+    {{> opco}}
+    {{/each}}
+  </select>
+</template>
+
+<template name="opco">
+  <option name="opco">{{this}}</option>
+</template>

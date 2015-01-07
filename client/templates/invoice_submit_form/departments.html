@@ -1,0 +1,12 @@
+<template name="departments">
+  <select name="departments" autocomplete="off" class="department-selection">
+    <option>Select</option>
+    {{#each departments}}
+      {{> department}}
+    {{/each}}
+  </select>
+</template>
+
+<template name="department">
+  <option name="department">{{this}}</option>
+</template>
