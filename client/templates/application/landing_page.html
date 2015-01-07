@@ -1,5 +1,12 @@
 <template name="landingPage">
   {{#if currentUser}}
+    {{#if isInRole 'admin'}}
+    <div>
+      <h3>Super Secret Section</h3>
+      <p>For Admins only</p>
+    </div>
+    {{/if}}
+
     {{> dashboard}}
     {{> invoiceSubmitForm}}
   {{else}}
