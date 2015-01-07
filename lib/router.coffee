@@ -2,7 +2,7 @@ Router.configure
   layoutTemplate: 'layout'
   loadingTemplate: 'loading'
   # waitOn: ->
-  #   Meteor.subscribe 'invoices'
+  #   Meteor.subscribe 'suppliers'
 
 Router.route '/',
   name: "landingPage"
