@@ -2,13 +2,21 @@ Router.configure
   layoutTemplate: 'layout'
   loadingTemplate: 'loading'
   # waitOn: ->
-  #   Meteor.subscribe 'suppliers'
+  #   [
+  #     # Meteor.subscribe("suppliers")
+  #     Meteor.subscribe("invoices")
+  #     # Meteor.subscribe("invoiceLines")
+  #     # Meteor.subscribe("manufacturers")
+  #     Meteor.subscribe("transactionCodes")
+  #   ]
 
 Router.route '/',
   name: "landingPage"
 
-Router.route '/invoice_submit_form',
+Router.route "/invoice_submit_form",
   name: "invoiceSubmitForm"
+  data: ->
+      Suppliers.find()
 
 Router.route '/invoices_list',
   name: "invoicesList"
