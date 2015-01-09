@@ -9,6 +9,5 @@ Template.departments.helpers({
 Template.departments.events({
   "change .department-selection": function(e, t){
     return Session.set("department", $("[name=departments]").val());
-    console.log(Session.get('department'));
   }
 });
