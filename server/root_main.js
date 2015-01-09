@@ -2,8 +2,6 @@ var fs = Npm.require('fs');
 __ROOT_APP_PATH__ = fs.realpathSync('.');
 console.log(__ROOT_APP_PATH__);
 
-/***************************** Variables ************************************/
-var ciu_mcr, ciu_header, ciu_detail;
 
 /*************************** Helper Functions *******************************/
 
@@ -46,7 +44,7 @@ function appendSpaces(maxLen, num, recordName) {
       mcr += ' ';
     }
   }
-  if (mcr + num > maxLen) { return recordName + "String is too long!"; }
+  if ((mcr + num).length > maxLen) { return recordName + "String is too long!"; }
 
   console.log('length of ' + recordName + ' is ' + mcr.length);
   return num + mcr;
@@ -61,6 +59,14 @@ function checkInvoiceSign(invoice, total) {
     if (total < 0) { return '-'; }
   }
 }
+
+/***************************** Variables ************************************/
+var vendorNumber = '7024073';
+var invoiceNumber = '123456789';
+var invoiceAmount = '98799';
+var source = 'SAKS ME MANUAL INVOICES';
+
+
 /*********************** CIU MCR ************************/
 
 // #1 MCR record
@@ -80,7 +86,7 @@ var mcr3 = prependZeros(15, 1, 'mcr3');
 // #4 Total number of invoice detail lines
 // Need a function like: InvoiceLines.find({invoiceId: this._id}).count();
 // a
-var mcr4 = '000000000000000';
+var mcr4 = '000000000000001';
 
 // #5 Invoice Amount Position
 //  Defaults to 7. This is the field position of the invoice amount in the
@@ -95,13 +101,13 @@ var mcr6 = checkInvoiceSign();
 // point!
 // TODO: need a function here, or something like:
 //  mcr7 = prependZeros(11, this.invoiceAmount*100);
-var mcr7 = prependZeros(11,'invLineAmt','mcr7');
+var mcr7 = prependZeros(11, invoiceAmount,'mcr7');
 
 
 // #8 Source
 // i.e. from Invoice Submission form dropdown: SAKS ME MANUAL INVOICES:
 //  var mcr8 = this.source;
-var mcr8 = prependZeros(30, '', 'mcr8')
+var mcr8 = appendSpaces(30, source, 'mcr8')
 
 var ciu_mcr = mcr1 + mcr2 + mcr3 + mcr4 + mcr5 + mcr6 + mcr7 + mcr8 + '\n';
 
@@ -112,10 +118,10 @@ var ciu_mcr = mcr1 + mcr2 + mcr3 + mcr4 + mcr5 + mcr6 + mcr7 + mcr8 + '\n';
 var hdr1 = "HDR";
 
 // #2 Vendor Number
-var hdr2 = prependZeros(10, '', 'hdr2');
+var hdr2 = prependZeros(10, vendorNumber, 'hdr2');
 
-// #3 Ivnoice Number
-var hdr3 = appendSpaces(25);
+// #3 Invoice Number
+var hdr3 = appendSpaces(25, invoiceNumber, 'hdr3');
 
 // #4 Voucher number - tells what invoice number that is in the batch of
 //  invoices. Will always be '1' for this application (for now).
@@ -133,10 +139,10 @@ var hdr6 = checkInvoiceSign();
 // point!
 // TODO: need a function here, or something like:
 //  hdr7 = prependZeros(11, this.invoiceAmount*100);
-var hdr7 = prependZeros(11,'','hdr7');
+var hdr7 = prependZeros(11, invoiceAmount,'hdr7');
 
 // #8 Transaction Code
-var hdr8 = prependZeros(3,'','hdr8')
+var hdr8 = prependZeros(3,'110','hdr8')
 
 // HDR9 - HDR11 are not required
 var hdr9 = appendSpaces(2, '', 'hdr9');
@@ -147,14 +153,15 @@ var hdr11 = appendSpaces(30, '', 'hdr11')
 var hdr12 = moment().format('DDMMYYYY');
 
 // #13 GL_DATE - NOT REQUIRED
-var hdr13 = appendSpaces(8, '', 'hdr13');
+var hdr13 = appendSpaces(8, '', 'hrd13')// moment().format('DDMMYYYY');
 
 // #14 Invoice Header Description
 // TODO: Write function to get invoice header description from current invoice
-var hdr14 = appendSpaces(200, '', 'hdr14');
+var hdr14 = appendSpaces(200, 'OTHER COST OF SALES', 'hdr14');
 
 // HDR15 - HDR28 not required. Including goods received date and URN to mimic
 //  what's on sample file
+// TODO: create variables for at least some of hdr15 - hdr28
 var hdr15_28 = appendSpaces(130, '', 'hdr15_28')
 
 var ciu_hdr = hdr1 + hdr2 + hdr3 + hdr4 + hdr5 + hdr6 + hdr7 + hdr8 + hdr9 +
@@ -166,33 +173,41 @@ var ciu_hdr = hdr1 + hdr2 + hdr3 + hdr4 + hdr5 + hdr6 + hdr7 + hdr8 + hdr9 +
 var ddr1 = 'DDR';
 
 // #2 Vendor Number (same as HDR Vendor Number)
-var ddr2 = prependZeros(10, '', 'ddr2');
+var ddr2 = prependZeros(10, vendorNumber, 'ddr2');
 
 // #3 Invoice number (same as HDR Invoice Number)
-var ddr3 = appendSpaces(25,'','ddr3');
+var ddr3 = appendSpaces(25, invoiceNumber,'ddr3');
 
 // #4 Invoice Distribution Line Amount Sign **** NOT REQUIRED ****
 var ddr4 = checkInvoiceSign();
 
 // #5 Invoice Distribution Line Amount
-var ddr5 = prependZeros(11,'', 'ddr5');
+var ddr5 = prependZeros(11, invoiceAmount, 'ddr5');
 
-/********** GL Account ***********/
+/************* GL Account ************/
+var company = '01';
+var operatingUnit = '90';
+var location = '0699';
+var costCenter = '00100';
+var account = '10600';
+var department = '0000';
+var interCompany = '00';
+
 // Company
-var ddr6 = prependZeros(2);
+var ddr6 = prependZeros(2, company, 'ddr6');
 // Operating Unit
-var ddr7 = prependZeros(2);
+var ddr7 = prependZeros(2, operatingUnit);
 // Location
-var ddr8 = prependZeros(4);
+var ddr8 = prependZeros(4, location);
 // Cost Center
-var ddr9 = prependZeros(5);
+var ddr9 = prependZeros(5, costCenter);
 // Account
-var ddr10 = prependZeros(5);
+var ddr10 = prependZeros(5, account);
 // Department
-var ddr11 = prependZeros(4);
+var ddr11 = prependZeros(4, department);
 // Inter Company
-var ddr12 = prependZeros(2);
-/**********************************/
+var ddr12 = prependZeros(2, interCompany);
+/************************************/
 
 // Retail amount sign
 var ddr13 = checkInvoiceSign();
