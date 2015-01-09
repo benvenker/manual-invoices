@@ -8,6 +8,6 @@ Template.departments.helpers({
 
 Template.departments.events({
   "change .department-selection": function(e, t){
-    return Session.set("department", $("[name=departments]").val());
+    return Session.set("department", parseInt($("[name=departments]").val()));
   }
 });
