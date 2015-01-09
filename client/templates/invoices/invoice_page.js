@@ -1,6 +1,12 @@
 Template.invoicePage.events({
   "click .confirm-changes": function(e, t){
-    alert("Invoice Submitted");
+    e.preventDefault();
+
+    Meteor.call('ciuExport', function(error, result) {
+      if (error)
+        return alert(error.reason);
+      Router.go('invoicePage', {_id: result._id});
+    });
   }
 });
 
