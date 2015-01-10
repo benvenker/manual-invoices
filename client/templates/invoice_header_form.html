@@ -4,19 +4,19 @@
     <div data-row-span="4">
       <div data-field-span="1">
         <label>PO</label>
-        <input type="text" name="PO" required/>
+        <input type="text" name="PO" maxlength=4 required/>
       </div>
       <div data-field-span="1">
         <label>BOL</label>
-        <input type="text" name="BOL" required/>
+        <input type="text" name="BOL" maxlength=8 required/>
       </div>
-      <div data-field-span="1">
+      <!-- <div data-field-span="1">
         <label>TOTAL QUANTITY</label>
         <input type="text" name="totalQuantity">
-      </div>
+      </div> -->
       <div data-field-span="1">
         <label>TOTAL COST</label>
-        <input type="text" name="totalCost">
+        <input type="text" name="totalCost" maxlength=11>
       </div>
     </div>
     <div data-row-span="5">
@@ -40,7 +40,7 @@
     <div data-row-span="5">
       <div data-field-span="1">
         <label>INVOICE NUMBER</label>
-        <input type="text" name="invoiceNumber">
+        <input type="text" name="invoiceNumber" maxlength=25>
       </div>
       <div data-field-span="1">
         <label>TRANSACTION CODE</label>
@@ -48,7 +48,7 @@
       </div>
       <div data-field-span="2"  class="">
         <label>SOURCE</label>
-        <select class="source-select" name="source"></select>
+        {{> sources}}
       </div>
       <div data-field-span="1">
         <label>INVOICE DATE</label>

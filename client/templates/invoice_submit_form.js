@@ -26,11 +26,10 @@ Template.invoiceSubmitForm.events({
       vendorName: form.find('[name=vendorNames]').val(),
       invoiceNumber: form.find('[name=invoiceNumber]').val(),
       transactionCode: form.find('[name=transactionCodes]').val(),
-      // TODO: add SOURCE dropdown here
+      source: form.find('[name=sources]').val(),
       invoiceDate: form.find('[name=invoiceDate]').val(),
       description: form.find('[name=description]').val(),
       submitted: moment(new Date()).format('L'),
-
     }
 
     invoice._id = Invoices.insert(invoice);
