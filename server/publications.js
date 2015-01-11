@@ -16,9 +16,17 @@ Meteor.publish('departments', function() {
 // });
 
 Meteor.publish('manufacturers', function() {
-  return Manufacturers.find();
+  return Manufacturers.find({}, {limit: 6000});
 });
 
 Meteor.publish('transactionCodes', function() {
   return TransactionCodes.find();
 });
+
+Meteor.publish('invoices', function() {
+  return Invoices.find();
+});
+
+Meteor.publish('invoiceLines', function() {
+  return InvoiceLines.find();
+})

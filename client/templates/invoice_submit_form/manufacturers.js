@@ -16,8 +16,6 @@ Template.manufacturers.helpers({
 
 Template.manufacturers.events({
   "change .manufacturer-selection": function(e, t){
-    if (Session.get('department') > 0) {
       return Session.set("manufacturer", $("[name=manufacturers]").val());
-    }
   }
 });

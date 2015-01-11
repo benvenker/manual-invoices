@@ -11,12 +11,6 @@ Router.route "/",
 
 Router.route "/invoice_submit_form",
   name: "invoiceSubmitForm"
-  # data:
-  #   suppliers: ->
-  #     Suppliers.find()
-  #
-  #   manufacturers: ->
-  #     Manufacturers.find()
 
 Router.route "/invoices_list",
   name: "invoicesList"
@@ -25,6 +19,7 @@ Router.route "/invoices/:_id",
   name: "invoicePage"
   data: ->
     Invoices.findOne @params._id
+    # InvoiceLines.find @params.invoiceNumber
 
 Router.route "/invoices/:_id/edit",
   name: "invoiceEdit"

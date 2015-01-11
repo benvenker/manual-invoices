@@ -7,8 +7,8 @@
 // Meteor.subscribe('manufacturers');
 // Meteor.subscribe('transactionCodes');
 //
-// Meteor.subscribe('invoices');
-// Meteor.subscribe('invoiceLines');
+Meteor.subscribe('invoices');
+Meteor.subscribe('invoiceLines');
 //
 //
 // Tracker.autorun(function() {
