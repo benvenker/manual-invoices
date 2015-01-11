@@ -13,6 +13,8 @@ Template.invoiceSubmitForm.events({
   'click .add-invoice': function(){
     var form = $('.grid-form');
     var table = $('.flakes-table tbody');
+    // var transactionCode = TransactionCodes.find({transactionCode: parseInt(Session.get('transactionCode')), banner: parseInt(Session.get('opco'))});
+    // // var glAccount = transactionCode.account
 
     // Get the header values
     var invoice = {
@@ -25,11 +27,12 @@ Template.invoiceSubmitForm.events({
       manufacturer: form.find('[name=manufacturers]').val(),
       vendorName: form.find('[name=vendorNames]').val(),
       invoiceNumber: form.find('[name=invoiceNumber]').val(),
-      transactionCode: form.find('[name=transactionCodes]').val(),
+      transactionCode: form.find('[name=transactionCodes]'),
       source: form.find('[name=sources]').val(),
       invoiceDate: form.find('[name=invoiceDate]').val(),
       description: form.find('[name=description]').val(),
       submitted: moment(new Date()).format('L'),
+      // glAccount: transactionCode.account
     }
 
     invoice._id = Invoices.insert(invoice);

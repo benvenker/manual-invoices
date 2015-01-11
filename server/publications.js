@@ -1,6 +1,10 @@
+// Meteor.publish('suppliers', function(opco, department) {
+//   return Suppliers.find({opco: opco, department: department});
+// });
+
 Meteor.publish('suppliers', function() {
   return Suppliers.find();
-});
+})
 
 Meteor.publish('invoices', function() {
   return Invoices.find();
