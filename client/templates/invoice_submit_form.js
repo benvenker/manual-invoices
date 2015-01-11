@@ -1,5 +1,6 @@
 Template.invoiceSubmitForm.rendered = function(){
   // On-rendered code here
+  Suppliers.find({OPCO: 6});
 }
 
 Template.invoiceSubmitForm.events({
@@ -17,7 +18,40 @@ Template.invoiceSubmitForm.events({
     var transactionCode = TransactionCodes.find({transactionCode: parseInt(Session.get('transactionCode')), banner: parseInt(Session.get('opco'))}).fetch();
     var glAccount = _.pluck(transactionCode, 'account');
     console.log("GL Account: " + glAccount);
-    // var glAccount = transactionCode.account
+
+
+    /************ Get all the invoice lines ***************/
+
+    // Count the invoice lines
+    var invoiceLineNum = InvoiceLines.find({InvoiceId: invoice._id}).count();
+    console.log(invoiceLineNum);
+
+    table.find('tr').each(function(i, el) {
+      // Increment the invoice line number
+      invoiceLineNum++;
+
+      var $tds = $(this).find('td input');
+      var invoiceLine = {
+        invoiceId: invoice._id,
+        invoiceLineNumber: invoiceLineNum,
+        store: $tds.eq(0).val(),
+        itemClass: $tds.eq(1).val(),
+        unitCost: $tds.eq(2).val(),
+        quantity: $tds.eq(3).val(),
+        style: $tds.eq(4).val(),
+        sku: $tds.eq(5).val(),
+        description: $tds.eq(6).val(),
+        lineTotal: $tds.eq(7).val(),
+        submitted: moment(new Date()).format('L'),
+      }
+
+      InvoiceLines.insert(invoiceLine);
+
+      // Update variables for header
+
+      console.log(invoiceLineNum);
+    });
+
 
     // Get the header values
     var invoice = {
@@ -41,34 +75,7 @@ Template.invoiceSubmitForm.events({
     invoice._id = Invoices.insert(invoice);
     console.log(invoice._id);
 
-    // /************ Get all the invoice lines ***************/
-    //
-    // // Count the invoice lines
-    // var invoiceLineNum = InvoiceLines.find({InvoiceId: invoice._id}).count();
-    // console.log(invoiceLineNum);
-    //
-    // table.find('tr').each(function(i, el) {
-    //   // Increment the invoice line number
-    //   invoiceLineNum++;
-    //
-    //   var $tds = $(this).find('td input');
-    //   var invoiceLine = {
-    //     invoiceId: invoice._id,
-    //     invoiceLineNumber: invoiceLineNum,
-    //     store: $tds.eq(0).val(),
-    //     itemClass: $tds.eq(1).val(),
-    //     unitCost: $tds.eq(2).val(),
-    //     quantity: $tds.eq(3).val(),
-    //     style: $tds.eq(4).val(),
-    //     sku: $tds.eq(5).val(),
-    //     description: $tds.eq(6).val(),
-    //     lineTotal: $tds.eq(7).val(),
-    //     submitted: moment(new Date()).format('L'),
-    //   }
-    //   InvoiceLines.insert(invoiceLine);
-    //
-    //   console.log(invoiceLineNum);
-    // });
+
     // Router.go('invoicePage', invoice);
 
   },

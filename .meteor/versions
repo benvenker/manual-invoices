@@ -19,6 +19,7 @@ check@1.0.3
 coffeescript@1.0.5
 ddp@1.0.13
 deps@1.0.6
+doctorpangloss:mongodb-server-aggregation@1.0.6
 ejson@1.0.5
 email@1.0.5
 fastclick@1.0.2

@@ -1,3 +1,9 @@
+Template.manufacturers.created = function() {
+  this.autorun(function() {
+    Meteor.subscribe('manufacturers');
+  })
+}
+
 Template.manufacturers.helpers({
   manufacturers: function() {
     // TODO: add manufacturers collection

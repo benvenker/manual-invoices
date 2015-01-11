@@ -1,3 +1,9 @@
+Template.transactionCodes.created = function() {
+  this.autorun(function() {
+    Meteor.subscribe('transactionCodes');
+  })
+}
+
 Template.transactionCodes.helpers({
   transactionCodes: function() {
     var everything = TransactionCodes.find({banner: parseInt(Session.get('opco'))}, {sort: {transactionCode:1}}).fetch();

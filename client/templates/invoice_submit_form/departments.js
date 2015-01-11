@@ -1,7 +1,14 @@
+Template.departments.created = function() {
+  this.autorun(function() {
+    Meteor.subscribe('departments');
+  })
+}
+
+
 Template.departments.helpers({
   departments: function() {
-    var everything = Suppliers.find({OPCO: parseInt(Session.get('opco'))}, {sort: {department:1}}).fetch();
-    var justDepartments = _.pluck(everything,"department");
+    var departmentNums = Departments.find().fetch();
+    var justDepartments = _.pluck(departmentNums, 'department');
     return _.uniq(justDepartments);
   }
 });

@@ -1,13 +1,14 @@
-// Meteor.subscribe('suppliers', 7, department);
-Meteor.subscribe('suppliers');
-Meteor.subscribe('fullLine');
+// Departments = new Mongo.Collection('departments');
+// Manufacturers = new Mongo.Collection('manufacturers');
+
+// Meteor.subscribe('departments');
 
 // Meteor.subscribe('suppliers', {OPCO: 7});
-Meteor.subscribe('manufacturers');
-Meteor.subscribe('transactionCodes');
-
-Meteor.subscribe('invoices');
-Meteor.subscribe('invoiceLines');
+// Meteor.subscribe('manufacturers');
+// Meteor.subscribe('transactionCodes');
+//
+// Meteor.subscribe('invoices');
+// Meteor.subscribe('invoiceLines');
 //
 //
 // Tracker.autorun(function() {
