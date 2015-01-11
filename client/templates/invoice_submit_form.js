@@ -11,10 +11,13 @@ Template.invoiceSubmitForm.events({
   },
 
   'click .add-invoice': function(){
+    alert("you clicked the button!");
     var form = $('.grid-form');
     var table = $('.flakes-table tbody');
-    // var transactionCode = TransactionCodes.find({transactionCode: parseInt(Session.get('transactionCode')), banner: parseInt(Session.get('opco'))});
-    // // var glAccount = transactionCode.account
+    var transactionCode = TransactionCodes.find({transactionCode: parseInt(Session.get('transactionCode')), banner: parseInt(Session.get('opco'))}).fetch();
+    var glAccount = _.pluck(transactionCode, 'account');
+    console.log("GL Account: " + glAccount);
+    // var glAccount = transactionCode.account
 
     // Get the header values
     var invoice = {
@@ -27,46 +30,46 @@ Template.invoiceSubmitForm.events({
       manufacturer: form.find('[name=manufacturers]').val(),
       vendorName: form.find('[name=vendorNames]').val(),
       invoiceNumber: form.find('[name=invoiceNumber]').val(),
-      transactionCode: form.find('[name=transactionCodes]'),
+      transactionCode: form.find('[name=transactionCodes]').val(),
       source: form.find('[name=sources]').val(),
       invoiceDate: form.find('[name=invoiceDate]').val(),
       description: form.find('[name=description]').val(),
       submitted: moment(new Date()).format('L'),
-      // glAccount: transactionCode.account
+      glAccount: glAccount[0]
     }
 
     invoice._id = Invoices.insert(invoice);
     console.log(invoice._id);
 
-    /************ Get all the invoice lines ***************/
-
-    // Count the invoice lines
-    var invoiceLineNum = InvoiceLines.find({InvoiceId: invoice._id}).count();
-    console.log(invoiceLineNum);
-
-    table.find('tr').each(function(i, el) {
-      // Increment the invoice line number
-      invoiceLineNum++;
-
-      var $tds = $(this).find('td input');
-      var invoiceLine = {
-        invoiceId: invoice._id,
-        invoiceLineNumber: invoiceLineNum,
-        store: $tds.eq(0).val(),
-        itemClass: $tds.eq(1).val(),
-        unitCost: $tds.eq(2).val(),
-        quantity: $tds.eq(3).val(),
-        style: $tds.eq(4).val(),
-        sku: $tds.eq(5).val(),
-        description: $tds.eq(6).val(),
-        lineTotal: $tds.eq(7).val(),
-        submitted: moment(new Date()).format('L'),
-      }
-      InvoiceLines.insert(invoiceLine);
-
-      console.log(invoiceLineNum);
-    });
-    Router.go('invoicePage', invoice);
+    // /************ Get all the invoice lines ***************/
+    //
+    // // Count the invoice lines
+    // var invoiceLineNum = InvoiceLines.find({InvoiceId: invoice._id}).count();
+    // console.log(invoiceLineNum);
+    //
+    // table.find('tr').each(function(i, el) {
+    //   // Increment the invoice line number
+    //   invoiceLineNum++;
+    //
+    //   var $tds = $(this).find('td input');
+    //   var invoiceLine = {
+    //     invoiceId: invoice._id,
+    //     invoiceLineNumber: invoiceLineNum,
+    //     store: $tds.eq(0).val(),
+    //     itemClass: $tds.eq(1).val(),
+    //     unitCost: $tds.eq(2).val(),
+    //     quantity: $tds.eq(3).val(),
+    //     style: $tds.eq(4).val(),
+    //     sku: $tds.eq(5).val(),
+    //     description: $tds.eq(6).val(),
+    //     lineTotal: $tds.eq(7).val(),
+    //     submitted: moment(new Date()).format('L'),
+    //   }
+    //   InvoiceLines.insert(invoiceLine);
+    //
+    //   console.log(invoiceLineNum);
+    // });
+    // Router.go('invoicePage', invoice);
 
   },
 

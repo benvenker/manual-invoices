@@ -3,8 +3,27 @@
 // });
 
 Meteor.publish('suppliers', function() {
-  return Suppliers.find();
-})
+  return Suppliers.find({}, {fields: {
+    DEPT_DESC: false,
+    VEN_RES_NUM: false,
+    VNDRTYPECD: false,
+    vendorName: false,
+    vendorNumber: false,
+  }
+}, {limit: 100}
+
+);
+});
+
+// Meteor.publish('fullLine', function() {
+//   return Suppliers.find({OPCO: 6}, {fields: {
+//     DEPT_DESC: false,
+//     VEN_RES_NUM: false,
+//     VNDRTYPECD: false,
+//     vendorName: false,
+//     vendorNumber: false
+//   }});
+// });
 
 Meteor.publish('invoices', function() {
   return Invoices.find();
