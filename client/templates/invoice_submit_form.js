@@ -12,35 +12,7 @@ Template.invoiceSubmitForm.events({
   },
 
   'click .add-invoice': function(){
-    /*
-    Get the invoice lines for a given invoice
-    */
-      function getInvoiceLines (invoiceNumber) {
-      var lines = InvoiceLines.find({invoiceId: invoiceNumber});
-      return lines;
-    }
 
-    /*
-    Calculate the total cost of an invoice by summming the lineTotal of
-    each invoice line
-    */
-    function totalCost (invoiceNumber) {
-      var lines = getInvoicelines(invoiceNumber).fetch();
-      var lineValues = _.pluck(lines, 'lineTotal');
-
-      // Convert line values to numbers
-      var lines = _.map(lineValues, function(line) { return parseFloat(line); })
-
-      // Sum the array of values
-      var totalCost = lines.reduce(function(previousValue, currentValue){
-        return currentValue + previousValue;
-      });
-      return totalCost;
-    }
-
-
-
-    alert("you clicked the button!");
     var form = $('.grid-form');
     var table = $('.flakes-table tbody');
     var transactionCode = TransactionCodes.find({transactionCode: parseInt(Session.get('transactionCode')), banner: parseInt(Session.get('opco'))}).fetch();
@@ -81,6 +53,8 @@ Template.invoiceSubmitForm.events({
 
     table.find('tr').each(function(i, el) {
       // Increment the invoice line number
+      var currentInvoice;
+      var invoiceProperties;
       invoiceLineNum++;
 
       var $tds = $(this).find('td input');
@@ -102,11 +76,11 @@ Template.invoiceSubmitForm.events({
       InvoiceLines.insert(invoiceLine);
 
       // Update variables for header
-      var currentInvoice = invoice._id;
+      currentInvoice = invoice._id;
 
-      var invoiceProperties = {
+      invoiceProperties = {
         totalCost: totalCost(invoice.invoiceNumber)
-      }
+      };
       console.log(invoiceLineNum);
 
       Invoices.update(currentInvoice, {$set: invoiceProperties})
