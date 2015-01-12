@@ -76,14 +76,14 @@ Template.invoiceSubmitForm.events({
       InvoiceLines.insert(invoiceLine);
 
       // Update variables for header
-      currentInvoice = invoice._id;
-
-      invoiceProperties = {
-        totalCost: totalCost(invoice.invoiceNumber)
-      };
-      console.log(invoiceLineNum);
-
-      Invoices.update(currentInvoice, {$set: invoiceProperties})
+      //currentInvoice = invoice._id;
+      //
+      //invoiceProperties = {
+      //  totalCost: TotalCost(invoice.invoiceNumber)
+      //};
+      //console.log(invoiceLineNum);
+      //
+      //Invoices.update(currentInvoice, {$set: invoiceProperties})
     });
 
     Router.go('invoicePage', invoice);
