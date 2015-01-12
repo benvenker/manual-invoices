@@ -1,0 +1,65 @@
+<template name="invoiceHeaderEdit">
+  <fieldset>
+    <legend>Invoice Header</legend>
+    <div data-row-span="4">
+      <div data-field-span="1">
+        <label>PO</label>
+        <input type="text" name="PO" value="{{PO}}">
+      </div>
+      <div data-field-span="1">
+        <label>BOL</label>
+        <input type="text" name="BOL" value="{{BOL}}">
+      </div>
+      <div data-field-span="1">
+        <label>TOTAL QUANTITY</label>
+        <input type="text" name="totalQuantity" value="{{totalQuantity}}">
+      </div>
+      <div data-field-span="1">
+        <label>TOTAL COST</label>
+        <input type="text" name="totalCost" value="{{totalCost}}">
+      </div>
+    </div>
+    <div data-row-span="5">
+      <div data-field-span="1">
+        <label>OPCO</label>
+        <input type="text" name="opco" value="{{OPCO}}">
+      </div>
+      <div data-field-span="1">
+        <label>Department</label>
+        <input type="text" name="department" value="{{department}}">
+      </div>
+      <div data-field-span="1">
+        <label>Manufacturer</label>
+        <input type="text" name="manufacturer" value="{{manufacturer}}">
+      </div>
+      <div data-field-span="2">
+        <label>Vendor Name</label>
+        <input type="text" name="vendorName" value="{{vendorName}}">
+      </div>
+    </div>
+    <div data-row-span="5">
+      <div data-field-span="1">
+        <label>INVOICE NUMBER</label>
+        <input type="text" name="invoiceNumber" value="{{invoiceNumber}}">
+      </div>
+      <div data-field-span="1">
+        <label>TRANSACTION CODE</label>
+        <input type="text" name="transactionCode" value="{{transactionCode}}">
+      </div>
+      <div data-field-span="2"  class="">
+        <label>SOURCE</label>
+        <input type="text" name="source" value="{{source}}">
+      </div>
+      <div data-field-span="1">
+        <label>INVOICE DATE</label>
+        <input type="text" name="invoiceDate" value="{{invoiceDate}}">
+      </div>
+    </div>
+    <div data-row-span="12">
+      <div data-field-span="" style="width:100%;" >
+        <label>DESCRIPTION</label>
+        <textarea name="description" value="{{description}}"></textarea>
+      </div>
+    </div>
+  </fieldset>
+</template>
