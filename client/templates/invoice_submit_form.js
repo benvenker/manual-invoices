@@ -18,13 +18,14 @@ Template.invoiceSubmitForm.events({
     var transactionCode = TransactionCodes.find({transactionCode: parseInt(Session.get('transactionCode')), banner: parseInt(Session.get('opco'))}).fetch();
     var glAccount = _.pluck(transactionCode, 'account');
     console.log("GL Account: " + glAccount);
+    var invoiceAmount = 0;
 
     // Get the header values
     var invoice = {
       PO: form.find('[name=PO]').val(),
       BOL: form.find('[name=BOL]').val(),
       totalQuantity: form.find('[name=totalQuantity]').val(),
-      totalCost: form.find('[name=totalCost]').val(),
+      totalCost: 0,
       OPCO: form.find('[name=OPCOs]').val(),
       department: form.find('[name=departments]').val(),
       manufacturer: form.find('[name=manufacturers]').val(),
@@ -51,39 +52,41 @@ Template.invoiceSubmitForm.events({
     var invoiceLineNum = InvoiceLines.find({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
     console.log(invoiceLineNum);
 
-    table.find('tr').each(function(i, el) {
+    table.find('tr').each(function() {
       // Increment the invoice line number
-      var currentInvoice;
-      var invoiceProperties;
       invoiceLineNum++;
 
       var $tds = $(this).find('td input');
+      var unitCost = parseFloat(($tds.eq(2).val()));
+      var quantity = parseInt($tds.eq(3).val());
       var invoiceLine = {
         invoiceId: invoice._id,
         invoiceNumber: invoice.invoiceNumber,
         invoiceLineNumber: invoiceLineNum,
-        store: $tds.eq(0).val(),
+        store: parseInt($tds.eq(0).val()),
         itemClass: $tds.eq(1).val(),
-        unitCost: $tds.eq(2).val(),
-        quantity: $tds.eq(3).val(),
+        unitCost: unitCost,
+        quantity: quantity,
         style: $tds.eq(4).val(),
         sku: $tds.eq(5).val(),
         description: $tds.eq(6).val(),
-        lineTotal: $tds.eq(7).val(),
+        lineTotal: numeral(unitCost * quantity).format('$0,0.00'),
         submitted: moment(new Date()).format('L'),
       }
 
+      var lineTotalVar = numeral(unitCost * quantity).format('$0,0.00');
+      invoiceAmount += numeral().unformat(lineTotalVar);
       InvoiceLines.insert(invoiceLine);
 
       // Update variables for header
-      //currentInvoice = invoice._id;
+      var currentInvoice = invoice._id;
       //
-      //invoiceProperties = {
-      //  totalCost: TotalCost(invoice.invoiceNumber)
-      //};
+      var invoiceProperties = {
+        totalCost: numeral(invoiceAmount).format('$0,0.00')
+      };
       //console.log(invoiceLineNum);
       //
-      //Invoices.update(currentInvoice, {$set: invoiceProperties})
+      Invoices.update(currentInvoice, {$set: invoiceProperties})
     });
 
     Router.go('invoicePage', invoice);
