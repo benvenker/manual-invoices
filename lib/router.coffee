@@ -12,6 +12,12 @@ Router.route "/",
 Router.route "/invoice_submit_form",
   name: "invoiceSubmitForm"
 
+Router.route "/approved",
+  name: "approved"
+
+Router.route "/archive",
+  name: "archive"
+
 Router.route "/invoices_list",
   name: "invoicesList"
 
