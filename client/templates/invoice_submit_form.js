@@ -6,7 +6,7 @@ Template.invoiceSubmitForm.rendered = function(){
 Template.invoiceSubmitForm.events({
   'click .add-invoice-line': function(e) {
     e.preventDefault();
-      var newRow = $('<tr><td><input type="text" class="store"></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost"></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" value=""></td><td><input type="text" class="sku" value=""></td><td><input type="text" class="description" value=""></td><td><input type="text" class="lineTotal" value=""></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
+      var newRow = $('<tr><td><input type="text" class="store" maxlength=4></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost"></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" value=""></td><td><input type="text" class="sku" value=""></td><td><input type="text" class="description" value=""></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
 
       $('table.flakes-table').append(newRow);
   },
