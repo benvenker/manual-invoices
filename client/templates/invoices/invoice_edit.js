@@ -3,7 +3,7 @@ Template.invoiceEdit.rendered = function(){
   $('.add-invoice-line').click(function(event){
     event.preventDefault();
     counter++;
-    var newRow = $('<tr><td><input type="text" class="invoiceLineNumber" value="' + counter + '"></td><td><input type="text" class="store"></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost"></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" value=""></td><td><input type="text" class="sku" value=""></td><td><input type="text" class="description" value=""></td><td><input type="text" class="lineTotal" value=""></td></tr>');
+    var newRow = $('<tr><td><input type="text" class="store"></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost"></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" value=""></td><td><input type="text" class="sku" value=""></td><td><input type="text" class="description" value=""></td><td><input type="text" class="lineTotal" value=""></td></tr>');
     $('table.flakes-table').append(newRow);
   });
 }
@@ -22,13 +22,15 @@ Template.invoiceEdit.events({
     console.log(currentInvoiceId);
     var form = $('.grid-form');
     var table = $('.flakes-table tbody');
+    var invoiceAmount = 0;
+
 
     // Get the header values
     var invoiceProperties = {
       PO: form.find('[name=PO]').val(),
       BOL: form.find('[name=BOL]').val(),
       totalQuantity: form.find('[name=totalQuantity]').val(),
-      totalCost: form.find('[name=totalCost]').val(),
+      totalCost: 0,
       OPCO: form.find('[name=OPCO]').val(),
       department: form.find('[name=department]').val(),
       manufacturer: form.find('[name=manufacturer]').val(),
@@ -42,21 +44,33 @@ Template.invoiceEdit.events({
 
     Invoices.update(currentInvoiceId, {$set: invoiceProperties});
 
-    // Get all the invoice lines
+    /***********  Get all the invoice lines **************/
+    // Count the invoice lines
+    var invoiceLineNum = InvoiceLines.find({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
+    console.log(invoiceLineNum);
+
+    // Edit / add data from rows
     table.find('tr').each(function(i, el) {
+      invoiceLineNum++;
+
       var $tds = $(this).find('td input');
+      var unitCost = parseFloat(($tds.eq(2).val()));
+      var quantity = parseInt($tds.eq(3).val());
       var invoiceLine = {
         invoiceId: currentInvoiceId,
         invoiceLineNumber: $tds.eq(0).val(),
-        store: $tds.eq(1).val(),
-        itemClass: $tds.eq(2).val(),
-        unitCost: $tds.eq(3).val(),
-        quantity: $tds.eq(4).val(),
-        style: $tds.eq(5).val(),
-        sku: $tds.eq(6).val(),
-        description: $tds.eq(7).val(),
-        lineTotal: $tds.eq(8).val()
+        store: parseInt($tds.eq(0).val()),
+        itemClass: $tds.eq(1).val(),
+        unitCost: unitCost,
+        quantity: quantity,
+        style: $tds.eq(4).val(),
+        sku: $tds.eq(5).val(),
+        description: $tds.eq(6).val(),
+        lineTotal: numeral(unitCost * quantity).format('$0,0.00'),
       }
+
+      var lineTotalVar = numeral(unitCost * quantity).format('$0,0.00');
+      invoiceAmount += numeral().unformat(lineTotalVar);
 
       if ($(this).attr('id')) {
         // Update if existing invoice line
@@ -66,6 +80,17 @@ Template.invoiceEdit.events({
         // Create new invoice line
         InvoiceLines.insert(invoiceLine);
       }
+
+      // Update variables for header
+      //var currentInvoice = invoice._id;
+      //
+      var invoiceProperties = {
+        totalCost: numeral(invoiceAmount).format('$0,0.00')
+      };
+      //console.log(invoiceLineNum);
+      //
+      Invoices.update(currentInvoiceId, {$set: invoiceProperties})
+
     });
     Router.go('invoicePage', {_id: currentInvoiceId});
   }

@@ -1,6 +1,6 @@
 Template.invoiceSubmitForm.rendered = function(){
   // On-rendered code here
-  Suppliers.find({OPCO: 6});
+  //Suppliers.find({OPCO: 6});
 }
 
 Template.invoiceSubmitForm.events({
@@ -72,6 +72,7 @@ Template.invoiceSubmitForm.events({
         description: $tds.eq(6).val(),
         lineTotal: numeral(unitCost * quantity).format('$0,0.00'),
         submitted: moment(new Date()).format('L'),
+        //vendorNumber: _.pluck(Manufacturers.findFaster({department: invoice.department, manufacturer: invoice.manufacturer}).fetch(), 'supplierSite')
       }
 
       var lineTotalVar = numeral(unitCost * quantity).format('$0,0.00');
