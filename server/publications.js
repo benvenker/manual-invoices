@@ -1,5 +1,5 @@
 Meteor.publish('departments', function() {
-  return Departments.find();
+  return Departments.findFaster();
 });
 // Meteor.publish('departments', function() {
 //   var sub = this;
@@ -16,7 +16,7 @@ Meteor.publish('departments', function() {
 // });
 
 Meteor.publish('manufacturers', function() {
-  return Manufacturers.findFaster({}, {limit: 6000});
+  return Manufacturers.findFaster({},{limit: 6000});;
 });
 
 Meteor.publish('transactionCodes', function() {
@@ -28,5 +28,5 @@ Meteor.publish('invoices', function() {
 });
 
 Meteor.publish('invoiceLines', function() {
-  return InvoiceLines.find();
+  return InvoiceLines.findFaster();
 })
