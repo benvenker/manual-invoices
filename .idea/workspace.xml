@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bc332dbb-8e00-4f69-b125-5ae25cc8f00c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/invoices/invoice_line_edit.html" afterPath="$PROJECT_DIR$/client/templates/invoices/invoice_line_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/invoices/invoice_lines_table.html" afterPath="$PROJECT_DIR$/client/templates/invoices/invoice_lines_table.html" />
     </list>
     <ignored path="invoice-match.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,7 +42,7 @@
             <entry file="file://$PROJECT_DIR$/client/templates/invoices/invoice_line_edit.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.11147541" vertical-offset="0" max-vertical-offset="610">
-                  <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
+                  <caret line="3" column="56" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
                   <folding />
                 </state>
               </provider>
@@ -851,7 +850,7 @@
     <entry file="file://$PROJECT_DIR$/client/templates/invoices/invoice_line_edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.11147541" vertical-offset="0" max-vertical-offset="610">
-          <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
+          <caret line="3" column="56" selection-start-line="3" selection-start-column="56" selection-end-line="3" selection-end-column="56" />
           <folding />
         </state>
       </provider>
