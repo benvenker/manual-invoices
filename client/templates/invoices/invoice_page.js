@@ -4,11 +4,11 @@ Template.invoicePage.events({
 
     var invoice = this._id;
 
-    Meteor.call('ciuExport', invoice, function(error, result) {
-      if (error)
-        return alert(error.reason);
-      Router.go('invoicePage', {_id: this._id});
-    });
+    //Meteor.call('ciuExport', invoice, function(error, result) {
+    //  if (error)
+    //    return alert(error.reason);
+    //  Router.go('invoicePage', {_id: this._id});
+    //});
   }
 });
 
