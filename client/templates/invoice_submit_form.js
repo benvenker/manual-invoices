@@ -19,13 +19,14 @@ Template.invoiceSubmitForm.events({
     var glAccount = _.pluck(transactionCode, 'account');
     console.log("GL Account: " + glAccount);
     var invoiceAmount = 0;
+    var totalQuantity = 0;
 
     // Get the header values
     var invoice = {
       PO: form.find('[name=PO]').val(),
       BOL: form.find('[name=BOL]').val(),
-      totalQuantity: form.find('[name=totalQuantity]').val(),
       totalCost: 0,
+      totalQuantity: 0,
       OPCO: form.find('[name=OPCOs]').val(),
       department: form.find('[name=departments]').val(),
       manufacturer: form.find('[name=manufacturers]').val(),
@@ -36,8 +37,8 @@ Template.invoiceSubmitForm.events({
       invoiceDate: form.find('[name=invoiceDate]').val(),
       description: form.find('[name=description]').val(),
       submitted: moment(new Date()).format('L'),
-      glAccount: glAccount[0] // Since underscore returns an array, get the
-      // first element, which contains the GL account
+      glAccount: glAccount[0], // Since underscore returns an array, get the
+                               // first element, which contains the GL account
     }
 
     invoice._id = Invoices.insert(invoice);
@@ -72,18 +73,22 @@ Template.invoiceSubmitForm.events({
         description: $tds.eq(6).val(),
         lineTotal: numeral(unitCost * quantity).format('$0,0.00'),
         submitted: moment(new Date()).format('L'),
-        //vendorNumber: _.pluck(Manufacturers.findFaster({department: invoice.department, manufacturer: invoice.manufacturer}).fetch(), 'supplierSite')
       }
 
       var lineTotalVar = numeral(unitCost * quantity).format('$0,0.00');
       invoiceAmount += numeral().unformat(lineTotalVar);
+      totalQuantity += quantity;
       InvoiceLines.insert(invoiceLine);
 
       // Update variables for header
       var currentInvoice = invoice._id;
+      var vendor = Manufacturers.findFaster({department: parseInt(invoice.department), manufacturer: parseInt(invoice.manufacturer)}).fetch();
+      var vendorNumber = _.pluck(vendor, 'supplierSite');
       //
       var invoiceProperties = {
-        totalCost: numeral(invoiceAmount).format('$0,0.00')
+        totalCost: numeral(invoiceAmount).format('$0,0.00'),
+        totalQuantity: totalQuantity,
+        vendorNumber: vendorNumber
       };
       //console.log(invoiceLineNum);
       //

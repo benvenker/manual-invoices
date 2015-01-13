@@ -16,7 +16,7 @@ Meteor.publish('departments', function() {
 // });
 
 Meteor.publish('manufacturers', function() {
-  return Manufacturers.findFaster({}, {limit: 6000});
+  return Manufacturers.findFaster({},{limit: 6000});;
 });
 
 Meteor.publish('transactionCodes', function() {

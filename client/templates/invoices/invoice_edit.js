@@ -23,6 +23,7 @@ Template.invoiceEdit.events({
     var form = $('.grid-form');
     var table = $('.flakes-table tbody');
     var invoiceAmount = 0;
+    var totalQuantity = 0;
 
 
     // Get the header values
@@ -71,6 +72,7 @@ Template.invoiceEdit.events({
 
       var lineTotalVar = numeral(unitCost * quantity).format('$0,0.00');
       invoiceAmount += numeral().unformat(lineTotalVar);
+      totalQuantity += quantity;
 
       if ($(this).attr('id')) {
         // Update if existing invoice line
@@ -85,7 +87,8 @@ Template.invoiceEdit.events({
       //var currentInvoice = invoice._id;
       //
       var invoiceProperties = {
-        totalCost: numeral(invoiceAmount).format('$0,0.00')
+        totalCost: numeral(invoiceAmount).format('$0,0.00'),
+        totalQuantity: totalQuantity,
       };
       //console.log(invoiceLineNum);
       //
