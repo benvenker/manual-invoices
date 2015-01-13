@@ -1,13 +1,13 @@
 Template.departments.created = function() {
   this.autorun(function() {
-    Meteor.subscribe('departments');
+    // Meteor.subscribe('manufactu');
   })
 }
 
 
 Template.departments.helpers({
   departments: function() {
-    var departmentNums = Departments.find().fetch();
+    var departmentNums = Manufacturers.findFaster({manufacturerName: Session.get('vendorName')}, {sort: {department:1}}).fetch();
     var justDepartments = _.pluck(departmentNums, 'department');
     return _.uniq(justDepartments);
   }

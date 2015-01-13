@@ -1,7 +1,47 @@
 <template name="invoiceHeaderForm">
   <fieldset>
     <legend>Invoice Header</legend>
-    <div data-row-span="4">
+    <div data-row-span="5">
+      <div data-field-span="1">
+        <label>OPCO</label>
+        {{> opcos}}
+      </div>
+      <div data-field-span="2">
+        <label>Vendor Name</label>
+        {{> vendorNames}}
+      </div>
+      <div data-field-span="2">
+        <label>Vendor Number</label>
+        {{> vendorNumbers}}
+      </div>
+    </div>
+    <div data-row-span="5">
+      <div data-field-span="1">
+        <label>Department</label>
+        {{> departments}}
+      </div>
+      <div data-field-span="1">
+        <label>Manufacturer</label>
+        {{> manufacturers}}
+      </div>
+      <div data-field-span="1">
+        <label>TRANSACTION CODE</label>
+        {{> transactionCodes}}
+      </div>
+      <div data-field-span="1"  class="">
+        <label>SOURCE</label>
+        {{> sources}}
+      </div>
+      <div data-field-span="1">
+        <label>INVOICE DATE</label>
+        <input type="text" name="invoiceDate" maxlength=8 placeholder="DDMMYYYY">
+      </div>
+    </div>
+    <div data-row-span="6">
+      <div data-field-span="2">
+        <label>INVOICE NUMBER</label>
+        <input type="text" name="invoiceNumber" maxlength=25>
+      </div>
       <div data-field-span="2">
         <label>PO</label>
         <input type="text" name="PO" maxlength=20 required/>
@@ -18,42 +58,6 @@
         <label>TOTAL COST</label>
         <input type="text" name="totalCost" maxlength=11>
       </div> -->
-    </div>
-    <div data-row-span="5">
-      <div data-field-span="1">
-        <label>OPCO</label>
-          {{> opcos}}
-      </div>
-      <div data-field-span="2">
-        <label>Vendor Name</label>
-        {{> vendorNames}}
-      </div>
-      <div data-field-span="1">
-        <label>Department</label>
-          {{> departments}}
-      </div>
-      <div data-field-span="1">
-        <label>Manufacturer</label>
-          {{> manufacturers}}
-      </div>
-    </div>
-    <div data-row-span="5">
-      <div data-field-span="1">
-        <label>INVOICE NUMBER</label>
-        <input type="text" name="invoiceNumber" maxlength=25>
-      </div>
-      <div data-field-span="1">
-        <label>TRANSACTION CODE</label>
-        {{> transactionCodes}}
-      </div>
-      <div data-field-span="2"  class="">
-        <label>SOURCE</label>
-        {{> sources}}
-      </div>
-      <div data-field-span="1">
-        <label>INVOICE DATE</label>
-        <input type="text" name="invoiceDate" maxlength=8 placeholder="DDMMYYYY">
-      </div>
     </div>
     <div data-row-span="12">
       <div data-field-span="" style="width:100%;" >

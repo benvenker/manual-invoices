@@ -27,10 +27,11 @@ Template.invoiceSubmitForm.events({
       BOL: form.find('[name=BOL]').val(),
       totalCost: 0,
       totalQuantity: 0,
-      OPCO: form.find('[name=OPCOs]').val(),
-      department: form.find('[name=departments]').val(),
-      manufacturer: form.find('[name=manufacturers]').val(),
+      OPCO: parseInt(form.find('[name=OPCOs]').val()),
+      department: parseInt(form.find('[name=departments]').val()),
+      manufacturer: parseInt(form.find('[name=manufacturers]').val()),
       vendorName: form.find('[name=vendorNames]').val(),
+      vendorNumber: form.find('[name=vendorNumbers]').val(),
       invoiceNumber: form.find('[name=invoiceNumber]').val(),
       transactionCode: form.find('[name=transactionCodes]').val(),
       source: form.find('[name=sources]').val(),
@@ -83,12 +84,12 @@ Template.invoiceSubmitForm.events({
       // Update variables for header
       var currentInvoice = invoice._id;
       var vendor = Manufacturers.findFaster({department: parseInt(invoice.department), manufacturer: parseInt(invoice.manufacturer)}).fetch();
-      var vendorNumber = _.pluck(vendor, 'supplierSite');
+      // var vendorNumber = _.pluck(vendor, 'supplierSite');
       //
       var invoiceProperties = {
         totalCost: numeral(invoiceAmount).format('$0,0.00'),
         totalQuantity: totalQuantity,
-        vendorNumber: vendorNumber
+        // vendorNumber: vendorNumber
       };
       //console.log(invoiceLineNum);
       //
