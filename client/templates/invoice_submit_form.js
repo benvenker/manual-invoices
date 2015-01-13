@@ -76,7 +76,7 @@ Template.invoiceSubmitForm.events({
         submitted: moment(new Date()).format('L'),
       }
 
-      var lineTotalVar = numeral(unitCost * quantity).format('$0,0.00');
+      var lineTotalVar = numeral(unitCost * quantity).format('0,0.00');
       invoiceAmount += numeral().unformat(lineTotalVar);
       totalQuantity += quantity;
       InvoiceLines.insert(invoiceLine);
@@ -87,7 +87,7 @@ Template.invoiceSubmitForm.events({
       // var vendorNumber = _.pluck(vendor, 'supplierSite');
       //
       var invoiceProperties = {
-        totalCost: numeral(invoiceAmount).format('$0,0.00'),
+        totalCost: numeral(invoiceAmount).format('0,0.00'),
         totalQuantity: totalQuantity,
         // vendorNumber: vendorNumber
       };
