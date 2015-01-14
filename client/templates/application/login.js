@@ -6,8 +6,10 @@ Template.login.events({
     Meteor.loginWithPassword(emailVar, passwordVar, function(err) {
       if (err) {
         alert("Login failed. Please try again or register");
-      }
+      } else
+          Router.go('invoiceSubmitForm');
+          return false;
     });
-    return false;
+
   }
 });
