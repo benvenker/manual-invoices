@@ -2,6 +2,10 @@ Template.invoicePage.events({
   "click .ciu-export": function(e, t){
     e.preventDefault();
 
+    // Checking the data to why chrome says ID is not being passed
+    var data = Router.current().data();
+    console.log(data);
+
     var invoice = this._id;
 
     Meteor.call('ciuExport', invoice, function(error, result) {
