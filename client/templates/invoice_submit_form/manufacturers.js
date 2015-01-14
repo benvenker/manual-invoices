@@ -6,7 +6,7 @@ Template.manufacturers.created = function() {
 
 Template.manufacturers.helpers({
   manufacturers: function() {
-    var everything = Manufacturers.findFaster({department: Session.get('department')},{sort: {manufacturer:1}}).fetch();
+    var everything = Manufacturers.findFaster({department: Session.get('department'), manufacturerName: Session.get('vendorName')},{sort: {manufacturer:1}}).fetch();
     var justManufacturers = _.pluck(everything,"manufacturer");
     return _.uniq(justManufacturers);
   }
