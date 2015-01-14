@@ -3,6 +3,11 @@ Template.login.events({
     event.preventDefault();
     var emailVar = template.find('#login-email').value;
     var passwordVar = template.find('#login-password').value;
-    Meteor.loginWithPassword(emailVar, passwordVar);
+    Meteor.loginWithPassword(emailVar, passwordVar, function(err) {
+      if (err) {
+        alert("Login failed. Please try again or register");
+      }
+    });
+    return false;
   }
 });
