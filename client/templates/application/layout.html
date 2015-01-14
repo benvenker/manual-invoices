@@ -1,5 +1,6 @@
 <template name="layout">
   <div class="flakes-frame">
+    {{#if currentUser}}
     <div class="flakes-navigation">
       <a href="index.html" class="logo">
         <!-- <img src="/img/logo.png" width="120"> -->
@@ -20,6 +21,7 @@
 
       </ul>
     </div>
+      {{/if}}}
     <div class="flakes-content">
       <div class="flakes-mobile-top-bar">
         <a href="" class="logo-wrap">

@@ -35,5 +35,15 @@ Router.route "/invoices/:_id/edit",
 Router.route "/invoices/rejected",
   name: "rejected"
 
+requireLogin = ->
+  unless Meteor.user()
+    @render "accessDenied"
+  else
+    @next()
+  return
+
 Router.onBeforeAction "dataNotFound",
   only: "invoicesPage"
+
+Router.onBeforeAction requireLogin,
+  only: 'invoiceSubmitForm'
