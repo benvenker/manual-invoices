@@ -1,5 +1,7 @@
 //var fs = Npm.require('fs');
 //__ROOT_APP_PATH__ = fs.realpathSync('.');
+////var exportDir = '/Users/Ben/Desktop/ciu_sync_test.dat1';
+//var exportDir = '/Users/Ben/Desktop/ciu_test.dat1'
 //// console.log(__ROOT_APP_PATH__);
 //
 ///*************************** Helper Functions *******************************/
@@ -207,10 +209,7 @@
 //hdr10 + hdr11 + hdr12 + hdr13 + hdr14 + hdr15_28 + '\n';
 //
 //// Write the MCR and HDR records to the file
-//fs.writeFile('/Users/Ben/Desktop/ciu_test.dat1', ciu_mcr + ciu_hdr, function(err) {
-//   if (err) throw err;
-//   console.log('Header\'s saved');
-//});
+//fs.writeFileSync('/Users/Ben/Desktop/ciu_sync_test.dat1', ciu_mcr + ciu_hdr);
 //
 ///***************************** DETAIL RECORD *********************************/
 //// find all the invoice lines for an invoiceId
@@ -328,13 +327,7 @@
 //   // var ciu_export = ciu_mcr + ciu_hdr + ciu_ddr + ;
 //
 //
-//   fs.appendFile('/Users/Ben/Desktop/ciu_test.dat1', ciu_ddr, function(err) {
-//     if (err) throw err;
-//     console.log('ddr\'s appended');
-//   });
+//   fs.appendFileSync(exportDir, ciu_ddr);
 //   console.log("i made it to the end when k = " + k);
 //}
-//fs.appendFile('/Users/Ben/Desktop/ciu_test.dat1', 'EOF', function(err) {
-//   if (err) throw err;
-//   console.log('EOF\'s appended');
-//});
+//fs.appendFileSync(exportDir, 'EOF');
