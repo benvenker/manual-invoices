@@ -16,15 +16,15 @@ Meteor.publish('departments', function() {
 // });
 
 Meteor.publish('manufacturers', function() {
-  return Manufacturers.findFaster({}, {limit: 3000});
+  return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}, limit: 3000});
 });
 
 Meteor.publish('transactionCodes', function() {
-  return TransactionCodes.find();
+  return TransactionCodes.findFaster({}, {sort: {transactionCode: 1}});
 });
 
 Meteor.publish('invoices', function() {
-  return Invoices.find();
+  return Invoices.findFaster({}, {sort: {}});
 });
 
 Meteor.publish('invoiceLines', function() {

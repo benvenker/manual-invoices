@@ -3,9 +3,12 @@ Template.register.events({
     event.preventDefault();
     var emailVar = template.find('#register-email').value;
     var passwordVar = template.find('#register-password').value;
-    Accounts.createUser({
-      email: emailVar,
-      password: passwordVar
+    Accounts.createUser({email: emailVar, password: passwordVar}, function(err) {
+      if (err) {
+        alert(err.reason)
+      } else {
+        return true;
+      }
     });
     console.log("Form submitted.");
   }

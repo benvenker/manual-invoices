@@ -5,7 +5,7 @@ Template.login.events({
     var passwordVar = template.find('#login-password').value;
     Meteor.loginWithPassword(emailVar, passwordVar, function(err) {
       if (err) {
-        alert("Login failed. Please try again or register");
+        alert(err.reason);
       } else
           //Router.go('invoiceSubmitForm');
           return false;
