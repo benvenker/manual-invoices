@@ -38,6 +38,7 @@ Template.invoiceSubmitForm.events({
       source: form.find('[name=sources]').val(),
       invoiceDate: form.find('[name=invoiceDate]').val(),
       description: form.find('[name=description]').val(),
+      urn: form.find('[name=urn]').val(),
       submitted: moment(new Date()).format('L'),
       glAccount: glAccount[0], // Since underscore returns an array, get the
                                // first element, which contains the GL account
