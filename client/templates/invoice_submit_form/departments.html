@@ -1,5 +1,6 @@
 <template name="departments">
-  <select name="departments" autocomplete="off" type=number class="department-selection">
+  <label>Department</label>
+  <select name="departments" class="department-selection" required>
     <option>Select</option>
     {{#each departments}}
       {{> department}}

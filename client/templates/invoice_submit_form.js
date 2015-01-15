@@ -21,6 +21,7 @@ Template.invoiceSubmitForm.events({
     var invoiceAmount = 0;
     var totalQuantity = 0;
 
+
     // Get the header values
     var invoice = {
       PO: form.find('[name=PO]').val(),

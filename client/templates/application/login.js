@@ -7,7 +7,7 @@ Template.login.events({
       if (err) {
         alert("Login failed. Please try again or register");
       } else
-          Router.go('invoiceSubmitForm');
+          //Router.go('invoiceSubmitForm');
           return false;
     });
 
