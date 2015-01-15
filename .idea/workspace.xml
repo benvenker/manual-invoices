@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc332dbb-8e00-4f69-b125-5ae25cc8f00c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/invoices/invoice_edit.html" afterPath="$PROJECT_DIR$/client/templates/invoices/invoice_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/invoice_lines/invoice_line_item.html" afterPath="$PROJECT_DIR$/client/templates/invoice_lines/invoice_line_item.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/invoices/invoice_page.js" afterPath="$PROJECT_DIR$/client/templates/invoices/invoice_page.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/collections/invoices/invoices_methods.js" afterPath="$PROJECT_DIR$/lib/collections/invoices/invoices_methods.js" />
     </list>
     <ignored path="invoice-match.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,21 +48,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="router.coffee" pinned="false" current-in-tab="false">
+          <file leaf-file-name="router.coffee" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/lib/router.coffee">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-24.4" vertical-offset="189" max-vertical-offset="918">
+                <state vertical-scroll-proportion="0.8372093" vertical-offset="187" max-vertical-offset="918">
                   <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="invoice_page.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/client/templates/invoices/invoice_page.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.4090909" vertical-offset="0" max-vertical-offset="748">
-                  <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
                   <folding />
                 </state>
               </provider>
@@ -153,8 +141,8 @@
               <file leaf-file-name="invoices_methods.js" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/lib/collections/invoices/invoices_methods.js">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="4.134091" vertical-offset="0" max-vertical-offset="6018">
-                      <caret line="104" column="79" selection-start-line="104" selection-start-column="79" selection-end-line="104" selection-end-column="79" />
+                    <state vertical-scroll-proportion="0.611236" vertical-offset="5491" max-vertical-offset="5967">
+                      <caret line="337" column="47" selection-start-line="337" selection-start-column="47" selection-end-line="337" selection-end-column="47" />
                       <folding />
                     </state>
                   </provider>
@@ -277,7 +265,7 @@
               <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
                 <entry file="file://$PROJECT_DIR$/client/templates/application/login.html">
                   <provider selected="true" editor-type-id="text-editor">
-                    <state vertical-scroll-proportion="0.55060726" vertical-offset="0" max-vertical-offset="459">
+                    <state vertical-scroll-proportion="0.544" vertical-offset="0" max-vertical-offset="459">
                       <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
                       <folding />
                     </state>
@@ -312,7 +300,6 @@
         <option value="$PROJECT_DIR$/client/templates/invoice_submit_form/vendor_numbers.html" />
         <option value="$PROJECT_DIR$/client/templates/invoice_submit_form/vendor_number.js" />
         <option value="$PROJECT_DIR$/client/templates/invoice_submit_form/vendor_name.html" />
-        <option value="$PROJECT_DIR$/lib/collections/invoices/invoices_methods.js" />
         <option value="$PROJECT_DIR$/server/root_main.js" />
         <option value="$PROJECT_DIR$/client/templates/invoice_submit_form/manufacturers.js" />
         <option value="$PROJECT_DIR$/server/publications.js" />
@@ -329,6 +316,7 @@
         <option value="$PROJECT_DIR$/client/templates/invoice_lines/invoice_line_item.html" />
         <option value="$PROJECT_DIR$/client/templates/invoices/invoice_edit.html" />
         <option value="$PROJECT_DIR$/client/templates/invoices/invoice_page.js" />
+        <option value="$PROJECT_DIR$/lib/collections/invoices/invoices_methods.js" />
       </list>
     </option>
   </component>
@@ -338,8 +326,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="1296" />
     <option name="y" value="-454" />
-    <option name="width" value="1336" />
-    <option name="height" value="1050" />
+    <option name="width" value="1410" />
+    <option name="height" value="1058" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -485,11 +473,11 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1296" y="-454" width="1336" height="1050" extended-state="0" />
+    <frame x="1296" y="-454" width="1410" height="1058" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21298175" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2112676" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32962447" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298969" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19361277" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -777,7 +765,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/application/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.55060726" vertical-offset="0" max-vertical-offset="459">
+        <state vertical-scroll-proportion="0.544" vertical-offset="0" max-vertical-offset="459">
           <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
           <folding />
         </state>
@@ -822,14 +810,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-6.12" vertical-offset="0" max-vertical-offset="323">
           <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/router.coffee">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-24.4" vertical-offset="189" max-vertical-offset="918">
-          <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
           <folding />
         </state>
       </provider>
@@ -910,14 +890,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/collections/invoices/invoices_methods.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.134091" vertical-offset="0" max-vertical-offset="6018">
-          <caret line="104" column="79" selection-start-line="104" selection-start-column="79" selection-end-line="104" selection-end-column="79" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/invoices/invoice_edit.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.44" vertical-offset="0" max-vertical-offset="527">
@@ -928,8 +900,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/templates/invoices/invoice_page.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4090909" vertical-offset="0" max-vertical-offset="748">
-          <caret line="17" column="17" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.53968257" vertical-offset="0" max-vertical-offset="756">
+          <caret line="23" column="66" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/router.coffee">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8372093" vertical-offset="187" max-vertical-offset="918">
+          <caret line="47" column="35" selection-start-line="47" selection-start-column="35" selection-end-line="47" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/collections/invoices/invoices_methods.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.611236" vertical-offset="5491" max-vertical-offset="5967">
+          <caret line="337" column="47" selection-start-line="337" selection-start-column="47" selection-end-line="337" selection-end-column="47" />
           <folding />
         </state>
       </provider>
