@@ -1,18 +1,21 @@
 Template.invoicePage.events({
-  "click .ciu-export": function(e, t){
+  "click .ciu-export": function(e, t) {
     e.preventDefault();
 
-    // Checking the data to why chrome says ID is not being passed
-    var data = Router.current().data();
-    console.log(data);
+    if (confirm("Are you sure you want to export? \nThis will generate a CIU file to the LAN and cannot be undone.")) {
+      // Checking the data to why chrome says ID is not being passed
+      var data = Router.current().data();
+      console.log(data);
 
-    var invoice = this._id;
+      var invoice = this._id;
 
-    Meteor.call('ciuExport', invoice, function(error, result) {
-      if (error)
-        return alert(error.reason);
-      Router.go('invoicePage', {_id: this._id});
-    });
+      Meteor.call('ciuExport', invoice, function (error, result) {
+        if (error)
+          return alert(error.reason);
+        Router.go('invoicesList', {_id: this._id});
+      });
+    }
+    return false;
   }
 });
 
