@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bc332dbb-8e00-4f69-b125-5ae25cc8f00c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/invoices/invoice_edit.js" afterPath="$PROJECT_DIR$/client/templates/invoices/invoice_edit.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/invoices/invoice_header.html" afterPath="$PROJECT_DIR$/client/templates/invoices/invoice_header.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/invoices/edit/invoice_header_edit.html" afterPath="$PROJECT_DIR$/client/templates/invoices/edit/invoice_header_edit.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/invoice_header_form.html" afterPath="$PROJECT_DIR$/client/templates/invoice_header_form.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/templates/invoice_submit_form.js" afterPath="$PROJECT_DIR$/client/templates/invoice_submit_form.js" />
     </list>
     <ignored path="invoice-match.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -86,7 +82,7 @@
             <entry file="file://$PROJECT_DIR$/client/templates/invoices/invoice_header.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state vertical-scroll-proportion="0.04735376" vertical-offset="17" max-vertical-offset="1309">
-                  <caret line="2" column="119" selection-start-line="2" selection-start-column="119" selection-end-line="2" selection-end-column="119" />
+                  <caret line="2" column="115" selection-start-line="2" selection-start-column="115" selection-end-line="2" selection-end-column="115" />
                   <folding />
                 </state>
               </provider>
@@ -922,7 +918,7 @@
     <entry file="file://$PROJECT_DIR$/client/templates/invoices/invoice_header.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04735376" vertical-offset="17" max-vertical-offset="1309">
-          <caret line="2" column="119" selection-start-line="2" selection-start-column="119" selection-end-line="2" selection-end-column="119" />
+          <caret line="2" column="115" selection-start-line="2" selection-start-column="115" selection-end-line="2" selection-end-column="115" />
           <folding />
         </state>
       </provider>
