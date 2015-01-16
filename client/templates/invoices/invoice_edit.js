@@ -63,7 +63,7 @@ Template.invoiceEdit.events({
         invoiceLineNumber: $tds.eq(0).val(),
         store: parseInt($tds.eq(0).val()),
         itemClass: $tds.eq(1).val(),
-        unitCost: unitCost,
+        unitCost: numeral(unitCost).format('0,0.00'),
         quantity: quantity,
         style: $tds.eq(4).val(),
         sku: $tds.eq(5).val(),

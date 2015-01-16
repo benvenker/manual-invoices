@@ -10,9 +10,3 @@ Template.vendorNames.helpers({
     return _.uniq(justManufacturerNames);
   }
 });
-
-Template.vendorNames.events({
-  "change .vendor-name-selection": function(e, t){
-    return Session.set("vendorName", $("[name=vendorNames]").val());
-  }
-});

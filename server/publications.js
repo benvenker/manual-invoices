@@ -16,7 +16,7 @@ Meteor.publish('departments', function() {
 // });
 
 Meteor.publish('manufacturers', function() {
-  return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}, limit: 3000});
+  return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}});
 });
 
 Meteor.publish('transactionCodes', function() {
