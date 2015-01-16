@@ -88,7 +88,7 @@ Template.invoiceEdit.events({
       //var currentInvoice = invoice._id;
       //
       var invoiceProperties = {
-        totalCost: numeral(invoiceAmount).format('$0,0.00'),
+        totalCost: numeral(invoiceAmount).format('0,0.00'),
         totalQuantity: totalQuantity,
       };
       //console.log(invoiceLineNum);
