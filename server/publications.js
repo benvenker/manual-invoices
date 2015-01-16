@@ -16,8 +16,18 @@ Meteor.publish('departments', function() {
 // });
 
 Meteor.publish('manufacturers', function() {
-  return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}});
+  return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}, limit: 3000});
 });
+
+//// Get Full Line vendors
+//Meteor.publish('fullLine', function() {
+//  return Manufacturers.findFaster({OPCO: 6}, {sort: {manufacturerName: 1}, limit: 3000});
+//});
+//
+//// Get Off-Fifth vendors
+//Meteor.publish('offFifth', function() {
+//  return Manufacturers.findFaster({OPCO: 7}, {sort: {manufacturerName: 1}, limit: 3000});
+//});
 
 Meteor.publish('transactionCodes', function() {
   return TransactionCodes.findFaster({}, {sort: {transactionCode: 1}});

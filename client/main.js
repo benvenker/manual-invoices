@@ -9,6 +9,7 @@
 //
 Meteor.subscribe('invoices');
 Meteor.subscribe('invoiceLines');
+Session.setDefault('opco', null);
 //
 //
 // Tracker.autorun(function() {
