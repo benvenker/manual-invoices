@@ -74,7 +74,7 @@ Template.invoiceSubmitForm.events({
         style: $tds.eq(4).val(),
         sku: $tds.eq(5).val(),
         description: $tds.eq(6).val(),
-        lineTotal: numeral(unitCost * quantity).format('$0,0.00'),
+        lineTotal: numeral(unitCost * quantity).format('0,0.00'),
         submitted: moment(new Date()).format('L'),
       }
 
