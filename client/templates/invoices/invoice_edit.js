@@ -63,15 +63,15 @@ Template.invoiceEdit.events({
         invoiceLineNumber: $tds.eq(0).val(),
         store: parseInt($tds.eq(0).val()),
         itemClass: $tds.eq(1).val(),
-        unitCost: numeral(unitCost).format('0,0.00'),
+        unitCost: numeral(unitCost).format('00.00'),
         quantity: quantity,
         style: $tds.eq(4).val(),
         sku: $tds.eq(5).val(),
         description: $tds.eq(6).val(),
-        lineTotal: numeral(unitCost * quantity).format('0,0.00'),
+        lineTotal: numeral(unitCost * quantity).format('00.00'),
       }
 
-      var lineTotalVar = numeral(unitCost * quantity).format('0,0.00');
+      var lineTotalVar = numeral(unitCost * quantity).format('00.00');
       invoiceAmount += numeral().unformat(lineTotalVar);
       totalQuantity += quantity;
 
@@ -88,7 +88,7 @@ Template.invoiceEdit.events({
       //var currentInvoice = invoice._id;
       //
       var invoiceProperties = {
-        totalCost: numeral(invoiceAmount).format('0,0.00'),
+        totalCost: numeral(invoiceAmount).format('00.00'),
         totalQuantity: totalQuantity,
       };
       //console.log(invoiceLineNum);
