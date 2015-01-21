@@ -1,33 +1,10 @@
 Meteor.publish('departments', function() {
   return Departments.find();
 });
-// Meteor.publish('departments', function() {
-//   var sub = this;
-//   var cur = Suppliers.find({}, {sort: {department: 1}, fields: {
-//     DEPT_DESC: false,
-//     VEN_RES_NUM: false,
-//     VNDRTYPECD: false,
-//     vendorName: false,
-//     vendorNumber: false,
-//   }});
-//
-//   Mongo.Collection._publishCursor(cur, sub, 'departments')
-//   return sub.ready();
-// });
 
 Meteor.publish('manufacturers', function() {
   return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}, limit: 3000});
 });
-
-//// Get Full Line vendors
-//Meteor.publish('fullLine', function() {
-//  return Manufacturers.findFaster({OPCO: 6}, {sort: {manufacturerName: 1}, limit: 3000});
-//});
-//
-//// Get Off-Fifth vendors
-//Meteor.publish('offFifth', function() {
-//  return Manufacturers.findFaster({OPCO: 7}, {sort: {manufacturerName: 1}, limit: 3000});
-//});
 
 Meteor.publish('transactionCodes', function() {
   return TransactionCodes.findFaster({}, {sort: {transactionCode: 1}});
