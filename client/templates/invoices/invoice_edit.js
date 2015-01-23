@@ -103,5 +103,15 @@ Template.invoiceEdit.events({
     $('.remove-invoice-line').click(function(event) {
       $(this).closest('tr').remove();
     });
+  },
+
+  'click .delete-invoice': function(e) {
+    e.preventDefault();
+
+    if (confirm("Delete this invoice?")) {
+      var currentInvoiceId = this._id;
+      Invoices.remove(currentInvoiceId);
+      Router.go('invoicesList');
+    }
   }
 });
