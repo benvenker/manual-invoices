@@ -105,6 +105,14 @@ Template.invoiceEdit.events({
     });
   },
 
+  'click .cancel-changes': function(e) {
+    e.preventDefault();
+    if (confirm("Discard changes? \nYou will lose any changes you've made to this invoice.")) {
+      var currentInvoiceId = this._id;
+      Router.go('/invoices/' + currentInvoiceId);
+    }
+  },
+
   'click .delete-invoice': function(e) {
     e.preventDefault();
 
