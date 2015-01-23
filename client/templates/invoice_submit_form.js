@@ -1,8 +1,3 @@
-Template.invoiceSubmitForm.rendered = function(){
-  // On-rendered code here
-  //Suppliers.find({OPCO: 6});
-}
-
 Template.invoiceSubmitForm.events({
   'click .add-invoice-line': function(e) {
     e.preventDefault();
