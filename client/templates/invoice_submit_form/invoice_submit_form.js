@@ -29,7 +29,8 @@ Template.invoiceSubmitForm.events({
       vendorName: form.find('[name=vendorNames]').val(),
       vendorNumber: form.find('[name=vendorNumbers]').val(),
       invoiceNumber: form.find('[name=invoiceNumber]').val(),
-      transactionCode: form.find('[name=transactionCodes]').val(),
+      // Get the value of the transCode div in the transaction code dropdown
+      transactionCode: parseInt(Session.get('transactionCode')),
       source: form.find('[name=sources]').val(),
       invoiceDate: form.find('[name=invoiceDate]').val(),
       description: form.find('[name=description]').val(),
