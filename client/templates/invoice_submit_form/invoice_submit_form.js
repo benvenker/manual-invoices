@@ -34,7 +34,7 @@ Template.invoiceSubmitForm.events({
       transactionCode: parseInt(Session.get('transactionCode')),
       source: form.find('[name=sources]').val(),
       invoiceDate: form.find('[name=invoiceDate]').val(),
-      description: form.find('[name=description]').val(),
+      headerDescription: form.find('[name=headerDescription]').val(),
       urn: form.find('[name=urn]').val(),
       submitted: moment(new Date()).format('L'),
       retailCost: numeral().unformat(retailCost),

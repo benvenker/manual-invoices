@@ -41,8 +41,7 @@ Template.invoiceEdit.events({
       source: form.find('[name=source]').val(),
       invoiceDate: form.find('[name=invoiceDate]').val(),
       urn: form.find('[name=urn]').val(),
-      description: form.find('[name=description]').val(),
-      //retailCost: parseInt(numeral(retailCost).format('00.00'))
+      headerDescription: form.find('[name=headerDescription]').val(),
       retailCost: numeral().unformat(retailCost)
     }
 
