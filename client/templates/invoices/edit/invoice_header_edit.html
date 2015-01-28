@@ -1,7 +1,7 @@
 <template name="invoiceHeaderEdit">
   <fieldset>
     <legend>Invoice Header</legend>
-    <div data-row-span="5">
+    <div data-row-span="6">
       <div data-field-span="1">
         <label>PO</label>
         <input type="text" name="PO" value="{{PO}}">
@@ -21,6 +21,10 @@
       <div data-field-span="1">
         <label>URN</label>
         <input type="text" name="urn" value="{{urn}}"/>
+      </div>
+      <div data-field-span="1" >
+        <label>RETAIL COST</label>
+        <input type="text" name='retailCost' value="{{retailCost}}"/>
       </div>
     </div>
 

@@ -24,7 +24,7 @@ Template.invoiceEdit.events({
     var table = $('.flakes-table tbody');
     var invoiceAmount = 0;
     var totalQuantity = 0;
-
+    var retailCost = form.find('[name=retailCost]').val();
 
     // Get the header values
     var invoiceProperties = {
@@ -41,7 +41,9 @@ Template.invoiceEdit.events({
       source: form.find('[name=source]').val(),
       invoiceDate: form.find('[name=invoiceDate]').val(),
       urn: form.find('[name=urn]').val(),
-      description: form.find('[name=description]').val()
+      description: form.find('[name=description]').val(),
+      //retailCost: parseInt(numeral(retailCost).format('00.00'))
+      retailCost: numeral().unformat(retailCost)
     }
 
     Invoices.update(currentInvoiceId, {$set: invoiceProperties});
