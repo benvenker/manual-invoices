@@ -4,6 +4,8 @@ Router.configure
   waitOn: ->  [
     Meteor.subscribe('departments')
     Meteor.subscribe('manufacturers')
+    Meteor.subscribe('invoices')
+    Meteor.subscribe('invoiceLines')
   ]
 
 Router.route "/",
