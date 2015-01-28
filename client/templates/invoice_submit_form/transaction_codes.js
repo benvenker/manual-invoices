@@ -10,7 +10,7 @@ Template.transactionCodes.helpers({
     //var justTransactionCodes = _.pluck(everything,"transactionCode");
     //return _.uniq(justTransactionCodes);
 
-    return TransactionCodes.findFaster({banner: parseInt(Session.get('opco'))}, {sort: {transactionCode:1}}).fetch();
+    return TransactionCodes.findFaster({banner: parseInt(Session.get('opco')), banner: "NA"}, {sort: {transactionCode:1}}).fetch();
   }
 });
 
