@@ -1,7 +1,7 @@
 <template name="invoiceHeader">
   <fieldset>
     <legend>Invoice Header <small style="float: right;"><a href="http://prtprod/PRTSSOPrimas/RetrieveDoc.aspx?urn={{urn}}" target="_blank">View paper invoice</a></small></legend>
-    <div data-row-span="4">
+    <div data-row-span="5">
       <div data-field-span="1">
         <label>PO</label>
         <input type="text" name="PO" value="{{PO}}" disabled="true">
@@ -17,6 +17,10 @@
       <div data-field-span="1">
         <label>TOTAL COST</label>
         <input type="text" name="totalCost" value="{{totalCost}}" disabled="true">
+      </div>
+      <div data-field-span="1" >
+        <label>RETAIL COST</label>
+        <input type="text" name='retailCost' value="{{retailCost}}"/>
       </div>
     </div>
     <div data-row-span="5">

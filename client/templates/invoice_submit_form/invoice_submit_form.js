@@ -15,6 +15,7 @@ Template.invoiceSubmitForm.events({
     console.log("GL Account: " + glAccount);
     var invoiceAmount = 0;
     var totalQuantity = 0;
+    var retailCost = form.find('[name=retailCost]').val();
 
 
     // Get the header values
@@ -36,6 +37,7 @@ Template.invoiceSubmitForm.events({
       description: form.find('[name=description]').val(),
       urn: form.find('[name=urn]').val(),
       submitted: moment(new Date()).format('L'),
+      retailCost: numeral().unformat(retailCost),
       glAccount: glAccount[0], // Since underscore returns an array, get the
                                // first element, which contains the GL account
     }
