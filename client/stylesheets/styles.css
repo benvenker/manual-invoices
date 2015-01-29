@@ -5,3 +5,9 @@ body {
 td .invoiceLineNumber {
   width: 20px;
 }
+
+.flakes-table thead tr td.quantity-column,
+.flakes-table thead tr td.store-column
+{
+  width: 30px;
+}
