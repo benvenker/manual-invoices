@@ -58,16 +58,19 @@ Template.invoiceEdit.events({
 
       var $tds = $(this).find('td input');
       var unitCost = parseFloat(($tds.eq(2).val()));
-      var quantity = parseInt($tds.eq(3).val());
+      var lineRetailCost = parseFloat(($tds.eq(3).val()));
+      var quantity = parseInt($tds.eq(4).val());
+
       var invoiceLine = {
         invoiceId: currentInvoiceId,
         store: parseInt($tds.eq(0).val()),
         itemClass: $tds.eq(1).val(),
         unitCost: numeral(unitCost).format('00.00'),
+        lineRetailCost: numeral(lineRetailCost).format('00.00'),
         quantity: quantity,
-        style: $tds.eq(4).val(),
-        sku: $tds.eq(5).val(),
-        description: $tds.eq(6).val(),
+        style: $tds.eq(5).val(),
+        sku: $tds.eq(6).val(),
+        description: $tds.eq(7).val(),
         lineTotal: numeral(unitCost * quantity).format('00.00'),
       }
 
