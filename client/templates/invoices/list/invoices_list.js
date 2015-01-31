@@ -1,5 +1,5 @@
 Template.invoicesList.helpers({
   invoices: function(){
-    return Invoices.find({}, {sort: {submitted:-1}});
+    return Invoices.find({$or: [{}, {exported: false}]}, {sort: {submitted:-1}});
   }
 });

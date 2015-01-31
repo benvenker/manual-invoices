@@ -23,6 +23,12 @@ Router.route "/archive",
 Router.route "/invoices_list",
   name: "invoicesList"
 
+Router.route "/exported_invoices",
+  name: "exportedInvoices"
+
+Router.route "/pending_invoices",
+  name: "pendingInvoices"
+
 Router.route "/invoices/:_id",
   name: "invoicePage"
   data: ->

@@ -52,6 +52,7 @@ Template.invoiceSubmitForm.events({
         submitted: moment(new Date()).format('L'),
         glAccount: glAccount[0], // Since underscore returns an array, get the
                                  // first element, which contains the GL account
+        exported: false
       }
 
       if (isValidLength(invoice.invoiceNumber, 5)) {

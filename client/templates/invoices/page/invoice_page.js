@@ -14,6 +14,9 @@ Template.invoicePage.events({
           return alert(error.reason);
         Router.go('invoicesList', {_id: this._id});
       });
+
+      Invoices.update(invoice, {$set: {exported: true}});
+
     }
     return false;
   }
