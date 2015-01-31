@@ -12,10 +12,10 @@ Template.invoiceSubmitForm.events({
 
     // Form validation
     if (!(isSelected(Session.get('opco')) &&
-      isSelected(Session.get('vendorName')) &&
-      isSelected(Session.get('vendorNumber')) &&
-      isSelected(Session.get('department')) &&
-      isSelected(Session.get('manufacturer')) &&
+      //isSelected(Session.get('vendorName')) &&
+      //isSelected(Session.get('vendorNumber')) &&
+      //isSelected(Session.get('department')) &&
+      //isSelected(Session.get('manufacturer')) &&
       isSelected(Session.get('transactionCode')) &&
       isSelected(Session.get('source'))
       )) {
