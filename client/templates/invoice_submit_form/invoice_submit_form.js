@@ -31,6 +31,7 @@ Template.invoiceSubmitForm.events({
       var totalQuantity = 0;
       var retailCost = 0;
 
+      var user = Meteor.user();
       // Get the header values
       var invoice = {
         PO: form.find('[name=PO]').val(),
@@ -52,7 +53,9 @@ Template.invoiceSubmitForm.events({
         submitted: moment(new Date()).format('L'),
         glAccount: glAccount[0], // Since underscore returns an array, get the
                                  // first element, which contains the GL account
-        exported: false
+        exported: false,
+        userId: user._id,
+        author: user.emails[0].address
       }
 
       if (isValidLength(invoice.invoiceNumber, 5)) {
