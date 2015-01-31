@@ -1,10 +1,10 @@
-Meteor.publish('departments', function() {
-  return Departments.find();
-});
-
-Meteor.publish('manufacturers', function() {
-  return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}});
-});
+//Meteor.publish('departments', function() {
+//  return Departments.find();
+//});
+//
+//Meteor.publish('manufacturers', function() {
+//  return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}, limit: 1000});
+//});
 
 Meteor.publish('transactionCodes', function() {
   return TransactionCodes.findFaster({}, {sort: {transactionCode: 1}});

@@ -2,10 +2,10 @@ Router.configure
   layoutTemplate: "layout"
   loadingTemplate: "loading"
   waitOn: ->  [
-    Meteor.subscribe('departments')
-    Meteor.subscribe('manufacturers')
-    Meteor.subscribe('invoices')
-    Meteor.subscribe('invoiceLines')
+#    Meteor.subscribe('departments')
+#    Meteor.subscribe('manufacturers')
+#    Meteor.subscribe('invoices')
+#    Meteor.subscribe('invoiceLines')
   ]
 
 Router.route "/",
