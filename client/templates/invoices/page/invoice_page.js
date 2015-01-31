@@ -14,8 +14,7 @@ Template.invoicePage.events({
           return alert(error.reason);
         Router.go('invoicesList', {_id: this._id});
       });
-
-      Invoices.update(invoice, {$set: {exported: true}});
+      Invoices.update(invoice, {$set: {exported: true, exportedDate: new Date()}});
 
     }
     return false;
