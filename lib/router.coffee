@@ -29,6 +29,9 @@ Router.route "/exported_invoices",
 Router.route "/pending_invoices",
   name: "pendingInvoices"
 
+Router.route "/invoice_lines_list",
+  name: "invoiceLinesList"
+
 Router.route "/invoices/:_id",
   name: "invoicePage"
   data: ->

@@ -1,0 +1,40 @@
+<template name="invoiceLinesList">
+  <table class="flakes-table">
+    <colgroup>
+      <col span="1" style="width:20%;">
+      <col span="1" style="width:40%;">
+    </colgroup>
+    <thead>
+    <tr>
+      <td>Invoice No.</td>
+      <td>Line Amt.</td>
+      <td>Retail Amt.</td>
+      <td>Store</td>
+      <td>Quant.</td>
+      <td>Unit Cost</td>
+      <td>Unit Retail</td>
+      <td>Line Desc</td>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each invoiceLines}}
+        {{> invoiceExportItem}}
+    {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="invoiceExportItem">
+  <tr>
+    <!--<td>{{invoiceLineNumber}}</td>-->
+    <td>{{invoiceNumber}}</td>
+    <td>{{lineTotal}}</td>
+    <td>{{lineRetailCost}}</td>
+    <td>{{store}}</td>
+    <td>{{quantity}}</td>
+    <td>{{unitCost}}</td>
+    <td>{{lineRetailCost}}</td>
+    <td>{{description}}</td>
+    <!--<td><a class="button-red tiny"><b>×</b></a></td>-->
+  </tr>
+</template>
