@@ -1,0 +1,30 @@
+<template name="vendorList">
+  <table class="flakes-table">
+    <colgroup>
+      <col span="1" style="width:20%;">
+      <col span="1" style="width:40%;">
+    </colgroup>
+    <thead>
+    <tr>
+      <td>Vendor #</td>
+      <td>Invoice No.</td>
+      <td>Dept.</td>
+    </tr>
+    </thead>
+    <tbody>
+    {{#each vendors}}
+        {{> vendorItem}}
+    {{/each}}
+    </tbody>
+  </table>
+</template>
+
+<template name="vendorItem">
+  <tr>
+    <!--<td>{{invoiceLineNumber}}</td>-->
+    <td>{{vendorNumber}}</td>
+    <td>{{invoiceNumber}}</td>
+    <td>{{department}}</td>
+    <!--<td><a class="button-red tiny"><b>×</b></a></td>-->
+  </tr>
+</template>
