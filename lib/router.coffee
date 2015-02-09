@@ -3,7 +3,7 @@ Router.configure
   loadingTemplate: "loading"
   waitOn: ->  [
 #    Meteor.subscribe('departments')
-#    Meteor.subscribe('manufacturers')
+    Meteor.subscribe('manufacturers')
 #    Meteor.subscribe('invoices')
 #    Meteor.subscribe('invoiceLines')
   ]
