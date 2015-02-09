@@ -3,8 +3,9 @@
 
 // Meteor.subscribe('departments');
 
-// Meteor.subscribe('suppliers', {OPCO: 7});
-// Meteor.subscribe('manufacturers');
+Meteor.subscribe('suppliers');
+
+Meteor.subscribe('manufacturers');
 // Meteor.subscribe('transactionCodes');
 //
 Meteor.subscribe('invoices');
@@ -19,6 +20,21 @@ Session.setDefault('manufacturer', null);
 Session.setDefault('transactionCode', null);
 Session.setDefault('source', null);
 
+Meteor.startup(function(){
+  // initializes all typeahead instances
+  Meteor.typeahead.inject();
+});
+
+
+Template.layout.created = function() {
+  $(".navigation-expand-target").on('click', function() {
+    var toggle = $(this).data('toggle'),
+        dist   = toggle ? '0%' : '40%';
+
+    $(".flakes-navigation").animate({ "left" : dist }, 500);
+    $(this).data('toggle', !toggle);
+  });
+}
 
 //
 //
