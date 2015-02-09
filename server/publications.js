@@ -6,13 +6,13 @@
 //  return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}, limit: 1000});
 //});
 
-Meteor.publish('suppliers', function() {
-  return Suppliers.findFaster({}, {sort: {vendorName: 1}});
-});
+//Meteor.publish('suppliers', function() {
+//  return Suppliers.findFaster({}, {sort: {vendorName: 1}});
+//});
 
-Meteor.publish('manufacturers', function() {
-  return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}});
-})
+//Meteor.publish('manufacturers', function() {
+//  return Manufacturers.findFaster({}, {sort: {manufacturerName: 1}});
+//})
 
 Meteor.publish('transactionCodes', function() {
   return TransactionCodes.findFaster({}, {sort: {transactionCode: 1}});
