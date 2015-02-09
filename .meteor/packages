@@ -4,12 +4,10 @@
 # but you can also edit it by hand.
 
 meteor-platform
-insecure
 jquery
 stevezhu:sass
 iron:router
 coffeescript
-bdunnette:flakes
 sacha:spin
 accounts-password
 
@@ -18,7 +16,6 @@ alanning:roles
 meteorhacks:kadira
 aldeed:collection2
 doctorpangloss:mongodb-server-aggregation
-vsivsi:numeral
 arunoda:find-faster
 meteorhacks:npm
 
@@ -27,3 +24,6 @@ npm-container
 mizzao:autocomplete
 houston:admin
 meteorhacks:fast-render
+flakes:flakes
+sergeyt:typeahead
+numeral:numeral
