@@ -50,8 +50,11 @@ Router.route "/invoices/rejected",
   name: "rejected"
 
 requireLogin = ->
-  unless Meteor.user()
-    @render "accessDenied"
+  if !Meteor.user()
+    if Meteor.loggingIn()
+      @render @loadingTemplate
+    else
+      @render 'accessDenied'
   else
     @next()
   return
