@@ -3,9 +3,9 @@
 
 // Meteor.subscribe('departments');
 
-//Meteor.subscribe('suppliers');
-//
-//Meteor.subscribe('manufacturers');
+Meteor.subscribe('suppliers');
+
+Meteor.subscribe('manufacturers');
 // Meteor.subscribe('transactionCodes');
 //
 Meteor.subscribe('invoices');

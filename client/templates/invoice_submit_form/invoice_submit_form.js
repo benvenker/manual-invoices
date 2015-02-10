@@ -42,38 +42,28 @@ Template.invoiceSubmitForm.events({
         department: form.find('[name=departments]').val(),
         manufacturer: form.find('[name=manufacturers]').val(),
         vendorName: form.find('[name=vendorNames]').val(),
-        vendorNumber: parseInt(form.find('[name=vendorNumbers]').val()),
+        vendorNumber: form.find('[name=vendorNumbers]').val(),
         invoiceNumber: form.find('[name=invoiceNumber]').val(),
         // Get the value of the transCode div in the transaction code dropdown
         transactionCode: parseInt(Session.get('transactionCode')),
         source: form.find('[name=sources]').val(),
         invoiceDate: form.find('[name=invoiceDate]').val(),
         headerDescription: form.find('[name=headerDescription]').val(),
-        urn: parseInt(form.find('[name=urn]').val()),
-        glAccount: parseInt(glAccount[0]), // Since underscore returns an array, get the
+        urn: form.find('[name=urn]').val(),
+        submitted: moment(new Date()).format('L'),
+        glAccount: glAccount[0], // Since underscore returns an array, get the
                                  // first element, which contains the GL account
         exported: false,
-
+        userId: user._id,
+        author: user.emails[0].address
       }
 
-      // If validation passes, insert invoice
-      //if (isValidLength(invoice.invoiceNumber, 5)) {
-      //  invoice._id = Invoices.insert(invoice);
-      //  console.log(invoice._id);
-      //} else {
-      //  alert('Invoice numbers must be at least 5 characters!');
-      //}
-      Meteor.call('invoiceInsert', invoice, function(error, result) {
-        // Display the error to the user and abort
-        if (error)
-          return alert(error.reason);
-
-        // show this result but route anyway
-        if (result.invoiceExists)
-          alert.('This invoice has already been created');
-
-        Router.go('invoicePage', {_id: result._id});
-      });
+      if (isValidLength(invoice.invoiceNumber, 5)) {
+        invoice._id = Invoices.insert(invoice);
+        console.log(invoice._id);
+      } else {
+        alert('Invoice numbers must be at least 5 characters!');
+      }
 
 
 
