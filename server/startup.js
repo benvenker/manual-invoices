@@ -14,4 +14,6 @@
 
 Meteor.startup(function() {
   Invoices._ensureIndex({submitted: 1});
+
+  process.env.MAIL_URL = 'smtp://postmaster%40sandbox4f4e7e8ba6ce4c4eafda31644883f6fe.mailgun.org:b9f5350629fbd9c8473eda3762847dc2@smtp.mailgun.org:587';
 })
