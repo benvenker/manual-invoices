@@ -1,3 +1,8 @@
+Template.invoiceSubmitForm.rendered = function(){
+  // Inject all typeahead instances
+  Meteor.typeahead.inject();
+};
+
 Template.invoiceSubmitForm.events({
   'click .add-invoice-line': function(e) {
     e.preventDefault();
