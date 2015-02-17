@@ -2,45 +2,131 @@
   <div class="grid-16 gutter-20">
     <div class="span-12">
       <form class="grid-form">
-        {{> invoiceHeaderForm}}
-        <br>
-        <br>
         <fieldset>
-          <legend>Invoice Lines <small><a href="#" class="add-invoice-line"><b>Add Lines</b></a></small>
-                  <!-- <small><a href="#" class="remove-invoice-line"><b>Remove Lines</b></a></small> -->
-          </legend>
-        </fieldset>
-        <table class="flakes-table">
-          <thead>
-          <tr>
-            <!-- <td style="width: 40px;">#</td> -->
-            <td class="store-column">STORE</td>
-            <td>CLASS</td>
-            <td>UNIT CST</td>
-            <td>RET. CST</td>
-            <td class="quantity-column">QTY</td>
-            <td>STYLE</td>
-            <td>SKU</td>
-            <td class="description-column">DESC.</td>
-            <!--<td>LINE TOTAL</td>-->
-            <td>X</td>
-          </tr>
-          </thead>
-          <tbody>
-          {{> invoiceLine}}
-          </tbody>
-        </table>
-        <hr>
-        <br>
-        {{> glAccountEntry}}
-      </form>
-    </div>
-    <br>
-    <div class="span-12" >
-      <div class="span-10"></div>
-      <div class="span-2">
-        <a class="button-darkblue add-invoice" style="float: right;"><b>Submit</b></a>
+          <legend>Invoice Header</legend>
+          <div data-row-span="6">
+            <div data-field-span="1">
+              <label>OPCO</label>
+              {{> opcos}}
+            </div>
+            {{> vendorTypeahead}}
+            <!-- <div data-field-span="2">
+            <label>Vendor Name</label>
+            {{> vendorNames}}
+          </div> -->
+          <!--<div data-field-span="2" class="">-->
+          <!--<label>VENDOR NAME</label>-->
+          <!--<input type="text" name="vendorNames">-->
+          <!--</div>-->
+          <!-- <div data-field-span="2">
+          <label>Vendor Number</label>
+          {{> vendorNumbers}}
+        </div> -->
+        <!--<div data-field-span="2"  class="">-->
+        <!--<label>VENDOR NUMBER</label>-->
+        <!--<input type="text" name="vendorNumbers">-->
+        <!--</div>-->
+        <div data-field-span="2">
+          <label>INVOICE DATE</label>
+          <input type="date" name="invoiceDate" maxlength=8 placeholder="DDMMYYYY"/>
+        </div>
       </div>
+      <div data-row-span="5">
+        <div data-field-span="1">
+          {{> departments}}
+        </div>
+        <!--<div data-field-span="1" class="">-->
+        <!--<label>DEPARTMENT</label>-->
+        <!--<input type="text" name="departments">-->
+        <!--</div>-->
+        <div data-field-span="1">
+          <label>Manufacturer</label>
+          {{> manufacturers}}
+        </div>
+        <!--<div data-field-span="1" class="">-->
+        <!--<label>MANUFACTURER</label>-->
+        <!--<input type="text" name="manufacturers">-->
+        <!--</div>-->
+        <div data-field-span="1">
+          <label>TRANSACTION CODE</label>
+          {{> transactionCodes}}
+        </div>
+        <div data-field-span="1"  class="">
+          <label>SOURCE</label>
+          {{> sources}}
+        </div>
+      </div>
+      <div data-row-span="7">
+        <div data-field-span="2">
+          <label>INVOICE NUMBER</label>
+          <input type="text" name="invoiceNumber" maxlength=25>
+        </div>
+        <div data-field-span="2">
+          <label>PO</label>
+          <input type="text" name="PO" maxlength=20 required/>
+        </div>
+        <div data-field-span="2">
+          <label>BOL</label>
+          <input type="text" name="BOL" maxlength=20 required/>
+        </div>
+        <div data-field-span="1">
+          <label>URN</label>
+          <input type="text" name="urn" maxlength=10 required/>
+        </div>
+        <!-- <div data-field-span="1">
+        <label>TOTAL QUANTITY</label>
+        <input type="text" name="totalQuantity">
+      </div> -->
+      <!-- <div data-field-span="1">
+      <label>TOTAL COST</label>
+      <input type="text" name="totalCost" maxlength=11>
+    </div> -->
+  </div>
+  <div data-row-span="12">
+    <div data-field-span="" style="width:100%;" >
+      <label>HEADER DESCRIPTION</label>
+      <textarea name="headerDescription" maxlength="200"></textarea>
     </div>
   </div>
+</fieldset>
+<br>
+<br>
+<fieldset>
+  <legend>Invoice Lines <small><a href="#" class="add-invoice-line"><b>Add Lines</b></a></small>
+    <!-- <small><a href="#" class="remove-invoice-line"><b>Remove Lines</b></a></small> -->
+  </legend>
+</fieldset>
+<table class="flakes-table">
+  <thead>
+    <tr>
+      <!-- <td style="width: 40px;">#</td> -->
+      <td class="store-column">STORE</td>
+      <td>CLASS</td>
+      <td>UNIT CST</td>
+      <td>RET. CST</td>
+      <td class="quantity-column">QTY</td>
+      <td>STYLE</td>
+      <td>SKU</td>
+      <td class="description-column">DESC.</td>
+      <!--<td>LINE TOTAL</td>-->
+      <td>X</td>
+    </tr>
+  </thead>
+  <tbody>
+    {{> invoiceLine}}
+  </tbody>
+</table>
+<hr>
+<br>
+{{> glAccountEntry}}
+</form>
+</div>
+<br>
+<div class="span-12" >
+  <div class="span-10"></div>
+  <div class="span-2">
+    <a class="button-darkblue add-invoice" style="float: right;"><b>Submit</b></a>
+  </div>
+</div>
+</div>
 </template>

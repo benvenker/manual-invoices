@@ -1,6 +1,6 @@
 Template.transactionCodes.created = function() {
   this.autorun(function() {
-    Meteor.subscribe('transactionCodes');
+    subs.subscribe('transactionCodes');
   })
 }
 

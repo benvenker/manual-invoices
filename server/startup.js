@@ -11,3 +11,7 @@
 //     console.log(fixtures.js);
 //   })
 // })
+
+Meteor.startup(function() {
+  Invoices._ensureIndex({submitted: 1});
+})

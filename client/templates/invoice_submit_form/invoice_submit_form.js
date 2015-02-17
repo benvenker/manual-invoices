@@ -21,7 +21,6 @@ Template.invoiceSubmitForm.events({
       )) {
     } else {
 
-
       var transactionCode = TransactionCodes.find({
         transactionCode: parseInt(Session.get('transactionCode')),
         banner: parseInt(Session.get('opco'))
@@ -30,6 +29,7 @@ Template.invoiceSubmitForm.events({
       var invoiceAmount = 0;
       var totalQuantity = 0;
       var retailCost = 0;
+      var invoiceDate = moment(form.find('[name=invoiceDate]').val()).format('DDMMYYYY');
 
       var user = Meteor.user();
       // Get the header values
@@ -41,13 +41,13 @@ Template.invoiceSubmitForm.events({
         OPCO: form.find('[name=OPCOs]').val(),
         department: form.find('[name=departments]').val(),
         manufacturer: form.find('[name=manufacturers]').val(),
-        vendorName: form.find('[name=vendorNames]').val(),
+        vendorName: form.find('[name=vendorName]').val(),
         vendorNumber: form.find('[name=vendorNumbers]').val(),
         invoiceNumber: form.find('[name=invoiceNumber]').val(),
         // Get the value of the transCode div in the transaction code dropdown
         transactionCode: parseInt(Session.get('transactionCode')),
         source: form.find('[name=sources]').val(),
-        invoiceDate: form.find('[name=invoiceDate]').val(),
+        invoiceDate: invoiceDate,
         headerDescription: form.find('[name=headerDescription]').val(),
         urn: form.find('[name=urn]').val(),
         submitted: moment(new Date()).format('L'),
@@ -65,13 +65,7 @@ Template.invoiceSubmitForm.events({
         alert('Invoice numbers must be at least 5 characters!');
       }
 
-
-
       /************ Get all the invoice lines ***************/
-
-      // Count the invoice lines
-      // var invoiceLineNum = InvoiceLines.find({InvoiceId: invoice._id}).count();
-      // console.log(invoiceLineNum);
 
       var invoiceLineNum = InvoiceLines.find({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
       console.log(invoiceLineNum);
@@ -115,16 +109,13 @@ Template.invoiceSubmitForm.events({
           department: parseInt(invoice.department),
           manufacturer: parseInt(invoice.manufacturer)
         }).fetch();
-        // var vendorNumber = _.pluck(vendor, 'supplierSite');
-        //
+
         var invoiceProperties = {
           totalCost: numeral(invoiceAmount).format('00.00'),
           retailCost: numeral(retailCost).format('00.00'),
           totalQuantity: totalQuantity
-          // vendorNumber: vendorNumber
         };
-        //console.log(invoiceLineNum);
-        //
+
         Invoices.update(currentInvoice, {$set: invoiceProperties})
       });
 

@@ -2,14 +2,12 @@ Router.configure
   layoutTemplate: "layout"
   loadingTemplate: "loading"
   waitOn: ->  [
-#    Meteor.subscribe('departments')
-    Meteor.subscribe('manufacturers')
-#    Meteor.subscribe('invoices')
-#    Meteor.subscribe('invoiceLines')
+    # put global subscriptions here
   ]
 
 Router.route "/",
   name: "landingPage"
+  fastRender: true
 
 Router.route "/invoice_submit_form",
   name: "invoiceSubmitForm"
@@ -22,32 +20,54 @@ Router.route "/archive",
 
 Router.route "/invoices_list",
   name: "invoicesList"
+  # waitOn: ->
+  #   subs.subscribe 'invoices'
+  fastRender: true
 
 Router.route "/exported_invoices",
   name: "exportedInvoices"
+  waitOn: ->
+    subs.subscribe 'exportedInvoices',
+  fastRender: true
 
-Router.route "/pending_invoices",
+Router.route "/invoices/pending",
   name: "pendingInvoices"
+  waitOn: ->
+    subs.subscribe 'pendingInvoices'
+  fastRender: true
 
 Router.route "/invoice_lines_list",
   name: "invoiceLinesList"
+  waitOn: ->
+    subs.subscribe 'invoiceLines'
+  fastRender: true
 
 Router.route "/vendor_list",
   name: "vendorList"
 
 Router.route "/invoices/:_id",
   name: "invoicePage"
+  waitOn: ->
+    subs.subscribe 'invoices'
+    subs.subscribe 'invoiceLines'
   data: ->
     Invoices.findOne @params._id
     # InvoiceLines.find @params.invoiceNumber
 
 Router.route "/invoices/:_id/edit",
   name: "invoiceEdit"
+  waitOn: ->
+    subs.subscribe 'invoices'
+    subs.subscribe 'invoiceLines'
   data: ->
     Invoices.findOne @params._id
+    # InvoiceLines.find invoiceId: @params._id
 
 Router.route "/invoices/rejected",
   name: "rejected"
+  waitOn: ->
+    subs.subscribe 'rejectedInvoices'
+  fastRender: true
 
 requireLogin = ->
   if !Meteor.user()
@@ -63,4 +83,12 @@ Router.onBeforeAction "dataNotFound",
   only: "invoicesPage"
 
 Router.onBeforeAction requireLogin,
-  only: 'invoiceSubmitForm'
+  [
+    'invoiceSubmitForm',
+    'invoicePage',
+    'invoiceEdit',
+    'pendingInvoices',
+    'exportedInvoices',
+    'approved',
+    'rejected'
+  ]

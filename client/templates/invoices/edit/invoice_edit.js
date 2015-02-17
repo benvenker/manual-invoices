@@ -48,7 +48,7 @@ Template.invoiceEdit.events({
 
     /***********  Get all the invoice lines **************/
     // Count the invoice lines
-    var invoiceLineNum = InvoiceLines.find({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
+    var invoiceLineNum = InvoiceLines.findFaster({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
     console.log(invoiceLineNum);
 
     // Edit / add data from rows

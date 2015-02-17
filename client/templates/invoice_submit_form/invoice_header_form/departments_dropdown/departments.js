@@ -1,6 +1,6 @@
 Template.departments.created = function() {
   this.autorun(function() {
-    // Meteor.subscribe('manufactu');
+    // Meteor.subscribe('manufacturers');
   })
 }
 

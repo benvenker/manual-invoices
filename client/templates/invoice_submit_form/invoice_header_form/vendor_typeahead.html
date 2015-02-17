@@ -1,0 +1,14 @@
+<template name="vendorTypeahead">
+  <div data-field-span="1">
+    <label>Vendor Number</label>
+    <input class="typeahead vendor-number" name="vendor-number-search" type="text" placeholder="Type to query"
+          autocomplete="off" spellcheck="off"
+          data-source="getVendorNumber"/>
+  </div>
+  <div data-field-span="2">
+    <label>Vendor Name</label>
+    <input class="typeahead vendor-name" name="vendorName" type="text" placeholder="Type to query"
+    autocomplete="off" spellcheck="off"
+    data-source="getVendorName"/>
+  </div>
+</template>

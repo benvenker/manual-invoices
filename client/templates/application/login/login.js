@@ -7,7 +7,6 @@ Template.login.events({
       if (err) {
         alert(err.reason);
       } else
-          //Router.go('invoiceSubmitForm');
           return false;
     });
 

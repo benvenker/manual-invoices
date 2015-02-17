@@ -7,7 +7,7 @@ Template.invoiceLinesTable.rendered = function(){
 
 Template.invoiceLinesTable.helpers({
   invoiceLines: function(){
-    return InvoiceLines.find({invoiceId: this._id}, {sort: {invoiceLineNumber: 1}});
+    return InvoiceLines.findFaster({invoiceId: this._id}, {sort: {invoiceLineNumber: 1}});
   }
 });
 
