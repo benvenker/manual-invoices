@@ -1,8 +1,8 @@
 <template name="landingPage">
-  {{#if currentUser}}
-    {{> invoiceSubmitForm}}
-  {{else}}
-  <h1>Welcome to HBC AP Manual Invoice Entry</h1>
+{{#if currentUser}}
+  {{> invoiceSubmitForm}}
+{{else}}
+    <h1>Welcome to HBC AP Manual Invoice Entry</h1>
   <div class="grid-2 gutter-20">
     <div class="span-1">
       {{> login}}
@@ -11,5 +11,5 @@
       {{> register}}
     </div>
   </div>
-  {{/if}}
+{{/if}}
 </template>
