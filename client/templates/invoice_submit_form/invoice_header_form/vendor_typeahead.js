@@ -1,13 +1,17 @@
 Template.vendorTypeahead.helpers({
   getVendorNumber: function(query, callback) {
-    Meteor.call('vendorNumbers', query, {}, function(err, res) {
-      if (err) {
-        console.log(err);
-        return;
-      }
-      callback(res.map(function(v){ return {value: v.supplierSite}; }));
-      console.log("Client fired the search (vendorNumbers) method.")
-    });
+    // since regex's can't match ints, wait until valid length is entered to query db.
+    if (query.length === 7) {
+      Meteor.call('vendorNumbers', query, {}, function (err, res) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        callback(res.map(function (v) {
+          return {value: v.supplierSite};
+        }));
+      });
+    }
   },
   
   getVendorName: function(query, callback) {
@@ -20,7 +24,6 @@ Template.vendorTypeahead.helpers({
         return;
       }
       callback(res.map(function(v){ return {value: v.manufacturerName}; }));
-      console.log("Client fired the search-fast (vendorName) method...")
     });
   }
 });
@@ -30,8 +33,3 @@ Template.vendorTypeahead.events({
     return Session.set("supplierSite", parseInt($("[name=vendor-number-search]").val()));
   }
 });
-
-Template.vendorTypeahead.rendered = function(){
-  Meteor.typeahead.inject();
-  console.log("typeahead vendorTypeahead injected!");
-}
