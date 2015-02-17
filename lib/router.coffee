@@ -20,8 +20,8 @@ Router.route "/archive",
 
 Router.route "/invoices_list",
   name: "invoicesList"
-  # waitOn: ->
-  #   subs.subscribe 'invoices'
+  waitOn: ->
+     subs.subscribe 'invoices'
   fastRender: true
 
 Router.route "/exported_invoices",
@@ -69,6 +69,12 @@ Router.route "/invoices/rejected",
     subs.subscribe 'rejectedInvoices'
   fastRender: true
 
+Router.route "/reset-password",
+  name: "resetPassword"
+
+Router.route "/forgot_password",
+  name: "forgotPassword"
+
 requireLogin = ->
   if !Meteor.user()
     if Meteor.loggingIn()
@@ -83,12 +89,13 @@ Router.onBeforeAction "dataNotFound",
   only: "invoicesPage"
 
 Router.onBeforeAction requireLogin,
-  [
-    'invoiceSubmitForm',
-    'invoicePage',
-    'invoiceEdit',
-    'pendingInvoices',
-    'exportedInvoices',
-    'approved',
-    'rejected'
-  ]
+  only: 'invoiceSubmitForm'
+#  [
+#    'invoiceSubmitForm',
+#    'invoicePage',
+#    'invoiceEdit',
+#    'pendingInvoices',
+#    'exportedInvoices',
+#    'approved',
+#    'rejected'
+#  ]
