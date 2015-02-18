@@ -7,17 +7,18 @@ Template.register.events({
 
     if (isNotEmpty(email) && isNotEmpty(password) && isEmail(email) && areValidPasswords(password, passwordConfirm)) {
 
-      Accounts.createUser({email: email, password: password}, function (err) {
-        if (err) {
-          if (err.message === 'Email already exists. [403]') {
-            alert('We are sorry but this email is already used.');
-          } else {
-            alert('We are sorry but something went wrong.');
-          }
-        } else
-          alert('Congrats new Meteorite, you\'re in!');
-        Router.go('invoiceSubmitForm');
-        return false;
+      var data = {email: email, password: password};
+
+      Meteor.call('createUserWithRole', data, 'create-invoices', function(err, result) {
+        if (!err) {
+          //User created!!
+          //alert("Registration successful");
+          Router.go('invoiceSubmitForm');
+        } else {
+            //Insertion Error
+          if (err)
+            return alert(err.reason);
+            }
       });
     }
   }
