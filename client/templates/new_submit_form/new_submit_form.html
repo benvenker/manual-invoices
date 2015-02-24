@@ -1,0 +1,59 @@
+<template name="newSubmitForm">
+  <h1>New Invoice Submit Form</h1>
+  <p>Testing out some new ideas for the invoice data structure.</p>
+
+  <!-- Begin Form -->
+  <form class="grid-form">
+    <fieldset class="invoice-header-entry">
+      <legend>Generic Invoice Entry </legend>
+      <div data-row-span="5">
+        <div data-field-span="1" class="banner-field">
+          <label for="banner">Banner</label>
+          <select name="banner" id="banner">
+            <option value="Select">Select</option>
+            <option value="06">Saks Full-Line</option>
+            <option value="07">Saks Off-Fifth</option>
+          </select>
+        </div>
+        <div data-field-span="1" class="vendorNumber-field" >
+          <label for="vendorNumber-input">Vendor Number</label>
+          <input type="text" id="vendorNumber-input" name="vendorNumber">
+        </div>
+        <div data-field-span="1" class="department-field">
+          <label>Department </label>
+          <input type="text">
+        </div>
+        <div data-field-span="2" class="invoice-date">
+          <label>Invoice Date </label>
+          <input type="date">
+        </div>
+      </div>
+    </fieldset>
+    <br/>
+    <br/>
+    <fieldset class="invoice-line-entry">
+      <legend>Invoice Lines <small><a href="#" class="add-invoice-line"><b>Add Lines</b></a></small>
+      </legend>
+      <table class="flakes-table">
+        <thead>
+        <tr>
+          <!-- <td style="width: 40px;">#</td> -->
+          <td class="store-column">STORE</td>
+          <td>CLASS</td>
+          <td>COST</td>
+          <td>RETAIL</td>
+          <td class="quantity-column">QTY</td>
+          <td>STYLE</td>
+          <td>SKU</td>
+          <td class="description-column">DESC.</td>
+          <!--<td>LINE TOTAL</td>-->
+          <td>X</td>
+        </tr>
+        </thead>
+        <tbody>
+        {{> invoiceLine}}
+        </tbody>
+      </table>
+    </fieldset>
+  </form>
+</template>
