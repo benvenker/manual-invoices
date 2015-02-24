@@ -12,6 +12,15 @@ Router.route "/",
 Router.route "/invoice_submit_form",
   name: "invoiceSubmitForm"
 
+Router.route "/new_submit_form",  # Alternate invoice structure
+  name: "newSubmitForm"
+
+Router.route "/clothing_allowance",
+  name: "clothingAllowance"
+
+Router.route "/manual_apron",
+  name: "manualApron"
+
 Router.route "/approved",
   name: "approved"
 
@@ -48,8 +57,8 @@ Router.route "/vendor_list",
 Router.route "/invoices/:_id",
   name: "invoicePage"
   waitOn: ->
-    subs.subscribe 'invoices'
-    subs.subscribe 'invoiceLines'
+    subs.subscribe 'invoice', @params._id
+    subs.subscribe 'invoicesLines', @params._id
   data: ->
     Invoices.findOne @params._id
     # InvoiceLines.find @params.invoiceNumber
@@ -57,11 +66,11 @@ Router.route "/invoices/:_id",
 Router.route "/invoices/:_id/edit",
   name: "invoiceEdit"
   waitOn: ->
-    subs.subscribe 'invoices'
-    subs.subscribe 'invoiceLines'
+    subs.subscribe 'invoice', @params._id
+    subs.subscribe 'invoicesLines', @params._id
   data: ->
     Invoices.findOne @params._id
-    # InvoiceLines.find invoiceId: @params._id
+#    InvoiceLines.find invoiceId: @params._id
 
 Router.route "/invoices/rejected",
   name: "rejected"
