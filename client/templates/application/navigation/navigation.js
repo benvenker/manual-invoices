@@ -1,7 +1,7 @@
 Template.navigation.helpers({
-  address: function() {
+  emails: function() {
     self = Meteor.user();
-    return self.emails[0].address;
+    return self.emails;
   }
 });
 
