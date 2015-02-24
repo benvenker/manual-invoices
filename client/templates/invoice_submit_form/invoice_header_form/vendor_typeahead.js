@@ -30,6 +30,6 @@ Template.vendorTypeahead.helpers({
 
 Template.vendorTypeahead.events({
   "change .vendor-number": function(e, t){
-    return Session.set("supplierSite", parseInt($("[name=vendor-number-search]").val()));
+    return Session.set("supplierSite", parseInt($("[name=vendorNumber]").val()));
   }
 });
