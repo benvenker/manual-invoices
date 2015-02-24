@@ -1,0 +1,136 @@
+<template name="clothingAllowance">
+  <div class="grid-6 gutter-20">
+    <div row-span="6">
+      <div class="grid-6">
+        <div class="span-2">
+          <h1>DEBIT MEMO</h1>
+        </div>
+        <div class="span-4">
+          <!--<h3 class="saks-branding">SAKS FIFTH AVENUE</h3>-->
+        </div>
+      </div>
+    </div>
+    <div class="span-2">
+      <form class="grid-form">
+        <fieldset id="vendor-info-box">
+          <div data-row-span="1">
+            <div data-field-span="1">
+              <label>Vendor Site Code</label>
+              <input type="text">
+            </div>
+          </div>
+          <div data-row-span="1">
+            <div data-field-span="1">
+              <label>Billing Address (No. & Street)</label>
+              <input type="text">
+            </div>
+          </div>
+          <div data-row-span="1">
+            <div data-field-span="1">
+              <label>City, State, Zip</label>
+              <input type="text">
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div class="span-4">
+      <form class="grid-form">
+        <fieldset>
+          <div data-row-span="6">
+            <!--<div data-field-span="2"></div>-->
+            <div id="debit-memo-checkboxes" class="grid-4">
+              <div row-span="4">
+                <div class="grid-4">
+                  <div class="span-1"></div>
+                  <div class="span-3"><p class="debit-memo-checkboxes"><strong>WE HAVE CHANGED YOUR ACCOUNT AS FOLLOWS</strong></p></div>
+                </div>
+              </div>
+              <div class="span-2 debit-memo-address">PO BOX 20040<br>JACKSON, MS 32909</div>
+              <div class="span-1">
+                <ul>
+                  <li><input type="checkbox"/> SHORTAGE</li>
+                  <li><input type="checkbox"/> OVER CHARGE</li>
+                  <li><input type="checkbox"/> DEMONSTRATOR CHARGE</li>
+                  <li><input type="checkbox"/> ALLOWANCE</li>
+                </ul>
+              </div>
+              <div class="span-1">
+                <ul>
+                  <li><input type="checkbox"/> FREIGHT CHARGE</li>
+                  <li><input type="checkbox"/> DISCOUNT</li>
+                  <li><input type="checkbox"/> OTHER (SPECIFY):</li>
+                  <li><input type="text" id="other-specify"/></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div data-row-span="3">
+            <div data-field-span="2">
+              <label>Vendor Name If Factored</label>
+              <input type="text">
+            </div>
+            <div data-field-span="1">
+              <label>Apron No.</label>
+              <input type="text">
+            </div>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+  <br>
+  <br>
+  <form class="grid-form">
+    <fieldset>
+      <legend></legend>
+      <div data-row-span="6">
+        <div data-field-span="1" class="retail-amount">
+          <label>Retail Amount </label>
+          <input type="text">
+        </div>
+        <div data-field-span="1" class="discount-percent" style="width: 70px;">
+          <label>Disc. % </label>
+          <input type="text">
+        </div>
+        <div data-field-span="1" class="freight-charges">
+          <label>Freight Charges </label>
+          <input type="text">
+        </div>
+        <div data-field-span="1" class="miscellaneous-charges">
+          <label>Misc. Charges </label>
+          <input type="text">
+        </div>
+        <div data-field-span="1" class="credit-number">
+          <label>Credit Number </label>
+          <input type="text">
+        </div>
+        <div data-field-span="1" class="purchase-order-number" style="width: 150px;">
+          <label>Purchase Order No.</label>
+          <input type="text">
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  <br>
+  <form class="grid-form">
+    <fieldset>
+      <legend>Invoice Lines <small><a href="#" class="add-invoice-line"><b>Add Lines</b></a></small>
+              <!-- <small><a href="#" class="remove-invoice-line"><b>Remove Lines</b></a></small> -->
+      </legend>
+    </fieldset>
+    {{# clothingAllowanceTableWrapper}}
+      {{> clothingAllowanceLine}}
+    {{/ clothingAllowanceTableWrapper}}
+    <hr>
+    <br>
+    {{> glAccountEntry}}
+    <br>
+    <div class="span-12" >
+      <div class="span-10"></div>
+      <div class="span-2">
+        <a class="button-darkblue add-invoice" style="float: right;"><b>Submit</b></a>
+      </div>
+    </div>
+  </form>
+</template>
