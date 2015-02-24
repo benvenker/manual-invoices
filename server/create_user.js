@@ -1,3 +1,20 @@
+Meteor.startup(function() {
+  // var users = [
+  //   {
+  //     name: "Joy Rutlidge",
+  //     emails: [{ address: "joy.rutlidge@saks5inc.com", verified: true}]},
+  //
+  //   {
+  //     name: "Beth Busbea",
+  //     emails:[ {address: "beth.busbea@saks5_inc.com", verified: true}]},
+  //   {
+  //     name: "Kim Cooper",
+  //     emails: [ {address: "kim.cooper@partners.hbc.ca", verified: true}]}
+  // ];
+
+  
+});
+
 Meteor.methods({
   'createUserWithRole': function(data, role) {
     var userId;
