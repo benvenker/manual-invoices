@@ -1,0 +1,108 @@
+<template name="manualApron">
+  <form class="grid-form">
+    <fieldset>
+      <legend>Manual Apron </legend>
+      <div class="grid-2 gutter-20">
+        <div class="span-1">
+          <div data-row-span="1">
+            <div data-field-span="1">
+              <label>VENDOR NUMBER </label>
+              <input type="text">
+            </div>
+          </div>
+          <div data-row-span="1">
+            <div data-field-span="1" class="vendor-name apron">
+              <label>VENDOR NAME (PAYEE) </label>
+              <input type="text">
+            </div>
+          </div>
+          <div data-row-span="1">
+            <div data-field-span="1" class="invoice-total apron">
+              <label>INVOICE TOTAL (CREDIT) </label>
+              <input type="text">
+            </div>
+          </div>
+        </div>
+        <div class="span-1"></div>
+      </div>
+      <legend></legend>
+      <table class="flakes-table">
+        <thead>
+        <tr>
+          <td>INVOICE NUMBER</td>
+          <td>INVOICE DATE</td>
+          <td>STORE</td>
+          <td>DEPT</td>
+          <td>AMOUNT</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><input type="text"/></td>
+          <td><input type="date"/></td>
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+        </tr>
+        <tr>
+          <td><input type="text"/></td>
+          <td><input type="date"/></td>
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+        </tr>
+        <tr>
+          <td><input type="text"/></td>
+          <td><input type="date"/></td>
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+        </tr>
+        <tr>
+          <td><input type="text"/></td>
+          <td><input type="date"/></td>
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+        </tr>
+        <tr>
+          <td><input type="text"/></td>
+          <td><input type="date"/></td>
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+          <td><input type="text"/></td>
+        </tr>
+        </tbody>
+      </table>
+      <br>
+      <legend></legend>
+      <div data-row-span="8">
+        <div data-field-span="2" class="requested-by apron">
+          <label>REQUESTED BY</label>
+          <input type="text">
+        </div>
+        <div data-field-span="2" class="date">
+          <label>DATE</label>
+          <input type="date">
+        </div>
+        <div data-field-span="2" class="approved-by apron">
+          <label>APPROVED BY </label>
+          <input type="text">
+        </div>
+        <div data-field-span="2" class="approved-by date">
+          <label>DATE</label>
+          <input type="date">
+        </div>
+      </div>
+    </fieldset>
+    <br/>
+    <div class="grid-2 gutter-20">
+      <div class="span-1">
+        <input type="file"/>
+      </div>
+      <div class="span-1">
+        <a class="button-green bigger search-button" style="float: right;">Submit</a>
+      </div>
+    </div>
+  </form>
+</template>
