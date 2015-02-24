@@ -1,6 +1,6 @@
 <template name="invoiceSubmitForm">
   <div class="grid-16 gutter-20">
-    <div class="span-12">
+    <div class="span-16">
       <form class="grid-form">
         <fieldset>
           <legend>Invoice Header</legend>
@@ -31,18 +31,15 @@
           <input type="date" name="invoiceDate" maxlength=8 placeholder="DDMMYYYY"/>
         </div>
       </div>
-      <div data-row-span="5">
-    <!--     <div data-field-span="1">
-      {{> departments}}
-    </div> -->
+      <div data-row-span="4">
         <div data-field-span="1" class="">
         <label>DEPARTMENT</label>
         {{> departmentTypeahead}}
         </div>
-        <div data-field-span="1">
-          <label>Manufacturer</label>
-          {{> manufacturers}}
-        </div>
+        <!--<div data-field-span="1">-->
+          <!--<label>Manufacturer</label>-->
+          <!--{{> manufacturers}}-->
+        <!--</div>-->
         <!--<div data-field-span="1" class="">-->
         <!--<label>MANUFACTURER</label>-->
         <!--<input type="text" name="manufacturers">-->

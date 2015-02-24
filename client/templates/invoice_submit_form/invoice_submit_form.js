@@ -4,11 +4,28 @@ Template.invoiceSubmitForm.rendered = function(){
 };
 
 Template.invoiceSubmitForm.events({
+  'keydown [name=vendorNumber]': function(e) {
+    console.log('event detected');
+    isProvided(e, "[name=vendorNumber]", "Vendor Number");
+  },
+
+  'keydown [name=department]': function(e) {
+    isProvided(e, "[name=department]", "Department");
+  },
+
+  'keydown [name=invoiceNumber]': function(e) {
+    isProvided(e, "[name=invoiceNumber]", "Invoice Number");
+  },
+
+  'keydown .store': function(e) {
+    isProvided(e, ".store", "Store");
+  },
+
   'click .add-invoice-line': function(e) {
     e.preventDefault();
-      var newRow = $('<tr><td><input type="text" class="store" maxlength=4></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost" maxlength=11></td><td><input type="text" class="lineRetailCost" maxlength=11></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" maxlength=20 value=""></td><td><input type="text" class="sku" value="" maxlength=8></td><td><input type="text" class="description" value="" maxlength=200></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
+    var newRow = $('<tr><td><input type="text" class="store" maxlength=4></td><td><input type="text" class="class"></td><td><input type="text" class="unitCost" maxlength=11></td><td><input type="text" class="lineRetailCost" maxlength=11></td><td><input type="text" class="quantity" value=""></td><td><input type="text" class="style" maxlength=20 value=""></td><td><input type="text" class="sku" value="" maxlength=8></td><td><input type="text" class="description" value="" maxlength=200></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
 
-      $('table.flakes-table').append(newRow);
+    $('table.flakes-table').append(newRow);
   },
 
   'click .add-invoice': function() {
@@ -22,15 +39,18 @@ Template.invoiceSubmitForm.events({
       //isSelected(Session.get('department')) &&
       //isSelected(Session.get('manufacturer')) &&
       isSelected(Session.get('transactionCode')) &&
-      isSelected(Session.get('source'))
-      )) {
-    } else {
+      isSelected(Session.get('source'))) &&
+      //isNotEmpty(Session.get('department'))
+      storesEntered()
+      ) { alert("Please fill out all required fields!"); }
 
-      var transactionCode = TransactionCodes.find({
+    else {
+
+      var transactionCode = TransactionCodes.find({ // Get a TransactionCode object
         transactionCode: parseInt(Session.get('transactionCode')),
         banner: parseInt(Session.get('opco'))
       }).fetch();
-      var glAccount = _.pluck(transactionCode, 'account');
+      var glAccount = _.pluck(transactionCode, 'account'); // Get the GL account from TransactionCode object
       var invoiceAmount = 0;
       var totalQuantity = 0;
       var retailCost = 0;
@@ -44,8 +64,8 @@ Template.invoiceSubmitForm.events({
         totalCost: 0,
         totalQuantity: 0,
         OPCO: form.find('[name=OPCOs]').val(),
-        department: form.find('[name=departments]').val(),
-        manufacturer: form.find('[name=manufacturers]').val(),
+        department: form.find('[name=department]').val(),
+        //manufacturer: form.find('[name=manufacturers]').val(),
         vendorName: form.find('[name=vendorName]').val(),
         vendorNumber: form.find('[name=vendorNumbers]').val(),
         invoiceNumber: form.find('[name=invoiceNumber]').val(),
@@ -61,7 +81,21 @@ Template.invoiceSubmitForm.events({
         exported: false,
         userId: user._id,
         author: user.emails[0].address
-      }
+      };
+
+      var invoiceLineNum = InvoiceLines.find({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
+      console.log(invoiceLineNum);
+
+
+      //table.find('tr').each(function() {
+      //  invoiceLineNum++;
+      //
+      //  var store = $(this).find('input .store').val();
+      //  if (!isNotEmpty(store)) {
+      //    alert("Please enter a store in line " + invoiceLineNum);
+      //    //Router.go('invoiceEdit', invoice);
+      //  }
+      //});
 
       if (isValidLength(invoice.invoiceNumber, 5)) {
         invoice._id = Invoices.insert(invoice);
@@ -72,17 +106,25 @@ Template.invoiceSubmitForm.events({
 
       /************ Get all the invoice lines ***************/
 
-      var invoiceLineNum = InvoiceLines.find({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
-      console.log(invoiceLineNum);
+      //var invoiceLineNum = InvoiceLines.find({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
+      //console.log(invoiceLineNum);
+
+
 
       table.find('tr').each(function () {
         // Increment the invoice line number
         invoiceLineNum++;
 
         var $tds = $(this).find('td input');
+
         var unitCost = parseFloat(($tds.eq(2).val()));
         var lineRetailCost = parseFloat(($tds.eq(3).val()));
         var quantity = parseInt($tds.eq(4).val());
+
+        //if (!isNotEmpty(store)) {
+        //  alert("Please enter a store in line " + invoiceLineNum);
+        //  Router.go('invoiceEdit', invoice);
+        //}
 
         var invoiceLine = {
           invoiceId: invoice._id,
