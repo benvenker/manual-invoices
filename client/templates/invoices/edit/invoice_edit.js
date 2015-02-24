@@ -42,7 +42,7 @@ Template.invoiceEdit.events({
       invoiceDate: form.find('[name=invoiceDate]').val(),
       urn: form.find('[name=urn]').val(),
       headerDescription: form.find('[name=headerDescription]').val(),
-    }
+    };
 
     Invoices.update(currentInvoiceId, {$set: invoiceProperties});
 
@@ -95,9 +95,16 @@ Template.invoiceEdit.events({
         retailCost: numeral(retailCost).format('00.00'),
         totalQuantity: totalQuantity,
       };
-      //console.log(invoiceLineNum);
-      //
+
       Invoices.update(currentInvoiceId, {$set: invoiceProperties})
+
+      // Record the edit time and editor
+      var invoiceEditProperties = {
+        editDate: new Date(),
+        editor: Meteor.user().emails[0].address
+      };
+
+      Invoices.update(currentInvoiceId, {$push: {edits: invoiceEditProperties}});
 
     });
     Router.go('invoicePage', {_id: currentInvoiceId});
