@@ -4,22 +4,26 @@
       <!-- <img src="/img/logo.png" width="120"> -->
     </a>
     <ul>
-      <li class="title">Accounts Payable</li>
+      <li class="title">Invoice Forms</li>
       <li><a href="{{pathFor 'invoiceSubmitForm'}}" title="Enter Invoices">Create New Manual Invoice</a>
       </li>
+      <li><a href="{{pathFor 'clothingAllowance'}}">Clothing Allowance</a></li>
+      <li><a href="{{pathFor 'manualApron'}}">Manual Apron</a></li>
     </ul>
     <ul>
       <li class="title">Invoice Queues</li>
       <li><a href="{{pathFor 'invoicesList'}}" title="Invoices List">Invoices List</a></li>
       <li><a href="{{pathFor 'exportedInvoices'}}" title="Exported Invoices">Exported Invoices</a></li>
+      {{#if isInRole 'admin'}}
       <li><a href="{{pathFor 'pendingInvoices'}}" title="Pending Invoices">Pending Invoices</a></li>
+      {{/if}}
       <li><a href="{{pathFor 'approved'}}" title="Approved Invoices">Approved</a></li>
       <li><a href="{{pathFor 'rejected'}}" title="Rejected Invoices">Rejected</a></li>
       <li><a href="{{pathFor 'archive'}}" title="Archived Invoices">Archived</a></li>
     </ul>
     {{#if currentUser}}
     <p class="foot">
-      Hello <b>{{address}}</b><br>
+      Hello {{#each emails}}<b>{{address}}</b><br>{{/each}}
       <a>Account</a> &bullet; <a href="#" id="logout" class="logout">Logout</a>
     </p>
     {{/if}}
