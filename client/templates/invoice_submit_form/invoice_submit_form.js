@@ -34,17 +34,13 @@ Template.invoiceSubmitForm.events({
 
     // Form validation
     if (!(isSelected(Session.get('opco')) &&
-      //isSelected(Session.get('vendorName')) &&
-      //isSelected(Session.get('vendorNumber')) &&
-      //isSelected(Session.get('department')) &&
-      //isSelected(Session.get('manufacturer')) &&
       isSelected(Session.get('transactionCode')) &&
       isSelected(Session.get('source'))) &&
       //isNotEmpty(Session.get('department'))
-      storesEntered()
-      ) { alert("Please fill out all required fields!"); }
+      storesEntered()) {
+        alert("Please fill out all required fields!");
 
-    else {
+      } else {
 
       var transactionCode = TransactionCodes.find({ // Get a TransactionCode object
         transactionCode: parseInt(Session.get('transactionCode')),
@@ -56,7 +52,6 @@ Template.invoiceSubmitForm.events({
       var retailCost = 0;
       var invoiceDate = moment(form.find('[name=invoiceDate]').val()).format('DDMMYYYY');
 
-      var user = Meteor.user();
       // Get the header values
       var invoice = {
         PO: form.find('[name=PO]').val(),
@@ -65,7 +60,6 @@ Template.invoiceSubmitForm.events({
         totalQuantity: 0,
         OPCO: form.find('[name=OPCOs]').val(),
         department: form.find('[name=department]').val(),
-        //manufacturer: form.find('[name=manufacturers]').val(),
         vendorName: form.find('[name=vendorName]').val(),
         vendorNumber: form.find('[name=vendorNumber]').val(),
         invoiceNumber: form.find('[name=invoiceNumber]').val(),
@@ -75,57 +69,24 @@ Template.invoiceSubmitForm.events({
         invoiceDate: invoiceDate,
         headerDescription: form.find('[name=headerDescription]').val(),
         urn: form.find('[name=urn]').val(),
-        submitted: moment(new Date()).format('L'),
         glAccount: glAccount[0], // Since underscore returns an array, get the
                                  // first element, which contains the GL account
-        exported: false,
-        userId: user._id,
-        author: user.emails[0].address
+        exported: false
       };
 
       var invoiceLineNum = InvoiceLines.find({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
       console.log(invoiceLineNum);
 
-
-      //table.find('tr').each(function() {
-      //  invoiceLineNum++;
-      //
-      //  var store = $(this).find('input .store').val();
-      //  if (!isNotEmpty(store)) {
-      //    alert("Please enter a store in line " + invoiceLineNum);
-      //    //Router.go('invoiceEdit', invoice);
-      //  }
-      //});
-
-      if (isValidLength(invoice.invoiceNumber, 5)) {
-        invoice._id = Invoices.insert(invoice);
-        console.log(invoice._id);
-      } else {
-        alert('Invoice numbers must be at least 5 characters!');
-      }
-
       /************ Get all the invoice lines ***************/
-
-      //var invoiceLineNum = InvoiceLines.find({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
-      //console.log(invoiceLineNum);
-
-
-
+      var invoiceLinesArr = []
       table.find('tr').each(function () {
         // Increment the invoice line number
         invoiceLineNum++;
 
         var $tds = $(this).find('td input');
-
         var unitCost = parseFloat(($tds.eq(2).val()));
         var lineRetailCost = parseFloat(($tds.eq(3).val()));
         var quantity = parseInt($tds.eq(4).val());
-
-        //if (!isNotEmpty(store)) {
-        //  alert("Please enter a store in line " + invoiceLineNum);
-        //  Router.go('invoiceEdit', invoice);
-        //}
-
         var invoiceLine = {
           invoiceId: invoice._id,
           invoiceNumber: invoice.invoiceNumber,
@@ -140,33 +101,37 @@ Template.invoiceSubmitForm.events({
           description: $tds.eq(7).val(),
           lineTotal: numeral(unitCost * quantity).format('00.00'),
           submitted: moment(new Date()).format('L'),
-        }
-
+        };
         var lineTotalVar = numeral(unitCost * quantity).format('00.00');
         var lineRetailCostVar = numeral(lineRetailCost * quantity).format('00.00');
 
+        // Increment the invoice totals by line total
         invoiceAmount += numeral().unformat(lineTotalVar);
         retailCost += numeral().unformat(lineRetailCostVar);
         totalQuantity += quantity;
-        InvoiceLines.insert(invoiceLine);
 
-        // Update variables for header
-        var currentInvoice = invoice._id;
-        var vendor = Manufacturers.findFaster({
-          department: parseInt(invoice.department),
-          manufacturer: parseInt(invoice.manufacturer)
-        }).fetch();
-
-        var invoiceProperties = {
-          totalCost: numeral(invoiceAmount).format('00.00'),
-          retailCost: numeral(retailCost).format('00.00'),
-          totalQuantity: totalQuantity
-        };
-
-        Invoices.update(currentInvoice, {$set: invoiceProperties})
+        invoiceLinesArr.push(invoiceLine);  // Add invoiceLine object to array
       });
 
-      Router.go('invoicePage', invoice);
+      var invoiceProperties = {
+        totalCost: numeral(invoiceAmount).format('00.00'),
+        retailCost: numeral(retailCost).format('00.00'),
+        totalQuantity: totalQuantity,
+        lines: invoiceLinesArr  // Add the invoice lines
+      };
+
+      // extend the invoice object
+      _.extend(invoice, invoiceProperties);
+
+      Meteor.call('insertInvoice', invoice, function(error, result) {
+        if (error)
+          return alert(error.reason);
+
+        if (result.invoiceExists)
+          alert("This invoice has already been submitted!");
+
+        Router.go('invoicePage', {_id: result._id});
+      });
     }
   },
 
