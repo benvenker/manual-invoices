@@ -130,7 +130,10 @@ Template.invoiceEdit.events({
 
     if (confirm("Delete this invoice?")) {
       var currentInvoiceId = this._id;
-      Invoices.remove(currentInvoiceId);
+      //Invoices.remove(currentInvoiceId);
+
+      Meteor.call('deleteInvoice', currentInvoiceId);
+      console.log('post deleted');
       Router.go('invoicesList');
     }
   }
