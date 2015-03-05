@@ -28,111 +28,90 @@ Template.invoiceSubmitForm.events({
     $('table.flakes-table').append(newRow);
   },
 
-  'click .add-invoice': function() {
+  'click .add-invoice': function () {
     var form = $('.grid-form');
     var table = $('.flakes-table tbody');
+    var header = $('.invoice-header');
+    var transactionCode = TransactionCodes.find({ // Get a TransactionCode object
+      transactionCode: parseInt(Session.get('transactionCode')),
+      banner: parseInt(Session.get('opco'))
+    }).fetch();
+    var glAccount = _.pluck(transactionCode, 'account'); // Get the GL account from TransactionCode object
+    var totalCost = 0;
+    var totalQuantity = 0;
+    var retailCost = 0;
 
-    // Form validation
-    if (!(isSelected(Session.get('opco')) &&
-      isSelected(Session.get('transactionCode')) &&
-      isSelected(Session.get('source'))) &&
-      //isNotEmpty(Session.get('department'))
-      storesEntered()) {
-        alert("Please fill out all required fields!");
 
-      } else {
+// Get the header values
+    var invoice = {};
+    header.find('input').each(function() {
+      var key = $(this).attr('name');
+      var val = $(this).val();
+      addKey(invoice, key, val); // Add each input field to the invoice object
+    });
 
-      var transactionCode = TransactionCodes.find({ // Get a TransactionCode object
-        transactionCode: parseInt(Session.get('transactionCode')),
-        banner: parseInt(Session.get('opco'))
-      }).fetch();
-      var glAccount = _.pluck(transactionCode, 'account'); // Get the GL account from TransactionCode object
-      var invoiceAmount = 0;
-      var totalQuantity = 0;
-      var retailCost = 0;
-      var invoiceDate = moment(form.find('[name=invoiceDate]').val()).format('DDMMYYYY');
+    header.find('select').each(function() {
+      var key = $(this).attr('name');
+      var val = $(this).val();
+      addKey(invoice, key, val); // Add each selection field to the invoice object
 
-      // Get the header values
-      var invoice = {
-        PO: form.find('[name=PO]').val(),
-        BOL: form.find('[name=BOL]').val(),
-        totalCost: 0,
-        totalQuantity: 0,
-        OPCO: form.find('[name=OPCOs]').val(),
-        department: form.find('[name=department]').val(),
-        vendorName: form.find('[name=vendorName]').val(),
-        vendorNumber: form.find('[name=vendorNumber]').val(),
-        invoiceNumber: form.find('[name=invoiceNumber]').val(),
-        // Get the value of the transCode div in the transaction code dropdown
-        transactionCode: parseInt(Session.get('transactionCode')),
-        source: form.find('[name=sources]').val(),
-        invoiceDate: invoiceDate,
-        headerDescription: form.find('[name=headerDescription]').val(),
-        urn: form.find('[name=urn]').val(),
-        glAccount: glAccount[0], // Since underscore returns an array, get the
-                                 // first element, which contains the GL account
-        exported: false
-      };
+      console.log(key + ": " + val);
+    });
 
-      var invoiceLineNum = InvoiceLines.find({InvoiceNumber: form.find('[name=invoiceNumber]').val()}).count();
-      console.log(invoiceLineNum);
+// Get the invoice rows
 
-      /************ Get all the invoice lines ***************/
-      var invoiceLinesArr = []
-      table.find('tr').each(function () {
-        // Increment the invoice line number
-        invoiceLineNum++;
+    var lines = [];
+    table.find('tr').each(function () { // Find each table row and get the data
+      var quantity = parseInt( $(this).find('.quantity').val() );
+      var unitCost = parseFloat( $(this).find('.unitCost').val() ) ;
+      var lineRetailCost = parseFloat( $(this).find('.lineRetailCost').val() );
+      var lineTotalVar = numeral(unitCost * quantity).format('00.00');
+      var lineRetailCostVar = numeral(lineRetailCost * quantity).format('00.00');
 
-        var $tds = $(this).find('td input');
-        var unitCost = parseFloat(($tds.eq(2).val()));
-        var lineRetailCost = parseFloat(($tds.eq(3).val()));
-        var quantity = parseInt($tds.eq(4).val());
-        var invoiceLine = {
-          invoiceId: invoice._id,
-          invoiceNumber: invoice.invoiceNumber,
-          invoiceLineNumber: invoiceLineNum,
-          store: parseInt($tds.eq(0).val()),
-          itemClass: $tds.eq(1).val(),
-          unitCost: numeral(unitCost).format('00.00'),
-          lineRetailCost: numeral(lineRetailCost).format('00.00'),
-          quantity: quantity,
-          style: $tds.eq(5).val(),
-          sku: $tds.eq(6).val(),
-          description: $tds.eq(7).val(),
-          lineTotal: numeral(unitCost * quantity).format('00.00'),
-          submitted: moment(new Date()).format('L'),
+      var line = {};
+      $(this).find('td').each(function () { // Data comes from each input in each <tr>
+        // Set the key to the class name of input field
+        var key = $(this).find("input").attr('class');
+
+        // Set the key value to the input field's value
+        var val = $(this).find("input").val();
+
+        addKey(line, key, val); // Custom function to add key value pairs to line obj.
+        var invoiceLineProperties = {
+          lineTotal: numeral(unitCost * quantity).format('00.00')
         };
-        var lineTotalVar = numeral(unitCost * quantity).format('00.00');
-        var lineRetailCostVar = numeral(lineRetailCost * quantity).format('00.00');
 
-        // Increment the invoice totals by line total
-        invoiceAmount += numeral().unformat(lineTotalVar);
-        retailCost += numeral().unformat(lineRetailCostVar);
-        totalQuantity += quantity;
+        _.extend(line, invoiceLineProperties);
 
-        invoiceLinesArr.push(invoiceLine);  // Add invoiceLine object to array
       });
+      lines.push(line); // push the line object onto the lines array
 
-      var invoiceProperties = {
-        totalCost: numeral(invoiceAmount).format('00.00'),
-        retailCost: numeral(retailCost).format('00.00'),
-        totalQuantity: totalQuantity,
-        lines: invoiceLinesArr  // Add the invoice lines
-      };
+      // Increment the invoice header totals by line total
+      totalCost += numeral().unformat(lineTotalVar);
+      retailCost += numeral().unformat(lineRetailCostVar);
+      totalQuantity += quantity;
+    });
 
-      // extend the invoice object
-      _.extend(invoice, invoiceProperties);
+    var invoiceProperties = {
+      lines: lines,
+      submitted: new Date(),
+      totalCost: numeral(totalCost).format('0.00'),
+      retailCost: numeral(retailCost).format('0.00'),
+      totalQuantity: totalQuantity
+    };
 
-      Meteor.call('insertInvoice', invoice, function(error, result) {
-        if (error)
-          return alert(error.reason);
+    _.extend(invoice, invoiceProperties);
 
-        if (result.invoiceExists)
-          alert("This invoice has already been submitted!");
-
-        Router.go('invoicePage', {_id: result._id});
-      });
-    }
+    var invoiceId = Invoices.insert(invoice, function (err) {
+      if (err) {
+        console.log("failed" + invoice.invoiceNumber);
+        alert(err);
+      } else {
+        alert("Success!");
+        console.log(invoiceId);
+        return invoiceId;
+      }
+    });
   },
 
   'click .remove-invoice-line': function(e) {
