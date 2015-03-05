@@ -3,4 +3,4 @@ Template.invoiceLine.rendered = function(){
     event.preventDefault();
     $(this).closest('tr').remove();
   })
-}
+};
