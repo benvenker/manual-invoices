@@ -42,7 +42,7 @@ Template.invoiceSubmitForm.events({
     var retailCost = 0;
 
 
-// Get the header values
+// Get the header values TODO: Refactor this!!
     var invoice = {};
     header.find('input').each(function() {
       var key = $(this).attr('name');
@@ -56,6 +56,12 @@ Template.invoiceSubmitForm.events({
       addKey(invoice, key, val); // Add each selection field to the invoice object
 
       console.log(key + ": " + val);
+    });
+
+    header.find('textarea').each(function() {
+      var key = $(this).attr('name');
+      var val = $(this).val();
+      addKey(invoice, key, val); // Add each textarea field to invoice object
     });
 
 // Get the invoice rows
@@ -92,12 +98,15 @@ Template.invoiceSubmitForm.events({
       totalQuantity += quantity;
     });
 
+    var user = Meteor.user();
     var invoiceProperties = {
       lines: lines,
       submitted: new Date(),
       totalCost: numeral(totalCost).format('0.00'),
       retailCost: numeral(retailCost).format('0.00'),
-      totalQuantity: totalQuantity
+      totalQuantity: totalQuantity,
+      author: user.emails[0].address,
+      userId: user._id
     };
 
     _.extend(invoice, invoiceProperties);
@@ -109,9 +118,14 @@ Template.invoiceSubmitForm.events({
       } else {
         alert("Success!");
         console.log(invoiceId);
+        //Router.go('invoicePage', {_id: invoiceId._id});
+        Router.go('invoicePage', {_id: invoiceId});
+
+
         return invoiceId;
       }
     });
+
   },
 
   'click .remove-invoice-line': function(e) {
