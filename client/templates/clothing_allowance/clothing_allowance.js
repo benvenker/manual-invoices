@@ -5,7 +5,7 @@ Template.clothingAllowance.rendered = function() {
 Template.clothingAllowance.events({
   'click .add-invoice-line': function(e) {
     e.preventDefault();
-    var newRow = $('  <tr><td><input type="text" class="store" maxlength=4></td><td><input type="text" class="department"></td><td><input type="text" class="cost" maxlength=11></td><td><input type="text" class="lineRetailCost"></td><td><input type="text" class="invoiceNumber" value=""></td><td><input type="text" class="PO" value="" maxlength=20></td><td><input type="text" class="explanation" value="" maxlength=200></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
+    var newRow = $(' <tr><td><input type="text" class="store" maxlength=4></td> <td><input type="text" class="department"></td><td><input type="text" class="cost" maxlength=11></td><td><input type="text" class="lineRetailCost"></td><td><input type="text" class="invoiceNumber" value=""></td><td><input type="text" class="PO" value="" maxlength=20></td><td><input type="text" class="sku"/></td><td><input type="text" class="style"/></td><td><input type="text" class="description"/></td><td><input type="text" class="season"/></td><td><a class="remove-invoice-line button-red tiny"><b>×</b></a></td></tr>');
 
     $('table.flakes-table').append(newRow);
   },
