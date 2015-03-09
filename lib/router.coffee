@@ -21,9 +21,6 @@ Router.route "/clothing_allowance",
 Router.route "/manual_apron",
   name: "manualApron"
 
-Router.route "/approved",
-  name: "approved"
-
 Router.route "/archive",
   name: "archive"
 
@@ -33,7 +30,7 @@ Router.route "/invoices_list",
      subs.subscribe 'invoices'
   fastRender: true
 
-Router.route "/exported_invoices",
+Router.route "/approved",
   name: "exportedInvoices"
   waitOn: ->
     subs.subscribe 'exportedInvoices',

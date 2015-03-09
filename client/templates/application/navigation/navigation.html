@@ -13,19 +13,18 @@
     <ul>
       <li class="title">Invoice Queues</li>
       <li><a href="{{pathFor 'invoicesList'}}" title="Invoices List">Invoices List</a></li>
-      <li><a href="{{pathFor 'exportedInvoices'}}" title="Exported Invoices">Exported Invoices</a></li>
       {{#if isInRole 'admin'}}
-      <li><a href="{{pathFor 'pendingInvoices'}}" title="Pending Invoices">Pending Invoices</a></li>
+        <li><a href="{{pathFor 'pendingInvoices'}}" title="Pending Invoices">Pending Invoices</a></li>
       {{/if}}
-      <li><a href="{{pathFor 'approved'}}" title="Approved Invoices">Approved</a></li>
+      <li><a href="{{pathFor 'exportedInvoices'}}" title="Approved Invoices">Approved</a></li>
       <li><a href="{{pathFor 'rejected'}}" title="Rejected Invoices">Rejected</a></li>
       <li><a href="{{pathFor 'archive'}}" title="Archived Invoices">Archived</a></li>
     </ul>
     {{#if currentUser}}
-    <p class="foot">
-      Hello {{#each emails}}<b>{{address}}</b><br>{{/each}}
-      <a>Account</a> &bullet; <a href="#" id="logout" class="logout">Logout</a>
-    </p>
+      <p class="foot">
+        Hello {{#each emails}}<b>{{address}}</b><br>{{/each}}
+        <a>Account</a> &bullet; <a href="#" id="logout" class="logout">Logout</a>
+      </p>
     {{/if}}
   </div>
 </template>
