@@ -70,6 +70,7 @@ npm-container@1.0.0
 numeral:numeral@1.5.3
 observe-sequence@1.0.4
 ordered-dict@1.0.2
+particle4dev:sass@1.2.0
 random@1.0.2
 reactive-dict@1.0.5
 reactive-var@1.0.4
