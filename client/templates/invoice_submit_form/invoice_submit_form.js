@@ -67,7 +67,10 @@ Template.invoiceSubmitForm.events({
 // Get the invoice rows
 
     var lines = [];
+    var invoiceLineNumber = 0;
     table.find('tr').each(function () { // Find each table row and get the data
+      invoiceLineNumber ++;
+
       var quantity = parseInt( $(this).find('.quantity').val() );
       var unitCost = parseFloat( $(this).find('.unitCost').val() ) ;
       var lineRetailCost = parseFloat( $(this).find('.lineRetailCost').val() );
@@ -84,7 +87,8 @@ Template.invoiceSubmitForm.events({
 
         addKey(line, key, val); // Custom function to add key value pairs to line obj.
         var invoiceLineProperties = {
-          lineTotal: numeral(unitCost * quantity).format('00.00')
+          lineTotal: numeral(unitCost * quantity).format('00.00'),
+          invoiceLineNumber: invoiceLineNumber
         };
 
         _.extend(line, invoiceLineProperties);
