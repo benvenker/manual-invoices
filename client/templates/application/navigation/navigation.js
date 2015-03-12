@@ -10,5 +10,5 @@ Template.navigation.events({
     event.preventDefault();
     Meteor.logout();
     Router.go('landingPage');
-  },
+  }
 });

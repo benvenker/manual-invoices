@@ -8,6 +8,6 @@ Template.opcos.helpers({
 
 Template.opcos.events({
   "change .opco-selection": function(e, t){
-    return Session.set("opco", $("[name=OPCOs]").val());
+    return Session.set("opco", $("[name=OPCO]").val());
   }
 });

@@ -1,5 +1,5 @@
 Template.pendingInvoices.helpers({
   invoices: function(){
-    return Invoices.find({exported: false}, {sort: {submitted:-1}});
+    return Invoices.find({pending: true}, {sort: {submitted:-1}});
   }
 });

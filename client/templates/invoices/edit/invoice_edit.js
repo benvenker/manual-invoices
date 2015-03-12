@@ -71,7 +71,10 @@ Template.invoiceEdit.events({
         sku: $tds.eq(6).val(),
         description: $tds.eq(7).val(),
         lineTotal: numeral(unitCost * quantity).format('00.00'),
-      }
+      };
+      console.log("unitCost: " + invoiceLine.unitCost);
+      console.log("lineRetailCost: " + invoiceLine.lineRetailCost);
+      console.log("lineTotal: " + invoiceLine.lineTotal);
 
       var lineTotalVar = numeral(unitCost * quantity).format('00.00');
       invoiceAmount += numeral().unformat(lineTotalVar);
@@ -110,12 +113,12 @@ Template.invoiceEdit.events({
     Router.go('invoicePage', {_id: currentInvoiceId});
   },
 
-  'click .remove-invoice-line': function(e) {
-    e.preventDefault();
-    $('.remove-invoice-line').click(function(event) {
-      $(this).closest('tr').remove();
-    });
-  },
+  //'click .remove-invoice-line': function(e) {
+  //  e.preventDefault();
+  //  $('.remove-invoice-line').click(function(event) {
+  //    $(this).closest('tr').remove();
+  //  });
+  //},
 
   'click .cancel-changes': function(e) {
     e.preventDefault();

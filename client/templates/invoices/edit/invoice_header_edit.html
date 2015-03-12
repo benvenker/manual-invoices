@@ -12,19 +12,19 @@
       </div>
       <div data-field-span="1">
         <label>TOTAL QUANTITY</label>
-        <input type="text" name="totalQuantity" value="{{totalQuantity}}">
+        <input type="text" name="totalQuantity" value="{{totalQuantity}}" disabled="true">
       </div>
       <div data-field-span="1">
         <label>TOTAL COST</label>
-        <input type="text" name="totalCost" value="{{totalCost}}">
+        <input type="text" name="totalCost" value="{{formatDollars totalCost}}" disabled="true">
+      </div>
+      <div data-field-span="1" >
+        <label>RETAIL COST</label>
+        <input type="text" name='retailCost' value="{{formatDollars retailCost}}" disabled="true"/>
       </div>
       <div data-field-span="1">
         <label>URN</label>
         <input type="text" name="urn" value="{{urn}}"/>
-      </div>
-      <div data-field-span="1" >
-        <label>RETAIL COST</label>
-        <input type="text" name='retailCost' value="{{retailCost}}"/>
       </div>
     </div>
 

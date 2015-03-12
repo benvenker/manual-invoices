@@ -6,10 +6,8 @@ Template.invoiceLinesTable.rendered = function(){
 }
 
 Template.invoiceLinesTable.helpers({
-  invoiceLines: function() {
-    var self = Invoices.find({_id: this._id}, {sort: {invoiceLineNumber: 1}}).fetch();
-    console.log(self[0].lines);
-    return self[0].lines;
+  invoiceLines: function(){
+    return InvoiceLines.find({invoiceId: this._id}, {sort: {invoiceLineNumber: 1}});
   }
 });
 

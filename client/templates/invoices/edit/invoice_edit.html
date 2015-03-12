@@ -1,6 +1,6 @@
 <template name="invoiceEdit">
   <p class="flakes-message warning">WARNING: You are in edit mode. All fields are editable, but changes will not be saved until you click "CONFIRM" below.</p>
-  <form class="grid-form">
+  <form class="grid-form" invoiceId="{{_id}}">
     {{> invoiceHeaderEdit}}
     <br>
     <br>

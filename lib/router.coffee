@@ -24,6 +24,12 @@ Router.route "/manual_apron",
 Router.route "/archive",
   name: "archive"
 
+Router.route "/my_invoices",
+  name: "myInvoices"
+  waitOn: ->
+    subs.subscribe 'invoices'
+  fastRender: true
+
 Router.route "/invoices_list",
   name: "invoicesList"
   waitOn: ->
@@ -58,7 +64,7 @@ Router.route "/invoices/:_id",
     subs.subscribe 'invoicesLines', @params._id
   data: ->
     Invoices.findOne @params._id
-    # InvoiceLines.find @params.invoiceNumber
+#    InvoiceLines.find @params.invoiceId
 
 Router.route "/invoices/:_id/edit",
   name: "invoiceEdit"
@@ -67,7 +73,7 @@ Router.route "/invoices/:_id/edit",
     subs.subscribe 'invoicesLines', @params._id
   data: ->
     Invoices.findOne @params._id
-#    InvoiceLines.find invoiceId: @params._id
+#    InvoiceLines.find @params.invoiceId
 
 Router.route "/invoices/rejected",
   name: "rejected"

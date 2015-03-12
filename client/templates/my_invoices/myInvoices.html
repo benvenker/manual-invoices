@@ -1,0 +1,7 @@
+<template name="myInvoices">
+  {{#if ownInvoice}}
+    {{#each invoices}}
+        {{> invoiceItem}}
+    {{/each}}
+  {{/if}}
+</template>

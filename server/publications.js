@@ -14,22 +14,37 @@ Meteor.publish('transactionCodes', function() {
 Meteor.publish('invoices', function() {
   return Invoices.findFaster({}, {fields:
   { // Publish all invoice properties except the edit history and the userId of creator
+    "edits": 0
+    //"userId": 0
+  }, sort: {submitted: -1}});
+});
+
+Meteor.publish('myInvoices', function() {
+  return Invoices.findFaster({}, {fields:
+  { // Publish all invoice properties except the edit history and the userId of creator
+    "edits": 0
+  }, sort: {submitted: -1}});
+});
+
+Meteor.publish('approvedInvoices', function() {
+  return Invoices.findFaster({approved: true}, {fields:
+  { // Publish all invoice properties except the edit history and the userId of creator
     "edits": 0,
     "userId": 0
   }, sort: {submitted: -1}});
 });
 
 //// Subscribe to all invoice lines
-//Meteor.publish('invoiceLines', function(invoice) {
-//  return InvoiceLines.findFaster({invoiceId: invoice}, {sort: {invoiceId: 1}});
-//});
+Meteor.publish('invoiceLines', function(invoice) {
+  return InvoiceLines.findFaster({invoiceId: invoice}, {sort: {invoiceId: 1}});
+});
 
 // Subscribe to just the invoice to be viewed
 Meteor.publish('invoice', function(invoice) {
   return Invoices.findFaster({_id: invoice}, {fields:
   { // Publish all invoice properties except the edit history and the userId of creator
-    "edits": 0,
-    "userId": 0
+    "edits": 0
+    //"userId": 0
   }, sort: {submitted: -1}});
 });
 
@@ -39,7 +54,10 @@ Meteor.publish('invoicesLines', function(invoice) {
 });
 
 Meteor.publish('pendingInvoices', function() {
-  return Invoices.findFaster({exported: false}, {fields: {exported: 1, invoiceNumber: 1, vendorName: 1, totalCost: 1, retailCost: 1, headerDescription: 1, author: 1}, sort: {submitted:-1}});
+  return Invoices.findFaster({pending: true}, {fields:
+  { // Publish all invoice properties except the edit history and the userId of creator
+    "edits": 0
+  }, sort: {submitted: -1}});
 });
 
 Meteor.publish('exportedInvoices', function() {

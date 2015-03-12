@@ -13,7 +13,7 @@ Template.invoiceLineEdit.rendered = function(){
   // $('.delete-invoice-line').click(function(e){
   //   $(this).closest('tr').remove()
   // })
-}
+};
 
 Template.invoiceLineEdit.events({
   "click .delete-invoice-line": function(e, t){

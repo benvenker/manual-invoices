@@ -29,10 +29,19 @@
       <div class="span-1">
         <a class="button-red edit-invoice" href="{{pathFor 'invoiceEdit'}}" style="float: right"><b>Edit</b></a>
       </div>
+      {{#if isInRole 'superUser'}}
       <div class="span-1">
       <a class="button-green ciu-export"><b>Export</b></a>
-      </div>
-    </div>
+      </div> {{/if}}
+      {{#if isInRole 'admin'}}
+        <div class="span-1">
+          <a class="button-green approve-invoice"><b>Approve</b></a>
+        </div> {{/if}}
+      {{#if isInRole 'create-invoices'}}
+        <div class="span-1">
+          <a class="button-green submit-invoice"><b>Submit</b></a>
+        </div>{{/if}}
+</div>
   </form>
 
 </template>

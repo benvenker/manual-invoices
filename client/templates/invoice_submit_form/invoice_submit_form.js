@@ -64,57 +64,6 @@ Template.invoiceSubmitForm.events({
       addKey(invoice, key, val); // Add each textarea field to invoice object
     });
 
-// Get the invoice rows
-
-    var lines = [];
-    var invoiceLineNumber = 0;
-    table.find('tr').each(function () { // Find each table row and get the data
-      invoiceLineNumber ++;
-
-      var quantity = parseInt( $(this).find('.quantity').val() );
-      var unitCost = parseFloat( $(this).find('.unitCost').val() ) ;
-      var lineRetailCost = parseFloat( $(this).find('.lineRetailCost').val() );
-      var lineTotalVar = numeral(unitCost * quantity).format('00.00');
-      var lineRetailCostVar = numeral(lineRetailCost * quantity).format('00.00');
-
-      var line = {};
-      $(this).find('td').each(function () { // Data comes from each input in each <tr>
-        // Set the key to the class name of input field
-        var key = $(this).find("input").attr('class');
-
-        // Set the key value to the input field's value
-        var val = $(this).find("input").val();
-
-        addKey(line, key, val); // Custom function to add key value pairs to line obj.
-        var invoiceLineProperties = {
-          lineTotal: numeral(unitCost * quantity).format('00.00'),
-          invoiceLineNumber: invoiceLineNumber
-        };
-
-        _.extend(line, invoiceLineProperties);
-
-      });
-      lines.push(line); // push the line object onto the lines array
-
-      // Increment the invoice header totals by line total
-      totalCost += numeral().unformat(lineTotalVar);
-      retailCost += numeral().unformat(lineRetailCostVar);
-      totalQuantity += quantity;
-    });
-
-    var user = Meteor.user();
-    var invoiceProperties = {
-      lines: lines,
-      submitted: new Date(),
-      totalCost: numeral(totalCost).format('0.00'),
-      retailCost: numeral(retailCost).format('0.00'),
-      totalQuantity: totalQuantity,
-      author: user.emails[0].address,
-      userId: user._id
-    };
-
-    _.extend(invoice, invoiceProperties);
-
     var invoiceId = Invoices.insert(invoice, function (err) {
       if (err) {
         console.log("failed" + invoice.invoiceNumber);
@@ -129,7 +78,59 @@ Template.invoiceSubmitForm.events({
         return invoiceId;
       }
     });
+// Get the invoice rows
 
+    //var lines = [];
+    var invoiceLineNumber = 0;
+    table.find('tr').each(function () { // Find each table row and get the data
+      invoiceLineNumber ++;
+
+      var quantity = parseInt( $(this).find('.quantity').val() );
+      var unitCost = parseFloat( $(this).find('.unitCost').val() ) ;
+      var lineRetailCost = parseFloat( $(this).find('.lineRetailCost').val() );
+      var lineTotalVar = numeral(unitCost * quantity).format('00.00');
+      console.log("lineTotalVar = " + lineTotalVar);
+      var lineRetailCostVar = numeral(lineRetailCost * quantity).format('00.00');
+
+      var line = {};
+      $(this).find('td').each(function () { // Data comes from each input in each <tr>
+        // Set the key to the class name of input field
+        var key = $(this).find("input").attr('class');
+
+        // Set the key value to the input field's value
+        var val = $(this).find("input").val();
+
+        addKey(line, key, val); // Custom function to add key value pairs to line obj.
+        var invoiceLineProperties = {
+          lineTotal: numeral(unitCost * quantity).format('00.00'),
+          invoiceLineNumber: invoiceLineNumber,
+          invoiceId: invoiceId
+        };
+
+        _.extend(line, invoiceLineProperties);
+
+      });
+
+      // Increment the invoice header totals by line total
+      totalCost += numeral().unformat(lineTotalVar);
+      retailCost += numeral().unformat(lineRetailCostVar);
+      totalQuantity += quantity;
+
+      InvoiceLines.insert(line);
+
+      var user = Meteor.user();
+      var invoiceProperties = {
+        //lines: lines,
+        submitted: new Date(),
+        totalCost: numeral(totalCost).format('0.00'),
+        retailCost: numeral(retailCost).format('0.00'),
+        totalQuantity: totalQuantity,
+        author: user.emails[0].address,
+        userId: user._id
+      };
+
+      Invoices.update(invoiceId, {$set: invoiceProperties});
+    });
   },
 
   'click .remove-invoice-line': function(e) {

@@ -44,5 +44,28 @@ Meteor.methods({
       options.limit = 10;
     }
     return Manufacturers.findFaster({department: parseInt(query)}, {limit: 1}).fetch();
+  },
+
+  'deleteInvoiceLine': function(invoice, line, department) {
+    if (!invoice || !line) {
+      console.log("no invoice information provided!")
+    } else {
+      //var originalLines = countLines();
+      console.log("_id: " + invoice);
+      console.log("line: " + line);
+      console.log("about to delete the invoice line...");
+      Invoices.update(
+        {_id: invoice},  // find the right invoice
+        {$pull: {'lines.line': line}} // delete the line
+        //{$pull: {department: department}}
+      );
+      //var updatedLines = countLines();
+
+    //if (updatedLines == originalLines - 1 ) {
+      console.log("deleted!");
+    //} else {
+    //  console.log("something went wrong...")
+
+    }
   }
 });
