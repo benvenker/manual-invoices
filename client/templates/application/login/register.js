@@ -7,13 +7,19 @@ Template.register.events({
 
     if (isNotEmpty(email) && isNotEmpty(password) && isEmail(email) && areValidPasswords(password, passwordConfirm)) {
 
-      var data = {email: email, password: password};
+      var user = {email: email, password: password};
 
-      Meteor.call('createUserWithRole', data, 'create-invoices', function(err, result) {
+      Meteor.call('createUserWithRole', user, 'create-invoices', function(err, result) {
         if (!err) {
           //User created!!
           //alert("Registration successful");
-          Router.go('invoiceSubmitForm');
+          return Meteor.loginWithPassword(user.email, user.password, function(error) {
+            if (error) {
+              return alert(error.reason);
+            } else {
+              return Router.go('invoiceSubmitForm');
+            }
+          });
         } else {
             //Insertion Error
           if (err)

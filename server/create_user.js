@@ -16,10 +16,10 @@ Meteor.startup(function() {
 });
 
 Meteor.methods({
-  'createUserWithRole': function(data, role) {
+  'createUserWithRole': function(user, role) {
     var userId;
 
-    Meteor.call('createUserNoRole', data, function(err, result) {
+    Meteor.call('createUserNoRole', user, function(err, result) {
       if (err) {
         console.log(err.message);
         return err;
