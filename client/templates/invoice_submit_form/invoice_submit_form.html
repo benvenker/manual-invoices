@@ -115,7 +115,9 @@
 </table>
 <hr>
 <br>
-{{> glAccountEntry}}
+{{#if isGlTemplateRequired}}
+  {{> glAccountEntry}}
+{{/if}}
 </form>
 </div>
 <br>
