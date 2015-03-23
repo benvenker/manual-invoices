@@ -1,25 +1,35 @@
 Template.invoicePage.events({
+  // Export the invoice in CIU format
   "click .ciu-export": function(e, t) {
     e.preventDefault();
 
-    if (confirm("Are you sure you want to export? \nThis will generate a CIU file to the LAN and cannot be undone.")) {
+    if (confirm("Are you sure you want to approve? \nThis will generate a CIU file to the LAN and cannot be undone.")) {
       // Checking the data to why chrome says ID is not being passed
       var data = Router.current().data();
       console.log(data);
 
       var invoice = this._id;
+      var approver = Meteor.user();
 
       Meteor.call('ciuExport', invoice, function (error, result) {
         if (error)
           return alert(error.reason);
         Router.go('invoicesList', {_id: this._id});
       });
-      Invoices.update(invoice, {$set: {exported: true, exportedDate: new Date()}});
+      Invoices.update(invoice, {$set: {
+        exported: true,
+        exportedDate: new Date(),
+        approved: true,
+        approvedDate: new Date(),
+        approvedBy: approver,
+        pending: false
+      }});
 
     }
     return false;
   },
 
+  // Change invoice approval flag to 'true'
   "click .approve-invoice": function(e, t) {
     e.preventDefault();
 
@@ -34,6 +44,7 @@ Template.invoicePage.events({
     }
   },
 
+  // If you're in the 'create-invoices' role, submit the invoice for approval
   "click .submit-invoice": function(e, t) {
     e.preventDefault();
 
