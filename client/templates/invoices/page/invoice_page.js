@@ -29,21 +29,6 @@ Template.invoicePage.events({
     return false;
   },
 
-  // Change invoice approval flag to 'true'
-  "click .approve-invoice": function(e, t) {
-    e.preventDefault();
-
-    if (confirm("Are you sure you want to approve this invoice?")) {
-      var invoice = this._id;
-      var approver = Meteor.user();
-      Invoices.update(invoice, {$set: {
-        approved: true,
-        approvedDate: new Date(),
-        approvedBy: approver}
-      });
-    }
-  },
-
   // If you're in the 'create-invoices' role, submit the invoice for approval
   "click .submit-invoice": function(e, t) {
     e.preventDefault();
