@@ -43,6 +43,7 @@ Template.invoiceEdit.events({
       urn: form.find('[name=urn]').val(),
       headerDescription: form.find('[name=headerDescription]').val(),
     };
+    console.log("urn: " + invoiceProperties.urn);
 
     Invoices.update(currentInvoiceId, {$set: invoiceProperties});
 
