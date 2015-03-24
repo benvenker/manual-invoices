@@ -32,11 +32,14 @@ Template.invoiceSubmitForm.events({
     var form = $('.grid-form');
     var table = $('.flakes-table tbody');
     var header = $('.invoice-header');
-    var transactionCode = TransactionCodes.find({ // Get a TransactionCode object
-      transactionCode: parseInt(Session.get('transactionCode')),
-      banner: parseInt(Session.get('opco'))
-    }).fetch();
-    var glAccount = _.pluck(transactionCode, 'account'); // Get the GL account from TransactionCode object
+    var transactionCodeObj = TransactionCodes.findOne({ // Get a TransactionCode object
+      $or:
+        [
+          {transactionCode: parseInt(Session.get('transactionCode')),
+            banner: parseInt(Session.get('opco'))},
+          {transactionCode: parseInt(Session.get('transactionCode'))}
+        ]
+    });
     var totalCost = 0;
     var totalQuantity = 0;
     var retailCost = 0;
@@ -63,6 +66,8 @@ Template.invoiceSubmitForm.events({
       var val = $(this).val();
       addKey(invoice, key, val); // Add each textarea field to invoice object
     });
+
+    _.extend(invoice, glAccount)
 
     var invoiceId = Invoices.insert(invoice, function (err) {
       if (err) {
@@ -117,20 +122,41 @@ Template.invoiceSubmitForm.events({
       totalQuantity += quantity;
 
       InvoiceLines.insert(line);
-
-      var user = Meteor.user();
-      var invoiceProperties = {
-        //lines: lines,
-        submitted: new Date(),
-        totalCost: numeral(totalCost).format('0.00'),
-        retailCost: numeral(retailCost).format('0.00'),
-        totalQuantity: totalQuantity,
-        author: user.emails[0].address,
-        userId: user._id
-      };
-
-      Invoices.update(invoiceId, {$set: invoiceProperties});
     });
+
+    // Find an invoice line for the current invoice and get the store number
+    var store = InvoiceLines.findOne({invoiceId: invoiceId}).store;
+    console.log("store: " + store);
+
+    // Assign GL account
+    var glAccount = '';
+    if (Session.get('isGlTemplateRequired') == true) {
+      var glForm = $('.gl-account');
+      glForm.find('input').each(function() {
+        glAccount += $(this).val();
+        console.log("this (glAccount): " + invoice.glAccount);
+      });
+    } else {
+      glAccount = completeGlAccount(transactionCodeObj, store, parseInt(Session.get('opco')));
+      console.log("glAccount: " + glAccount);
+    }
+
+    var user = Meteor.user();
+
+    var invoiceProperties = {
+      //lines: lines,
+      glAccount: glAccount,
+      submitted: new Date(),
+      totalCost: numeral(totalCost).format('0.00'),
+      retailCost: numeral(retailCost).format('0.00'),
+      totalQuantity: totalQuantity,
+      author: user.emails[0].address,
+      userId: user._id
+    };
+    console.log("invoiceProperties.glAccount: " + invoiceProperties.glAccount);
+
+    Invoices.update(invoiceId, {$set: invoiceProperties});
+
   },
 
   'click .remove-invoice-line': function(e) {

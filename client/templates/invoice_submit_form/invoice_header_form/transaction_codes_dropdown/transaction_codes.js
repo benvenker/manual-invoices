@@ -20,6 +20,6 @@ Template.transactionCodes.helpers({
 
 Template.transactionCodes.events({
   "change .transactionCode-selection": function(e, t){
-    return Session.set("transactionCode", $("[name=transactionCodes]").val().substr(0,3));
+    return Session.set("transactionCode", $("[name=transactionCode]").val().substr(0,3));
   }
 });
