@@ -1,11 +1,23 @@
 //var fs = Npm.require('fs');
 //__ROOT_APP_PATH__ = fs.realpathSync('.');
 ////var exportDir = '/Users/Ben/Desktop/ciu_sync_test.dat1';
-//var exportDir = '/Users/Ben/Desktop/ciu_test.dat1'
+//var exportDir = '/Users/Ben/Desktop/ciu_test.dat1';
 //// console.log(__ROOT_APP_PATH__);
 //
 ///*************************** Helper Functions *******************************/
 //
+///*
+//* All dollar amounts need to be made positive because all amount are
+//* prepended by the sign of the of amount and 'n' zeros. For example, the
+//* invoiceAmount field, cannot be more than 11 characters, and if the
+//* invoice was for a negative $500.00, would look like: 00000050000, and
+//* then a separate field preceding it for the sign. So that combined value
+//* would be: -00000050000.
+//*/
+//function ensurePositive(amount) {
+//  amount < 0 ? amount = amount *= -1 : amount;
+//  return amount;
+//}
 ///*
 //Get the invoice lines for a given invoice
 //*/
@@ -92,7 +104,7 @@
 //}
 //
 ///***************************** Variables **********************************/
-//var invoice = "QNcZEabbNQoWBN8eS";
+//var invoice = "xwhvYtcnc8Ld9cBGM";
 //
 //var exportInvoice = Invoices.find({_id: invoice}).fetch();
 //var invoiceId = _.pluck(exportInvoice, '_id').toString();
