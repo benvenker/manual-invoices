@@ -13,7 +13,7 @@ Meteor.methods({
 
     //// TODO fix regexp to support multiple tokens
     var regex = new RegExp("^" + query);
-    return Manufacturers.findFaster({manufacturerName: {$regex: regex}, supplierSite: supplierSite}, options).fetch();
+    return Suppliers.findFaster({vendorName: {$regex: regex}, vendorNumber: supplierSite}, options).fetch();
   },
 
   'vendorNumbers': function(query, options) {

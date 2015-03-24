@@ -23,7 +23,7 @@ Template.vendorTypeahead.helpers({
         console.log(err);
         return;
       }
-      callback(res.map(function(v){ return {value: v.manufacturerName}; }));
+      callback(res.map(function(v){ return {value: v.vendorName}; }));
     });
   }
 });
