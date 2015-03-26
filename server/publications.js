@@ -27,7 +27,7 @@ Meteor.publish('myInvoices', function() {
 });
 
 Meteor.publish('approvedInvoices', function() {
-  return Invoices.findFaster({approved: true}, {fields:
+  return Invoices.findFaster({status: 'approved'}, {fields:
   { // Publish all invoice properties except the edit history and the userId of creator
     "edits": 0,
     "userId": 0
@@ -54,7 +54,7 @@ Meteor.publish('invoicesLines', function(invoice) {
 });
 
 Meteor.publish('pendingInvoices', function() {
-  return Invoices.findFaster({pending: true}, {fields:
+  return Invoices.findFaster({status: 'pending'}, {fields:
   { // Publish all invoice properties except the edit history and the userId of creator
     "edits": 0
   }, sort: {submitted: -1}});
