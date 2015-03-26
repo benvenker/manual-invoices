@@ -14,36 +14,40 @@ Template.invoicePage.events({
       Meteor.call('ciuExport', invoice, function (error, result) {
         if (error)
           return alert(error.reason);
+        alert("Export successful");
         Router.go('invoicesList', {_id: this._id});
       });
-      Invoices.update(invoice, {$set: {
+
+      var approvalAttributes = {
         exported: true,
         exportedDate: new Date(),
-        approved: true,
+        status: 'approved',
         approvedDate: new Date(),
-        approvedBy: approver,
+        approvedBy: approver.emails[0].address,
         pending: false
-      }});
-
+      };
+      console.log("invoice to update: " + invoice);
+      Invoices.update(invoice, {$set: approvalAttributes});
     }
     return false;
-  },
+  }
 
   // If you're in the 'create-invoices' role, submit the invoice for approval
-  "click .submit-invoice": function(e, t) {
-    e.preventDefault();
-
-    if (confirm("Are you sure you want to submit this invoice?")) {
-      var invoice = this._id;
-      console.log("invoice: " + invoice);
-      var author = Meteor.user().emails[0].address;
-      Invoices.update(invoice, {$set: {
-        pending: true,
-        submitted: new Date(),
-        author: author}
-      });
-    }
-  }
+  //"click .submit-invoice": function(e, t) {
+  //  e.preventDefault();
+  //
+  //  if (confirm("Are you sure you want to submit this invoice?")) {
+  //    var invoice = this._id;
+  //    console.log("invoice: " + invoice);
+  //    var author = Meteor.user().emails[0].address;
+  //    Invoices.update(invoice, {$set: {
+  //      pending: true,
+  //      submitted: new Date(),
+  //      author: author,
+  //      approved: true}
+  //    });
+  //  }
+  //}
 });
 
 Template.invoicePage.helpers({
