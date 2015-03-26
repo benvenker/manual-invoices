@@ -7,6 +7,7 @@
       <li class="title">Invoice Forms</li>
       <li><a href="{{pathFor 'invoiceSubmitForm'}}" title="Enter Invoices">Create New Manual Invoice</a>
       </li>
+      <li><a href="{{pathFor 'importInvoices'}}" title="Import Invoices">Imports</a></li>
       <li><a href="{{pathFor 'clothingAllowance'}}">Clothing Allowance</a></li>
       <li><a href="{{pathFor 'manualApron'}}">Manual Apron</a></li>
     </ul>
@@ -18,7 +19,7 @@
       {{/if}}
       <li><a href="{{pathFor 'exportedInvoices'}}" title="Approved Invoices">Approved</a></li>
       <li><a href="{{pathFor 'rejected'}}" title="Rejected Invoices">Rejected</a></li>
-      <li><a href="{{pathFor 'archive'}}" title="Archived Invoices">Archived</a></li>
+      <li><a href="{{pathFor 'archivedInvoices'}}" title="Archived Invoices">Archived</a></li>
     </ul>
     {{#if currentUser}}
       <p class="foot">
