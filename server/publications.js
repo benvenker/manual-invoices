@@ -68,6 +68,15 @@ Meteor.publish('rejectedInvoices', function() {
   return Invoices.findFaster({exported: true}, {fields: {rejected: 1, exported: 1, invoiceNumber: 1, vendorName: 1, totalCost: 1, retailCost: 1, headerDescription: 1, author: 1}, sort: {submitted: -1}});
 });
 
+
+Meteor.publish('archivedInvoices', function() {
+  return Invoices.findFaster({$or: [{archived: true}, {exported: true}]}, {fields:
+  { // Publish all invoice properties except the edit history and the userId of creator
+    "edits": 0
+    //"userId": 0
+  }, sort: {submitted: -1}});
+});
+
 Meteor.publish(null, function (){
   return Meteor.roles.find({})
 });
