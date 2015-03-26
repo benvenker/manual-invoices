@@ -22,7 +22,11 @@ Router.route "/manual_apron",
   name: "manualApron"
 
 Router.route "/archive",
-  name: "archive"
+  name: "archivedInvoices",
+  waitOn: ->
+    subs.subscribe 'archivedInvoices'
+  fastRender: true
+
 
 Router.route "/my_invoices",
   name: "myInvoices"
@@ -96,6 +100,9 @@ requireLogin = ->
   else
     @next()
   return
+
+Router.route "import_invoices",
+  name: "import_invoices"
 
 Router.onBeforeAction "dataNotFound",
   only: "invoicesPage"
