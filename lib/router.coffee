@@ -101,8 +101,8 @@ requireLogin = ->
     @next()
   return
 
-Router.route "import_invoices",
-  name: "import_invoices"
+Router.route "import_invoice_form",
+  name: "importInvoiceForm"
 
 Router.onBeforeAction "dataNotFound",
   only: "invoicesPage"
