@@ -1,5 +1,5 @@
 Template.exportedInvoices.helpers({
   invoices: function(){
-    return Invoices.findFaster({exported: true}, {sort: {exportedDate:-1}});
+    return Invoices.findFaster({$or: [{exported: true}, {approved: true}]},{sort: {exportedDate:-1}});
   }
 });
