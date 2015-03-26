@@ -1,6 +1,6 @@
 <template name="invoiceHeader">
   <fieldset>
-    <legend>Invoice Header <small style="float: right;"><a href="http://prtprod/PRTSSOPrimas/RetrieveDoc.aspx?urn={{urn}}" target="_blank">View paper invoice</a></small></legend>
+    <legend>Invoice Header <small style="float: right;">Approved: {{formatDate approvedDate}} <a href="http://prtprod/PRTSSOPrimas/RetrieveDoc.aspx?urn={{urn}}" target="_blank">View paper invoice</a></small></legend>
     <div data-row-span="5">
       <div data-field-span="2" class="vendorNumber">
         <label>Vendor Number </label>
