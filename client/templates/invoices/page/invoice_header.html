@@ -2,6 +2,20 @@
   <fieldset>
     <legend>Invoice Header <small style="float: right;"><a href="http://prtprod/PRTSSOPrimas/RetrieveDoc.aspx?urn={{urn}}" target="_blank">View paper invoice</a></small></legend>
     <div data-row-span="5">
+      <div data-field-span="2" class="vendorNumber">
+        <label>Vendor Number </label>
+        <input type="text" value="{{vendorNumber}}" disabled="true">
+      </div>
+      <div data-field-span="2" class="author">
+        <label>Author </label>
+        <input type="text" value="{{author}}" disabled="true">
+      </div>
+      <div data-field-span="1" class="submitted">
+        <label>Submitted Date</label>
+        <input type="text" value="{{formatDate submitted}}" disabled="true">
+      </div>
+    </div>
+    <div data-row-span="5">
       <div data-field-span="1">
         <label>PO</label>
         <input type="text" name="PO" value="{{PO}}" disabled="true">
