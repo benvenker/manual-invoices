@@ -1,0 +1,68 @@
+<template name="importInvoicePage">
+  <form class="grid-form">
+    <fieldset>
+      <legend>Import Invoices</legend>
+      <div data-row-span="2">
+        <div data-field-span="1" class="preparedBy">
+          <label>Prepared By </label>
+          <input type="text" placeholder="Enter 1st initial and Last Name" value="test">
+        </div>
+        <div data-field-span="1">
+          <label>INVOICE DATE</label>
+          <input type="date" name="invoiceDate" maxlength=8 placeholder="DDMMYYYY"/>
+        </div>
+      </div>
+      <div data-row-span="6">
+          {{> vendorTypeahead}}
+        <div data-field-span="1" class="department">
+          <label>Department</label>
+            {{> departmentTypeahead}}
+        </div>
+      </div>
+      <div data-row-span="4">
+        <div data-field-span="2" class="saksPO">
+          <label>Saks PO# </label>
+          <input type="text">
+        </div>
+        <div data-field-span="2" class="postRefNumber">
+          <label>Post Ref # </label>
+          <input type="text">
+        </div>
+      </div>
+      <legend></legend>
+      <div data-row-span="6">
+        <div data-field-span="1" class="firstCost">
+          <label>First Cost </label>
+          <input type="text">
+        </div>
+        <div data-field-span="1" class="duty">
+          <label>Duty </label>
+          <input type="text">
+        </div>
+        <div data-field-span="1" class="freight">
+          <label>Freight </label>
+          <input type="text">
+        </div>
+        <div data-field-span="1" class="admin">
+          <label>Admin </label>
+          <input type="text">
+        </div>
+        <div data-field-span="1" class="commission">
+          <label>Commission </label>
+          <input type="text">
+        </div>
+        <div data-field-span="1" class="otherFees">
+          <label>Other Fees </label>
+          <input type="text">
+        </div>
+      </div>
+    </fieldset>
+  </form>
+  <br>
+  <div class="span-12" >
+    <div class="span-10"></div>
+    <div class="span-2">
+      <a class="button-green add-import-invoice" style="float: right;"><b>Submit</b></a>
+    </div>
+  </div>
+</template>
