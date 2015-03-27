@@ -113,6 +113,12 @@ Router.route "/import_invoices/:_id",
     ImportInvoices.findOne @params._id
 #    InvoiceLines.find @params.invoiceIdage"
 
+Router.route "edit_users",
+  name: "editUsers"
+  waitOn: ->
+    subs.subscribe 'directory'
+  fastRender: true
+
 Router.onBeforeAction "dataNotFound",
   only: "invoicesPage"
 

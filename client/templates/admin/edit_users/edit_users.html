@@ -1,0 +1,62 @@
+<template name="editUsers">
+    {{#each users}}
+      <!--{{> userItem}}-->
+      <div class="grid-1 gutter-20">
+        <div class="span-2" id="{{_id}}">
+          <fieldset class="flakes-information-box">
+            <legend>User Profile</legend>
+            <a href="{{pathFor 'invoicePage'}}">
+              <div class="grid-12">
+                <dl class="span-4">
+                  <dt>Email</dt>
+                  <dd>{{emails.[0].address}}</dd>
+                </dl>
+                <dl class="span-4">
+                  <dt>Roles</dt>
+                    {{#each roles}}
+                      <dd>{{this}}</dd>
+                    {{/each}}
+                </dl>
+              </div>
+            </a>
+            <div class="grid-8 gutter-10">
+              <div class="span-6"></div>
+              <div class="span-1 editUser">
+                <a class="button-orange" style="float: right;"><b>Edit</b></a>
+              </div>
+              <div class="span-1 editUser">
+                <a class="button-red" style="float: right;"><b>Delete</b></a>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+    {{/each}}
+</template>
+
+
+<!--<template name="userItem">-->
+<!--<div class="grid-1 gutter-20">-->
+<!--<div class="span-3" id="{{_id}}">-->
+<!--<fieldset class="flakes-information-box">-->
+<!--<legend>User Profile</legend>-->
+<!--<a href="{{pathFor 'invoicePage'}}">-->
+<!--<div class="grid-12">-->
+<!--<dl class="span-4">-->
+<!--<dt>Email</dt>-->
+<!--<dd>{{this}}</dd>-->
+<!--</dl>-->
+<!--<dl class="span-4">-->
+<!--<dt>Email</dt>-->
+<!--<dd></dd>-->
+<!--</dl>-->
+<!--<dl class="span-4">-->
+<!--<dt>Approved Date</dt>-->
+<!--<dd></dd>-->
+<!--</dl>-->
+<!--</div>-->
+<!--</a>-->
+<!--</fieldset>-->
+<!--</div>-->
+<!--</div>-->
+<!--</template>-->

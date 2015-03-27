@@ -21,6 +21,12 @@
       <li><a href="{{pathFor 'rejected'}}" title="Rejected Invoices">Rejected</a></li>
       <li><a href="{{pathFor 'archivedInvoices'}}" title="Archived Invoices">Archived</a></li>
     </ul>
+    {{#if isInRole 'admin'}}
+    <ul>
+      <li class="title">Admin</li>
+      <li><a href="{{pathFor 'editUsers'}}">Edit Users</a></li>
+    </ul>
+      {{/if}}
     {{#if currentUser}}
       <p class="foot">
         Hello <b>{{emails}}</b><br>
