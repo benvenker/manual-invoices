@@ -125,7 +125,7 @@ Template.invoiceSubmitForm.events({
       totalCost += numeral().unformat(lineTotalVar);
       retailCost += numeral().unformat(lineRetailCostVar);
       totalQuantity += quantity;
-
+      console.log("about to insert line " + invoiceLineNumber + " for invoiceId: " + invoiceId);
       InvoiceLines.insert(line);
     });
 
@@ -151,7 +151,7 @@ Template.invoiceSubmitForm.events({
     var invoiceProperties = {
       //lines: lines,
       glAccount: glAccount,
-      submitted: new Date(),
+      //submitted: new Date(),
       status: 'pending',
       totalCost: numeral(totalCost).format('0.00'),
       retailCost: numeral(retailCost).format('0.00'),

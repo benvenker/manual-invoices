@@ -100,7 +100,7 @@ Template.invoiceEdit.events({
         totalQuantity: totalQuantity,
       };
 
-      Invoices.update(currentInvoiceId, {$set: invoiceProperties})
+      Invoices.update(currentInvoiceId, {$set: invoiceProperties});
 
       // Record the edit time and editor
       var invoiceEditProperties = {
@@ -108,7 +108,7 @@ Template.invoiceEdit.events({
         editor: Meteor.user().emails[0].address
       };
 
-      Invoices.update(currentInvoiceId, {$push: {edits: invoiceEditProperties}});
+      //Invoices.update(currentInvoiceId, {$push: {edits: invoiceEditProperties}});
 
     });
     Router.go('invoicePage', {_id: currentInvoiceId});
