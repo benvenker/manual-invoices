@@ -4,8 +4,8 @@
       <fieldset class="flakes-information-box">
         <legend>Invoice Summary</legend>
         <a href="{{pathFor 'invoicePage'}}">
-          <div class="grid-8">
-            <dl class="span-2">
+          <div class="grid-12">
+            <dl class="span-4">
               <dt>Invoice Number</dt>
               <dd>{{invoiceNumber}}</dd>
             </dl>
@@ -13,13 +13,13 @@
               <dt>Vendor</dt>
               <dd>{{vendorName}}</dd>
             </dl>
-            <dl class="span-2">
+            <dl class="span-4">
               <dt>Approved Date</dt>
               <dd>{{formatDate approvedDate}}</dd>
             </dl>
           </div>
-          <div class="grid-8">
-            <dl class="span-2">
+          <div class="grid-12">
+            <dl class="span-4">
               <dt>Total Cost</dt>
               <dd>{{formatDollars totalCost}}</dd>
             </dl>
@@ -27,13 +27,13 @@
               <dt>Description</dt>
               <dd>{{headerDescription}}</dd>
             </dl>
-            <dl class="span-2">
+            <dl class="span-4">
               <dt>Author</dt>
               <dd>{{author}}</dd>
             </dl>
           </div>
-          <div class="grid-8">
-            <dl class="span-2">
+          <div class="grid-12">
+            <dl class="span-4">
               <dt>Retail Cost</dt>
               <dd>{{formatDollars retailCost}}</dd>
             </dl>
@@ -41,7 +41,7 @@
               <dt>Submitted Date</dt>
               <dd>{{formatDate submitted}}</dd>
             </dl>
-            <dl class="span-2">
+            <dl class="span-4">
               <dt>Approved By</dt>
               <dd>{{approvedBy}}</dd>
             </dl>
