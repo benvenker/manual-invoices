@@ -67,22 +67,27 @@ Template.invoiceSubmitForm.events({
       addKey(invoice, key, val); // Add each textarea field to invoice object
     });
 
-    _.extend(invoice, glAccount)
+    var vendorNumber = parseInt(invoice.vendorNumber);
+    console.log('vendorNumber = ' + 0);
 
     var invoiceId = Invoices.insert(invoice, function (err) {
       if (err) {
-        console.log("failed" + invoice.invoiceNumber);
+        console.log("failed" + vendorNumber);
         alert(err);
       } else {
         alert("Success!");
         console.log(invoiceId);
-        //Router.go('invoicePage', {_id: invoiceId._id});
-        Router.go('invoicePage', {_id: invoiceId});
+        console.log("vendor number: " + vendorNumber + " found");
 
+        //Router.go('invoicePage', {_id: invoiceId._id});
+
+        Router.go('invoicePage', {_id: invoiceId});
 
         return invoiceId;
       }
     });
+
+
 // Get the invoice rows
 
     //var lines = [];
@@ -147,6 +152,7 @@ Template.invoiceSubmitForm.events({
       //lines: lines,
       glAccount: glAccount,
       submitted: new Date(),
+      status: 'pending',
       totalCost: numeral(totalCost).format('0.00'),
       retailCost: numeral(retailCost).format('0.00'),
       totalQuantity: totalQuantity,
