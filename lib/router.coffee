@@ -44,6 +44,7 @@ Router.route "/approved",
   name: "exportedInvoices"
   waitOn: ->
     subs.subscribe 'exportedInvoices',
+    subs.subscribe 'approvedInvoices'
   fastRender: true
 
 Router.route "/invoices/pending",
@@ -103,6 +104,14 @@ requireLogin = ->
 
 Router.route "import_invoice_form",
   name: "importInvoiceForm"
+
+Router.route "/import_invoices/:_id",
+  name: "importInvoicePage"
+  waitOn: ->
+    subs.subscribe 'importInvoice', @params._id
+  data: ->
+    ImportInvoices.findOne @params._id
+#    InvoiceLines.find @params.invoiceIdage"
 
 Router.onBeforeAction "dataNotFound",
   only: "invoicesPage"
