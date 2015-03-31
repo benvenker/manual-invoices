@@ -1,0 +1,8 @@
+dt {
+  padding-top: 2px;
+}
+
+dd {
+  padding-top: 2px;
+  padding-bottom: 20px;  /* would love to know why the padding just stopped displaying on dd elements */
+}
