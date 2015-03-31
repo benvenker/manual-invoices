@@ -1,4 +1,4 @@
-Template.invoicePage.events({
+Template.approvedInvoicePage.events({
   // Export the invoice in CIU format
   "click .approve-invoice": function(e, t) {
     e.preventDefault();

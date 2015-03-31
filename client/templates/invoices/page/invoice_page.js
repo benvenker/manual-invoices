@@ -1,6 +1,6 @@
 Template.invoicePage.events({
   // Export the invoice in CIU format
-  "click .ciu-export": function(e, t) {
+  "click .approve-invoice": function(e, t) {
     e.preventDefault();
 
     if (confirm("Are you sure you want to approve? \nThis will generate a CIU file to the LAN and cannot be undone.")) {
@@ -14,7 +14,7 @@ Template.invoicePage.events({
       Meteor.call('ciuExport', invoice, function (error, result) {
         if (error)
           return alert(error.reason);
-        alert("Export successful");
+        Bert.alert("Export successful", "success");
         Router.go('invoicesList', {_id: this._id});
       });
 
@@ -30,6 +30,23 @@ Template.invoicePage.events({
       Invoices.update(invoice, {$set: approvalAttributes});
     }
     return false;
+  },
+
+  'click .reject-invoice': function(e) {
+    e.preventDefault();
+    if (confirm("Reject this invoice? This will send it to the Rejected queue for review.")) {
+      var approver = Meteor.user();
+
+      Invoices.update({_id: this._id},
+        {$set:
+          {
+            status: 'rejected',
+            rejectedBy: approver.profile.firstName + ' ' + approver.profile.lastName || approver.emails[0].address
+          }
+        });
+      alert("Invoice moved to the Rejected queue");
+      Router.go('invoicesList');
+    }
   }
 
   // If you're in the 'create-invoices' role, submit the invoice for approval

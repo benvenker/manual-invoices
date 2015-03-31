@@ -17,8 +17,8 @@
       {{#if isInRole 'admin'}}
         <li><a href="{{pathFor 'pendingInvoices'}}" title="Pending Invoices">Pending Approval</a></li>
       {{/if}}
-      <li><a href="{{pathFor 'exportedInvoices'}}" title="Approved Invoices">Approved</a></li>
-      <li><a href="{{pathFor 'rejected'}}" title="Rejected Invoices">Rejected</a></li>
+      <li><a href="{{pathFor 'approvedInvoices'}}" title="Approved Invoices">Approved</a></li>
+      <li><a href="{{pathFor 'rejectedInvoices'}}" title="Rejected Invoices">Rejected</a></li>
       <li><a href="{{pathFor 'archivedInvoices'}}" title="Archived Invoices">Archived</a></li>
     </ul>
     {{#if isInRole 'admin'}}

@@ -21,11 +21,11 @@ Router.route "/clothing_allowance",
 Router.route "/manual_apron",
   name: "manualApron"
 
-Router.route "/archive",
-  name: "archivedInvoices",
-  waitOn: ->
-    subs.subscribe 'archivedInvoices'
-  fastRender: true
+#Router.route "/approved",
+#  name: "approvedInvoices",
+#  waitOn: ->
+#    subs.subscribe 'archivedInvoices'
+#  fastRender: true
 
 
 Router.route "/my_invoices",
@@ -41,7 +41,7 @@ Router.route "/invoices_list",
   fastRender: true
 
 Router.route "/approved",
-  name: "exportedInvoices"
+  name: "approvedInvoices"
   waitOn: ->
     subs.subscribe 'exportedInvoices',
     subs.subscribe 'approvedInvoices'
@@ -71,6 +71,15 @@ Router.route "/invoices/:_id",
     Invoices.findOne @params._id
 #    InvoiceLines.find @params.invoiceId
 
+Router.route "/approved/invoices/:_id",
+  name: "approvedInvoicePage"
+  waitOn: ->
+    subs.subscribe 'approvedInvoices', @params._id
+    subs.subscribe 'invoicesLines', @params._id
+  data: ->
+    Invoices.findOne @params._id
+#    InvoiceLines.find @params.invoiceId
+
 Router.route "/invoices/:_id/edit",
   name: "invoiceEdit"
   waitOn: ->
@@ -80,8 +89,8 @@ Router.route "/invoices/:_id/edit",
     Invoices.findOne @params._id
 #    InvoiceLines.find @params.invoiceId
 
-Router.route "/invoices/rejected",
-  name: "rejected"
+Router.route "/rejected",
+  name: "rejectedInvoices"
   waitOn: ->
     subs.subscribe 'rejectedInvoices'
   fastRender: true
