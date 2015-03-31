@@ -1,4 +1,13 @@
 <template name="invoiceHeader">
+
+  <div class="grid-8 gutter-10">
+    <div class="span-7" style=";"></div>
+    <div class="span-1">
+      <div class="status-label {{status}}">{{status}}</div>
+    </div>
+  </div>
+
+
   <fieldset>
     <legend>Invoice Header <small style="float: right;">Approved: {{formatDate approvedDate}} <a href="http://prtprod/PRTSSOPrimas/RetrieveDoc.aspx?urn={{urn}}" target="_blank">View paper invoice</a></small></legend>
     <div data-row-span="5">

@@ -1,0 +1,20 @@
+.status-label {
+  text-align: center;
+  padding: 5px;
+  width: 100px;
+  border-radius: 10px;
+}
+.status-label.pending {
+  background-color: orange;
+  color: white;
+}
+
+.status-label.approved {
+  background-color: limegreen;
+  color: white;
+}
+
+.status-label.rejected {
+  background-color: red;
+  color: white;
+}

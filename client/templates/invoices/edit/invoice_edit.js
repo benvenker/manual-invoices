@@ -98,6 +98,7 @@ Template.invoiceEdit.events({
         totalCost: numeral(invoiceAmount).format('00.00'),
         retailCost: numeral(retailCost).format('00.00'),
         totalQuantity: totalQuantity,
+        status: 'pending'
       };
 
       Invoices.update(currentInvoiceId, {$set: invoiceProperties});
