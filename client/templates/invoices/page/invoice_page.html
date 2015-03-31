@@ -3,46 +3,54 @@
     {{> invoiceHeader}}
     <table class="flakes-table">
       <thead>
-        <tr>
-          <!--<td>#</td>-->
-          <td class="store-column">STORE</td>
-          <td>CLASS</td>
-          <td>UNIT CST</td>
-          <td>RET. CST</td>
-          <td class="quantity-column">QTY</td>
-          <td>STYLE</td>
-          <td>SKU</td>
-          <td class="description-column">DESC.</td>
-          <td>LINE TOTAL</td>
-        </tr>
+      <tr>
+        <!--<td>#</td>-->
+        <td class="store-column">STORE</td>
+        <td>CLASS</td>
+        <td>UNIT CST</td>
+        <td>RET. CST</td>
+        <td class="quantity-column">QTY</td>
+        <td>STYLE</td>
+        <td>SKU</td>
+        <td class="description-column">DESC.</td>
+        <td>LINE TOTAL</td>
+      </tr>
       </thead>
       <tbody>
-        {{#each invoiceLines}}
+      {{#each invoiceLines}}
         {{> invoiceLineItem}}
-        {{/each}}
+      {{/each}}
       </tbody>
     </table>
     <hr>
     <br>
-    <div class="grid-8 gutter-10">
-      <div class="span-6"></div>
-      <div class="span-1">
-        <a class="button-red edit-invoice" href="{{pathFor 'invoiceEdit'}}" style="float: right"><b>Edit</b></a>
-      </div>
-      {{#if isInRole 'superUser'}}
-      <div class="span-1">
-      <a class="button-green ciu-export"><b>Export</b></a>
-      </div> {{/if}}
+    <div class="grid-7 gutter-10">
       {{#if isInRole 'admin'}}
+        <div class="span-4"></div>
+        <div class="span-1">
+          <a class="button-orange edit-invoice" href="{{pathFor 'invoiceEdit'}}" style="float: right"><b>Edit</b></a>
+        </div>
         <div class="span-1">
           <a class="button-green approve-invoice ciu-export"><b>Approve</b></a>
-        </div> {{/if}}
+        </div>
+        <div class="span-1">
+          <a class="button-red reject-invoice pull-right"><b>Reject</b></a>
+        </div>
+      {{else}}
+        {{#if isInRole 'create-invoices'}}
+          <div class="span-6"></div>
+          <div class="span-1">
+            <a class="button-orange edit-invoice" href="{{pathFor 'invoiceEdit'}}" style="float: right"><b>Edit</b></a>
+          </div>
+          <!--<div class="span-1">-->
+            <!--<a class="button-green submit-invoice pull-right"><b>Submit</b></a>-->
+          <!--</div>-->
+        {{/if}}
+      {{/if}}
       <!-- Don't show the submit button to admins - approve does the same thing -->
       {{#if isInRole 'create-invoices'}}
-        <div class="span-1">
-          <a class="button-green submit-invoice"><b>Submit</b></a>
-        </div>{{/if}}
-</div>
+      {{/if}}
+    </div>
   </form>
 
 </template>
