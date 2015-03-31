@@ -43,7 +43,7 @@ Router.route "/invoices_list",
 Router.route "/approved",
   name: "approvedInvoices"
   waitOn: ->
-    subs.subscribe 'exportedInvoices',
+#    subs.subscribe 'exportedInvoices',
     subs.subscribe 'approvedInvoices'
   fastRender: true
 
@@ -74,11 +74,10 @@ Router.route "/invoices/:_id",
 Router.route "/approved/invoices/:_id",
   name: "approvedInvoicePage"
   waitOn: ->
-    subs.subscribe 'approvedInvoices', @params._id
+    subs.subscribe 'approvedInvoice', @params._id
     subs.subscribe 'invoicesLines', @params._id
   data: ->
     Invoices.findOne @params._id
-#    InvoiceLines.find @params.invoiceId
 
 Router.route "/invoices/:_id/edit",
   name: "invoiceEdit"
