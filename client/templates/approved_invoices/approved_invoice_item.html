@@ -1,0 +1,59 @@
+<template name="approvedInvoiceItem">
+  <div class="grid-1 gutter-20">
+    <div class="span-3">
+      <fieldset class="flakes-information-box">
+        <legend>Invoice Summary</legend>
+        <div class="grid-8 gutter-10">
+          <div class="span-7" style=";"></div>
+          <div class="span-1">
+            <div class="status-label {{status}}">{{status}}</div>
+          </div>
+        </div>
+        <a href="{{pathFor 'approvedInvoicePage'}}">
+          <div class="grid-12">
+            <dl class="span-4">
+              <dt>Invoice Number</dt>
+              <dd>{{invoiceNumber}}</dd>
+            </dl>
+            <dl class="span-4">
+              <dt>Vendor</dt>
+              <dd>{{vendorName}}</dd>
+            </dl>
+            <dl class="span-4">
+              <dt>Approved Date</dt>
+              <dd>{{formatDate approvedDate}}</dd>
+            </dl>
+          </div>
+          <div class="grid-12">
+            <dl class="span-4">
+              <dt>Total Cost</dt>
+              <dd>{{formatDollars totalCost}}</dd>
+            </dl>
+            <dl class="span-4">
+              <dt>Description</dt>
+              <dd>{{headerDescription}}</dd>
+            </dl>
+            <dl class="span-4">
+              <dt>Author</dt>
+              <dd>{{author}}</dd>
+            </dl>
+          </div>
+          <div class="grid-12">
+            <dl class="span-4">
+              <dt>Retail Cost</dt>
+              <dd>{{formatDollars retailCost}}</dd>
+            </dl>
+            <dl class="span-4">
+              <dt>Submitted Date</dt>
+              <dd>{{formatDate submitted}}</dd>
+            </dl>
+            <dl class="span-4">
+              <dt>Approved By</dt>
+              <dd>{{approvedBy}}</dd>
+            </dl>
+          </div>
+        </a>
+      </fieldset>
+    </div>
+  </div>
+</template>
