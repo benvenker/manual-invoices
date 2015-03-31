@@ -1,0 +1,92 @@
+<template name="invoiceHeader">
+
+  <div class="grid-8 gutter-10">
+    <div class="span-7" style=";"></div>
+    <div class="span-1">
+      <div class="status-label {{status}}">{{status}}</div>
+    </div>
+  </div>
+
+
+  <fieldset>
+    <legend>Invoice Header <small style="float: right;">Approved: {{formatDate approvedDate}} <a href="http://prtprod/PRTSSOPrimas/RetrieveDoc.aspx?urn={{urn}}" target="_blank">View paper invoice</a></small></legend>
+    <div data-row-span="5">
+      <div data-field-span="2" class="vendorNumber">
+        <label>Vendor Number </label>
+        <input type="text" value="{{vendorNumber}}" disabled="true">
+      </div>
+      <div data-field-span="2" class="author">
+        <label>Author </label>
+        <input type="text" value="{{author}}" disabled="true">
+      </div>
+      <div data-field-span="1" class="submitted">
+        <label>Submitted Date</label>
+        <input type="text" value="{{formatDate submitted}}" disabled="true">
+      </div>
+    </div>
+    <div data-row-span="5">
+      <div data-field-span="1">
+        <label>PO</label>
+        <input type="text" name="PO" value="{{PO}}" disabled="true">
+      </div>
+      <div data-field-span="1">
+        <label>BOL</label>
+        <input type="text" name="BOL" value="{{BOL}}" disabled="true">
+      </div>
+      <div data-field-span="1">
+        <label>TOTAL QUANTITY</label>
+        <input type="text" name="totalQuantity" value="{{totalQuantity}}" disabled="true">
+      </div>
+      <div data-field-span="1">
+        <label>TOTAL COST</label>
+        <input type="text" name="totalCost" value="{{formatDollars totalCost}}" disabled="true">
+      </div>
+      <div data-field-span="1" >
+        <label>RETAIL COST</label>
+        <input type="text" name='retailCost' value="{{formatDollars retailCost}}" disabled="true"/>
+      </div>
+    </div>
+    <div data-row-span="5">
+      <div data-field-span="1">
+        <label>OPCO</label>
+        <input type="text" name="opco" value="{{OPCO}}" disabled="true">
+      </div>
+      <div data-field-span="1">
+        <label>Department</label>
+        <input type="text" name="department" value="{{department}}" disabled="true">
+      </div>
+      <div data-field-span="1">
+        <label>Manufacturer</label>
+        <input type="text" name="manufacturer" value="{{manufacturer}}" disabled="true">
+      </div>
+      <div data-field-span="2">
+        <label>Vendor Name</label>
+        <input type="text" name="vendorName" value="{{vendorName}}" disabled="true">
+      </div>
+    </div>
+    <div data-row-span="5">
+      <div data-field-span="1">
+        <label>INVOICE NUMBER</label>
+        <input type="text" name="invoiceNumber" value="{{invoiceNumber}}" disabled="true">
+      </div>
+      <div data-field-span="1">
+        <label>TRANSACTION CODE</label>
+        <input type="text" name="transactionCode" value="{{transactionCode}}" disabled="true">
+      </div>
+      <div data-field-span="2"  class="">
+        <label>SOURCE</label>
+        <input type="text" name="source" value="{{source}}" disabled="true">
+      </div>
+      <div data-field-span="1">
+        <label>INVOICE DATE</label>
+        <input type="text" name="invoiceDate" value="{{invoiceDate}}" disabled="true">
+      </div>
+    </div>
+    <div data-row-span="12">
+      <div data-field-span="" style="width:100%;" >
+        <label>HEADER DESCRIPTION</label>
+        <textarea name="headerDescription" value="{{headerDescription}}" disabled="true"></textarea>
+      </div>
+    </div>
+  </fieldset>
+</template>
