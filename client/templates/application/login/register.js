@@ -7,7 +7,7 @@ Template.register.events({
 
     if (isNotEmpty(email) && isNotEmpty(password) && isEmail(email) && areValidPasswords(password, passwordConfirm)) {
 
-      var user = {email: email, password: password};
+      var user = {email: email, username: email, password: password};
 
       Meteor.call('createUserWithRole', user, 'create-invoices', function(err, result) {
         if (!err) {

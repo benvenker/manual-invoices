@@ -119,6 +119,14 @@ Router.route "edit_users",
     subs.subscribe 'directory'
   fastRender: true
 
+Router.route "/user/:_id",
+  name: 'userPage'
+  waitOn: ->
+    subs.subscribe 'directory', @params._id
+    subs.subscribe 'invoices'
+  data: ->
+    Meteor.users.findOne @params._id
+
 Router.onBeforeAction "dataNotFound",
   only: "invoicesPage"
 

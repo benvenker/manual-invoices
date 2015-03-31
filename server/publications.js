@@ -78,7 +78,7 @@ Meteor.publish('archivedInvoices', function() {
 });
 
 Meteor.publish('directory', function() {
-  return Meteor.users.find();
+  return Meteor.users.find({}, {fields: {services: 0}});
 });
 
 Meteor.publish(null, function (){
