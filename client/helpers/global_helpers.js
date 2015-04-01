@@ -9,18 +9,43 @@ UI.registerHelper('isGlTemplateRequired', function() {
   }
 });
 
+UI.registerHelper('isApproved', function() {
+  if (Session.get('invoiceStatus') == 'approved') {
+    return true;
+  } else {
+    return false;
+  }
+});
+
+
+UI.registerHelper('isPending', function() {
+  if (Session.get('invoiceStatus') == 'pending') {
+    return true;
+  } else {
+    return false;
+  }
+});
+
+
+UI.registerHelper('isRejected', function() {
+  if (Session.get('invoiceStatus') == 'rejected') {
+    return true;
+  } else {
+    return false;
+  }
+});
 
 // Watch transactionCode session variable.
 Tracker.autorun(function() {
   console.log("transCode = " + Session.get('transactionCode'));
   var transCode = Session.get('transactionCode');
   if (transCode == '160' ||
-      transCode == '210' ||
-      transCode == '211' ||
-      transCode == '212' ||
-      transCode == '327' ||
-      transCode == '500' ||
-      transCode == '501') {
+    transCode == '210' ||
+    transCode == '211' ||
+    transCode == '212' ||
+    transCode == '327' ||
+    transCode == '500' ||
+    transCode == '501') {
 
     Session.set('glRequired', true)
   } else {

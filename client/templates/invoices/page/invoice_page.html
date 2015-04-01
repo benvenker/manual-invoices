@@ -1,5 +1,5 @@
 <template name="invoicePage">
-  <form class="grid-form">
+  <form class="grid-form invoice" id="{{_id}}">
     {{> invoiceHeader}}
     <table class="flakes-table">
       <thead>
@@ -25,32 +25,46 @@
     <hr>
     <br>
     <div class="grid-7 gutter-10">
-      {{#if isInRole 'admin'}}
-        <div class="span-4"></div>
-        <div class="span-1">
-          <a class="button-orange edit-invoice" href="{{pathFor 'invoiceEdit'}}" style="float: right"><b>Edit</b></a>
-        </div>
-        <div class="span-1">
-          <a class="button-green approve-invoice ciu-export"><b>Approve</b></a>
-        </div>
-        <div class="span-1">
-          <a class="button-red reject-invoice pull-right"><b>Reject</b></a>
-        </div>
-      {{else}}
-        {{#if isInRole 'create-invoices'}}
-          <div class="span-6"></div>
+      {{#if isApproved}}
+        {{#if isInRole 'create-invoices' 'admin'}}
+          <div class="span-4"></div>
+          <div class="span-3">
+            <a class="button-orange bigger edit-invoice" href="{{pathFor 'invoiceEdit'}}" style="float: right"><b>Edit and Resubmit</b></a>
+          </div>
+        {{/if}}
+      {{/if}}
+      {{#if isPending}}
+        {{#if isInRole 'admin'}}
+          <div class="span-4"></div>
           <div class="span-1">
             <a class="button-orange edit-invoice" href="{{pathFor 'invoiceEdit'}}" style="float: right"><b>Edit</b></a>
           </div>
-          <!--<div class="span-1">-->
+          <div class="span-1">
+            <a class="button-green approve-invoice ciu-export"><b>Approve</b></a>
+          </div>
+          <div class="span-1">
+            <a class="button-red reject-invoice pull-right"><b>Reject</b></a>
+          </div>
+        {{else}}
+          {{#if isInRole 'create-invoices'}}
+            <div class="span-6"></div>
+            <div class="span-1">
+              <a class="button-orange edit-invoice" href="{{pathFor 'invoiceEdit'}}" style="float: right"><b>Edit</b></a>
+            </div>
+            <!--<div class="span-1">-->
             <!--<a class="button-green submit-invoice pull-right"><b>Submit</b></a>-->
-          <!--</div>-->
+            <!--</div>-->
+          {{/if}}
         {{/if}}
       {{/if}}
-      <!-- Don't show the submit button to admins - approve does the same thing -->
-      {{#if isInRole 'create-invoices'}}
+            <!-- Don't show the submit button to admins - approve does the same thing -->
+
+      {{#if isRejected}}
+        <div class="span-6"></div>
+        <div class="span-1">
+          <a class="button-orange edit-invoice" href="{{pathFor 'invoiceEdit'}}" style="float: right"><b>Edit</b></a>
+        </div>
       {{/if}}
     </div>
   </form>
-
 </template>

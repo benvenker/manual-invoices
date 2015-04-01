@@ -1,3 +1,11 @@
+Template.invoicePage.rendered = function() {
+  var _id = $('.grid-form.invoice').attr('id');
+  var invoiceStatus = Invoices.findOne({_id: _id}).status;
+  Session.set('invoiceStatus', invoiceStatus);
+  console.log("status = " + invoiceStatus);
+};
+
+
 Template.invoicePage.events({
   // Export the invoice in CIU format
   "click .approve-invoice": function(e, t) {
