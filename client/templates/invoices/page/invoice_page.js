@@ -42,7 +42,9 @@ Template.invoicePage.events({
 
   'click .reject-invoice': function(e) {
     e.preventDefault();
-    if (confirm("Reject this invoice? This will send it to the Rejected queue for review.")) {
+    if ($('.comment').val().length === 0) {
+      alert("You must provide a comment if you are rejecting an invoice!");
+    } else if (confirm("Reject this invoice? This will send it to the Rejected queue for review.")) {
       var approver = Meteor.user();
 
       Invoices.update({_id: this._id},
@@ -52,6 +54,15 @@ Template.invoicePage.events({
             rejectedBy: approver.profile.firstName + ' ' + approver.profile.lastName || approver.emails[0].address
           }
         });
+
+      var comment = {
+        userId: Meteor.user()._id,
+        author: Meteor.user().emails[0].address,
+        invoiceId: this._id,
+        body: $('.comment').val()
+      };
+
+      Comments.insert(comment)
       alert("Invoice moved to the Rejected queue");
       Router.go('invoicesList');
     }
@@ -78,11 +89,33 @@ Template.invoicePage.events({
 Template.invoicePage.helpers({
   invoiceLines: function(){
     return InvoiceLines.find({invoiceId: this._id}, {sort: {invoiceLineNumber: 1}});
-  }
+  },
 
-  //invoiceLines: function() {
-  //  var self = Invoices.find({_id: this._id}, {sort: {invoiceLineNumber: 1}}).fetch();
-  //  console.log(self[0].lines);
-  //  return self[0].lines;
-  //}
+  comments: function() {
+    return Comments.find({invoiceId: this._id});
+  },
+
+  pending: function() {
+    if (this.status === 'pending') {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
+  approved: function() {
+    if (this.status === 'approved') {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
+  rejected: function() {
+    if (this.status === 'rejected') {
+      return true;
+    } else {
+      return false;
+    }
+  }
 });
