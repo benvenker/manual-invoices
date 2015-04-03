@@ -1,5 +1,15 @@
 <template name="invoiceEdit">
   <p class="flakes-message warning">WARNING: You are in edit mode. All fields are editable, but changes will not be saved until you click "CONFIRM" below.</p>
+  {{#if isRejected}}
+    <h3>Rejection Reason</h3>
+    <br/>
+    <div class="comments">
+      {{#each comments}}
+        {{> commentItem}}
+      {{/each}}
+    </div>
+    <br/>
+  {{/if}}
   <form class="grid-form" invoiceId="{{_id}}">
     {{> invoiceHeaderEdit}}
     <br>

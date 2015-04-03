@@ -1,4 +1,14 @@
 <template name="invoicePage">
+  {{#if isRejected}}
+    <h3>Rejection Reason</h3>
+    <br/>
+    <div class="comments">
+      {{#each comments}}
+        {{> commentItem}}
+      {{/each}}
+    </div>
+    <br/>
+  {{/if}}
   <form class="grid-form invoice" id="{{_id}}">
     {{> invoiceHeader}}
     <table class="flakes-table">
@@ -24,6 +34,29 @@
     </table>
     <hr>
     <br>
+    {{#if isPending}}
+      <br/>
+      <p class="flakes-message warning">If you are rejecting the invoice, please add a comment to explain the reason for rejection.</p>
+      <form class="grid-form">
+        <fieldset>
+          <div data-row-span="1">
+            <legend>Comments</legend>
+            <div data-row-span="">
+              <div data-field-span="1" style="width: 100%;">
+                <label></label>
+                <textarea rows=3 type="text" class="comment"></textarea>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </form>
+      <ul class="comments">
+        {{#each commments}}
+          {{> commentItem}}
+        {{/each}}
+      </ul>
+    {{/if}}
+    <br/>
     <div class="grid-7 gutter-10">
       {{#if isApproved}}
         {{#if isInRole 'create-invoices' 'admin'}}
@@ -67,4 +100,5 @@
       {{/if}}
     </div>
   </form>
+  <!-- Comment form -->
 </template>

@@ -143,3 +143,9 @@ Template.invoiceEdit.events({
     }
   }
 });
+
+Template.invoiceEdit.helpers({
+  comments: function() {
+    return Comments.find({invoiceId: this._id});
+  }
+});
