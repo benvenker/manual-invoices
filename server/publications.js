@@ -93,3 +93,7 @@ Meteor.publish('directory', function() {
 Meteor.publish(null, function (){
   return Meteor.roles.find({})
 });
+
+Meteor.publish('comments', function(invoiceId) {
+  return Comments.findFaster({invoiceId: invoiceId});
+});

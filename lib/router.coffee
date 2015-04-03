@@ -67,6 +67,7 @@ Router.route "/invoices/:_id",
   waitOn: ->
     subs.subscribe 'invoice', @params._id
     subs.subscribe 'invoicesLines', @params._id
+    subs.subscribe 'comments', @params._id
   data: ->
     Invoices.findOne @params._id
 #    InvoiceLines.find @params.invoiceId
@@ -84,6 +85,7 @@ Router.route "/invoices/:_id/edit",
   waitOn: ->
     subs.subscribe 'invoice', @params._id
     subs.subscribe 'invoicesLines', @params._id
+    subs.subscribe 'comments', @params._id
   data: ->
     Invoices.findOne @params._id
 #    InvoiceLines.find @params.invoiceId
