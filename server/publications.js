@@ -74,7 +74,7 @@ Meteor.publish('exportedInvoices', function() {
 });
 
 Meteor.publish('rejectedInvoices', function() {
-  return Invoices.findFaster({status: 'rejected'}, {fields: { status: 1, exported: 1, invoiceNumber: 1, vendorName: 1, totalCost: 1, retailCost: 1, headerDescription: 1, author: 1}, sort: {submitted: -1}});
+  return Invoices.findFaster({status: 'rejected'}, {fields: { status: 1, exported: 1, invoiceNumber: 1, vendorName: 1, totalCost: 1, retailCost: 1, headerDescription: 1, author: 1, rejectedBy: 1, submitted: 1}, sort: {submitted: -1}});
 });
 
 
