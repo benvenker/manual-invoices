@@ -11,46 +11,62 @@
         </div>
         <a href="{{pathFor 'invoicePage'}}">
           <div class="grid-12">
-            <dl class="span-4">
+            <dl class="span-2">
               <dt>Invoice Number</dt>
               <dd>{{invoiceNumber}}</dd>
             </dl>
+            <dl class="span-1"></dl>
             <dl class="span-4">
               <dt>Vendor</dt>
               <dd>{{vendorName}}</dd>
             </dl>
-            <dl class="span-4">
-              <dt>Approved Date</dt>
-              <dd>{{formatDate approvedDate}}</dd>
-            </dl>
-          </div>
-          <div class="grid-12">
-            <dl class="span-4">
-              <dt>Total Cost</dt>
-              <dd>{{formatDollars totalCost}}</dd>
-            </dl>
-            <dl class="span-4">
-              <dt>Description</dt>
-              <dd>{{headerDescription}}</dd>
-            </dl>
+            <dl class="span-1"></dl>
             <dl class="span-4">
               <dt>Author</dt>
               <dd>{{author}}</dd>
             </dl>
           </div>
           <div class="grid-12">
+            <dl class="span-2">
+              <dt>Total Cost</dt>
+              <dd>{{formatDollars totalCost}}</dd>
+            </dl>
+            <dl class="span-1"></dl>
             <dl class="span-4">
+              <dt>Description</dt>
+              <dd>{{headerDescription}}</dd>
+            </dl>
+            <dl class="span-1"></dl>
+            {{#if isApproved}}
+              <dl class="span-4">
+                <dt>Approved Date</dt>
+                <dd>{{formatDate approvedDate}}</dd>
+              </dl>
+            {{/if}}
+          </div>
+          <div class="grid-12">
+            <dl class="span-2">
               <dt>Retail Cost</dt>
               <dd>{{formatDollars retailCost}}</dd>
             </dl>
+            <dl class="span-1"></dl>
             <dl class="span-4">
               <dt>Submitted Date</dt>
               <dd>{{formatDate submitted}}</dd>
             </dl>
-            <dl class="span-4">
-              <dt>Approved By</dt>
-              <dd>{{approvedBy}}</dd>
-            </dl>
+            <dl class="span-1"></dl>
+            {{#if isApproved}}
+              <dl class="span-4">
+                <dt>Approved By</dt>
+                <dd> test or {{approvedBy}}</dd>
+              </dl>
+            {{/if}}
+            {{#if isRejected}}
+              <dl class="span-4">
+                <dt>Rejected By</dt>
+                <dd>{{rejectedBy}}</dd>
+              </dl>
+            {{/if}}
           </div>
         </a>
       </fieldset>
