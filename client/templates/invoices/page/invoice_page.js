@@ -46,7 +46,8 @@ Template.invoicePage.events({
       alert("You must provide a comment if you are rejecting an invoice!");
     } else if (confirm("Reject this invoice? This will send it to the Rejected queue for review.")) {
       var approver = Meteor.user();
-
+      console.log("rejected by: " + approver.profile.firstName + ' ' + approver.profile.lastName);
+      console.log("rejector email: " + approver.emails[0].address);
       Invoices.update({_id: this._id},
         {$set:
           {
