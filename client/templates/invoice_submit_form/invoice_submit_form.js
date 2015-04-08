@@ -75,11 +75,96 @@ Template.invoiceSubmitForm.events({
         console.log("failed" + vendorNumber);
         alert(err);
       } else {
-        alert("Success!");
         console.log(invoiceId);
         console.log("vendor number: " + vendorNumber + " found");
 
-        //Router.go('invoicePage', {_id: invoiceId._id});
+        // Get the invoice rows
+        var invoiceLineNumber = 0;  // set counter variable for invoice line
+        table.find('tr').each(function () { // Find each table row and get the data
+          invoiceLineNumber ++;
+
+          var quantity = parseInt( $(this).find('.quantity').val() );
+          var unitCost = parseFloat( $(this).find('.unitCost').val() ) ;
+          var lineRetailCost = parseFloat( $(this).find('.lineRetailCost').val() ) || 0;
+          var lineTotalVar = numeral(unitCost * quantity).format('00.00') || 0;
+          var lineRetailCostVar = numeral(lineRetailCost * quantity).format('00.00') || 0;
+
+          var line = {};
+          $(this).find('td').each(function () { // Data comes from each input in each <tr>
+            // Set the key to the class name of input field
+            var key = $(this).find("input").attr('class');
+
+            // Set the key value to the input field's value
+            var val = $(this).find("input").val();
+
+            addKey(line, key, val); // Custom function to add key value pairs to line obj.
+            var invoiceLineProperties = {
+              lineTotal: numeral(unitCost * quantity).format('00.00'),
+              invoiceLineNumber: invoiceLineNumber,
+              invoiceId: invoiceId
+            };
+
+            _.extend(line, invoiceLineProperties);
+
+          });
+
+          // Increment the invoice header totals by line total
+          totalCost += numeral().unformat(lineTotalVar);
+          retailCost += numeral().unformat(lineRetailCostVar);
+          totalQuantity += quantity;
+          console.log("about to insert line " + invoiceLineNumber + " for invoiceId: " + invoiceId);
+
+          // Insert the invoice line
+          InvoiceLines.insert(line, function(err) {
+            if (err) {
+              console.log("failed invoice line insert");
+              alert(err);
+            } else {
+              console.log("InvoiceLine inserted");
+            }
+          });
+        });
+
+        // After the invoice lines are inserted, set the GL account...
+
+        // Find an invoice line for the current invoice and get the store number
+        // for the GL account.
+        var store = InvoiceLines.findOne({invoiceId: invoiceId}).store;
+        console.log("store: " + store);
+
+        // Assign GL account
+        var glAccount = '';
+        if (Session.get('isGlTemplateRequired') == true) {
+          var glForm = $('.gl-account');
+          glForm.find('input').each(function() {
+            glAccount += $(this).val();
+            console.log("this (glAccount): " + invoice.glAccount);
+          });
+        } else {
+          glAccount = completeGlAccount(transactionCodeObj, store, parseInt(Session.get('opco')));
+          console.log("glAccount: " + glAccount);
+        }
+
+        var user = Meteor.user(); // Get the current user object
+
+        var invoiceProperties = {
+          glAccount: glAccount,
+          status: 'pending',
+          totalCost: numeral(totalCost).format('0.00'),
+          retailCost: numeral(retailCost).format('0.00'),
+          totalQuantity: totalQuantity,
+          author: user.emails[0].address,
+          userId: user._id
+        };
+        console.log("invoiceProperties.glAccount: " + invoiceProperties.glAccount);
+
+        Invoices.update(invoiceId, {$set: invoiceProperties}, function(err) {
+          if (err) {
+            alert(err)
+          } else {
+            console.log("invoice updated");
+          }
+        });
 
         Router.go('invoicePage', {_id: invoiceId});
 
@@ -88,89 +173,7 @@ Template.invoiceSubmitForm.events({
     });
 
 
-// Get the invoice rows
 
-    //var lines = [];
-    var invoiceLineNumber = 0;
-    table.find('tr').each(function () { // Find each table row and get the data
-      invoiceLineNumber ++;
-
-      var quantity = parseInt( $(this).find('.quantity').val() );
-      var unitCost = parseFloat( $(this).find('.unitCost').val() ) ;
-      var lineRetailCost = parseFloat( $(this).find('.lineRetailCost').val() );
-      var lineTotalVar = numeral(unitCost * quantity).format('00.00');
-      console.log("lineTotalVar = " + lineTotalVar);
-      var lineRetailCostVar = numeral(lineRetailCost * quantity).format('00.00');
-
-      var line = {};
-      $(this).find('td').each(function () { // Data comes from each input in each <tr>
-        // Set the key to the class name of input field
-        var key = $(this).find("input").attr('class');
-
-        // Set the key value to the input field's value
-        var val = $(this).find("input").val();
-
-        addKey(line, key, val); // Custom function to add key value pairs to line obj.
-        var invoiceLineProperties = {
-          lineTotal: numeral(unitCost * quantity).format('00.00'),
-          invoiceLineNumber: invoiceLineNumber,
-          invoiceId: invoiceId
-        };
-
-        _.extend(line, invoiceLineProperties);
-
-      });
-
-      // Increment the invoice header totals by line total
-      totalCost += numeral().unformat(lineTotalVar);
-      retailCost += numeral().unformat(lineRetailCostVar);
-      totalQuantity += quantity;
-      console.log("about to insert line " + invoiceLineNumber + " for invoiceId: " + invoiceId);
-
-      // Insert the invoice line
-      InvoiceLines.insert(line, function(err) {
-        if (err) {
-          console.log("failed invoice line insert");
-          alert(err);
-        } else {
-          console.log("InvoiceLine inserted");
-        }
-      });
-    });
-
-    // Find an invoice line for the current invoice and get the store number
-    var store = InvoiceLines.findOne({invoiceId: invoiceId}).store;
-    console.log("store: " + store);
-
-    // Assign GL account
-    var glAccount = '';
-    if (Session.get('isGlTemplateRequired') == true) {
-      var glForm = $('.gl-account');
-      glForm.find('input').each(function() {
-        glAccount += $(this).val();
-        console.log("this (glAccount): " + invoice.glAccount);
-      });
-    } else {
-      glAccount = completeGlAccount(transactionCodeObj, store, parseInt(Session.get('opco')));
-      console.log("glAccount: " + glAccount);
-    }
-
-    var user = Meteor.user();
-
-    var invoiceProperties = {
-      //lines: lines,
-      glAccount: glAccount,
-      //submitted: new Date(),
-      status: 'pending',
-      totalCost: numeral(totalCost).format('0.00'),
-      retailCost: numeral(retailCost).format('0.00'),
-      totalQuantity: totalQuantity,
-      author: user.emails[0].address,
-      userId: user._id
-    };
-    console.log("invoiceProperties.glAccount: " + invoiceProperties.glAccount);
-
-    Invoices.update(invoiceId, {$set: invoiceProperties});
 
   },
 
