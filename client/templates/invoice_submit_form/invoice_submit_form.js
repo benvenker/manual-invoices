@@ -126,7 +126,16 @@ Template.invoiceSubmitForm.events({
       retailCost += numeral().unformat(lineRetailCostVar);
       totalQuantity += quantity;
       console.log("about to insert line " + invoiceLineNumber + " for invoiceId: " + invoiceId);
-      InvoiceLines.insert(line);
+
+      // Insert the invoice line
+      InvoiceLines.insert(line, function(err) {
+        if (err) {
+          console.log("failed invoice line insert");
+          alert(err);
+        } else {
+          console.log("InvoiceLine inserted");
+        }
+      });
     });
 
     // Find an invoice line for the current invoice and get the store number
