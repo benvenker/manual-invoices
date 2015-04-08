@@ -1,6 +1,10 @@
 <template name="approvedInvoices">
   <h1>Approved Invoices</h1>
-  {{#each invoices}}
-    {{> approvedInvoiceItem}}
-  {{/each}}
-</template>
+  <!--{{#if isListGreaterThanOne}}-->
+    {{#each invoices}}
+      {{> approvedInvoiceItem}}
+    {{/each}}
+  <!--{{else}}-->
+    <!--<p class="flakes-message information">There are no approved invoices at this time.</p>-->
+  <!--{{/if}}-->
+  </template>
