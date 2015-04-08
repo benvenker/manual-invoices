@@ -1,29 +1,9 @@
 <template name="editUsers">
   {{#each users}}
-    <!--{{> userItem}}-->
     <div class="grid-1 gutter-20">
       <div class="span-2" id="{{_id}}">
         <fieldset class="flakes-information-box">
           <legend>User Profile</legend>
-          {{#if isEditingUser}}
-            <div class="grid-12">
-              <dl class="span-4">
-                <dt>Email</dt>
-                <dd><div data-field-span="1" class="userEmail">
-                  <label></label>
-                  <input type="text" class="email" value="{{emails.[0].address}}">
-                </div>
-                </dd>
-              </dl>
-              <dl class="span-1"></dl>
-              <dl class="span-4">
-                <dt>Roles</dt>
-                {{#each roles}}
-                  <dd>{{this}}</dd>
-                {{/each}}
-              </dl>
-            </div>
-          {{else}}
             <div class="grid-12">
               <dl class="span-4">
                 <dt>Email</dt>
@@ -37,7 +17,6 @@
                 {{/each}}
               </dl>
             </div>
-          {{/if}}
           <div class="grid-8 gutter-10">
             <div class="span-6"></div>
             <div class="span-1 editUser">
