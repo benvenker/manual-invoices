@@ -18,7 +18,6 @@ Template.vendorTypeahead.helpers({
     var supplierSite = Session.get("supplierSite");
     query = query.toUpperCase();
 
-    //Meteor.call('vendorNames', supplierSite, function(err, res) {
     Meteor.call('vendorNames', query, {}, supplierSite, function(err, res) {
       if (err) {
         console.log(err);
