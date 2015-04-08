@@ -1,11 +1,7 @@
 <template name="userPage">
   <div class="view-wrap">
-
-
     <h1>{{profile.firstName}} {{profile.lastName}}'s Profile</h1>
-
     <br>
-
     <div class="grid-10 gutter-20">
       <div class="span-7">
         <form class="grid-form">
@@ -29,8 +25,7 @@
             </div>
             <br/>
             <p class="flakes-message information">Roles are separated by commas. For roles with multiple words, (e.g. 'create-invoices') separate the words with dashes.</p>
-          <legend>Roles</legend>
-
+            <legend>Roles</legend>
             <div data-row-span="1">
               <textarea name="roles" id="" cols="30" rows="3">{{#each roles}} {{this}}, {{/each}}</textarea>
             </div>
@@ -53,24 +48,6 @@
                 <input type="text" value="{{pending}}" disabled="true">
               </div>
             </div>
-            <!--<div data-row-span="1">-->
-              <!--<div data-field-span="1" >-->
-                <!--<label>Cost Price</label>-->
-                <!--<input type="text">-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div data-row-span="1">-->
-              <!--<div data-field-span="1" >-->
-                <!--<label>Wholesale Price</label>-->
-                <!--<input type="text">-->
-              <!--</div>-->
-            <!--</div>-->
-            <!--<div data-row-span="1">-->
-              <!--<div data-field-span="1" >-->
-                <!--<label>Retail Price</label>-->
-                <!--<input type="text">-->
-              <!--</div>-->
-            <!--</div>-->
           </fieldset>
         </form>
       </div>
@@ -78,16 +55,20 @@
 
     <br>
 
-    <div class="grid-4 gutter-20">
-      <!--<div class="span-2"></div>-->
-
+    <div class="grid-7 gutter-20">
       <div class="span-2">
         <a class="button-green bigger save-changes">Save Changes</a>
       </div>
-      <div class="span-2">
+      <div class="span-1"></div>
+      <div class="span-1">
         <a href="{{pathFor 'editUsers'}}" class="button-orange bigger cancel">Cancel</a>
       </div>
     </div>
-
+    <br/>
+    <div data-row-span="7">
+      <div class="span-2">
+        <a class="button-red bigger delete-user">Delete User</a>
+      </div>
+    </div>
   </div>
 </template>

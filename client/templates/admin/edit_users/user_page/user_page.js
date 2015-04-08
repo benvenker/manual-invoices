@@ -20,11 +20,12 @@ Template.userPage.events({
   'click .save-changes': function() {
     // Edit users events here
 
-    // Update the fields
     var firstName = $('[name=firstName').val();
     var lastName = $('[name=lastName').val();
     var newEmail = $('[name=email').val();
     var rolesArray = $('textarea').val().split(' ').join('').split(',');
+
+    // Update the fields
     Meteor.users.update({_id: this._id}, {
       $set: {
         emails: [
@@ -41,6 +42,10 @@ Template.userPage.events({
   },
 
   'click .delete-user': function() {
-    //
+    // Delete the user
+    if (confirm("Are you sure you want to delete this user?")) {
+      Meteor.users.remove({_id: this._id});
+      Router.go('editUsers');
+    }
   }
 });
