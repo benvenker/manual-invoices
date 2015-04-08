@@ -2,14 +2,10 @@ Template.transactionCodes.created = function() {
   this.autorun(function() {
     subs.subscribe('transactionCodes');
   })
-}
+};
 
 Template.transactionCodes.helpers({
   transactionCodes: function() {
-    //var everything = TransactionCodes.find({banner: parseInt(Session.get('opco'))}, {sort: {transactionCode:1}}).fetch();
-    //var justTransactionCodes = _.pluck(everything,"transactionCode");
-    //return _.uniq(justTransactionCodes);
-
     return TransactionCodes.findFaster({$or: [
       {banner: parseInt(Session.get('opco'))},
       {banner: "NA"}

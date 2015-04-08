@@ -2,12 +2,11 @@
   <select name="transactionCode" autocomplete="off" class="transactionCode-selection transactionCode">
     <option>Select</option>
     {{#each transactionCodes}}
-    {{> transactionCode}}
+      {{> transactionCode}}
     {{/each}}
   </select>
 </template>
 
 <template name="transactionCode">
-  <!--<option name="transactionCode">{{this}}</option>-->
   <option name="transactionCode"><div name="transCode">{{transactionCode}}</div> - <div name="description">{{description}}</div></option>
 </template>
