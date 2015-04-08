@@ -18,7 +18,7 @@
     </thead>
     <tbody>
     {{#each invoiceLines}}
-        {{> invoiceExportItem}}
+      {{> invoiceExportItem}}
     {{/each}}
     </tbody>
   </table>
@@ -26,7 +26,6 @@
 
 <template name="invoiceExportItem">
   <tr>
-    <!--<td>{{invoiceLineNumber}}</td>-->
     <td>{{invoiceNumber}}</td>
     <td>{{lineTotal}}</td>
     <td>{{lineRetailCost}}</td>
@@ -35,6 +34,5 @@
     <td>{{unitCost}}</td>
     <td>{{lineRetailCost}}</td>
     <td>{{description}}</td>
-    <!--<td><a class="button-red tiny"><b>×</b></a></td>-->
   </tr>
 </template>
