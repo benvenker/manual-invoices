@@ -26,7 +26,6 @@ Template.approvedInvoicePage.events({
         approvedBy: approver.emails[0].address,
         pending: false
       };
-      console.log("invoice to update: " + invoice);
       Invoices.update(invoice, {$set: approvalAttributes});
     }
     return false;
@@ -48,33 +47,10 @@ Template.approvedInvoicePage.events({
       Router.go('invoicesList');
     }
   }
-
-  // If you're in the 'create-invoices' role, submit the invoice for approval
-  //"click .submit-invoice": function(e, t) {
-  //  e.preventDefault();
-  //
-  //  if (confirm("Are you sure you want to submit this invoice?")) {
-  //    var invoice = this._id;
-  //    console.log("invoice: " + invoice);
-  //    var author = Meteor.user().emails[0].address;
-  //    Invoices.update(invoice, {$set: {
-  //      pending: true,
-  //      submitted: new Date(),
-  //      author: author,
-  //      approved: true}
-  //    });
-  //  }
-  //}
 });
 
 Template.approvedInvoicePage.helpers({
   invoiceLines: function(){
     return InvoiceLines.find({invoiceId: this._id}, {sort: {invoiceLineNumber: 1}});
   }
-
-  //invoiceLines: function() {
-  //  var self = Invoices.find({_id: this._id}, {sort: {invoiceLineNumber: 1}}).fetch();
-  //  console.log(self[0].lines);
-  //  return self[0].lines;
-  //}
 });
