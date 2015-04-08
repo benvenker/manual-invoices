@@ -12,7 +12,6 @@ Template.register.events({
       Meteor.call('createUserWithRole', user, 'create-invoices', function(err, result) {
         if (!err) {
           //User created!!
-          //alert("Registration successful");
           return Meteor.loginWithPassword(user.email, user.password, function(error) {
             if (error) {
               return alert(error.reason);

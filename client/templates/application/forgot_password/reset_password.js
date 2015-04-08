@@ -1,5 +1,5 @@
 Template.resetPassword.events({
-  'submit #resetPasswordForm': function(e, t) {
+  'submit #resetPasswordForm': function(e) {
     e.preventDefault();
 
     var resetPasswordForm = $(e.currentTarget),
