@@ -4,6 +4,7 @@ Template.invoiceSubmitForm.rendered = function(){
 };
 
 Template.invoiceSubmitForm.events({
+  // A series of validators that warn userss if they tab out of a required field.
   'keydown [name=vendorNumber]': function(e) {
     console.log('event detected');
     isProvided(e, "[name=vendorNumber]", "Vendor Number");
@@ -29,54 +30,50 @@ Template.invoiceSubmitForm.events({
   },
 
   'click .add-invoice': function () {
+    // Variables to make code cleaner when getting values from form fields
     var form = $('.grid-form');
     var table = $('.flakes-table tbody');
     var header = $('.invoice-header');
-    var transactionCodeObj = TransactionCodes.findOne({ // Get a TransactionCode object
+    var transactionCodeObj = TransactionCodes.findOne({ // Get a TransactionCode object for the GL account
       $or:
         [
+          // Get a transaction code that is valid for the banner...
           {transactionCode: parseInt(Session.get('transactionCode')),
             banner: parseInt(Session.get('opco'))},
+
+          // or one that is banner-independent (banner = "N/A" in the database)
           {transactionCode: parseInt(Session.get('transactionCode'))}
         ]
     });
+
+    // Create placeholder variables for summary values. These will be incremented with each additional
+    // invoice line that is collected, and finally summed to give a total value for the invoice.
     var totalCost = 0;
     var totalQuantity = 0;
     var retailCost = 0;
 
+    /*************************** Get the header values ****************************/
+    var invoice = {}; // invoice object to hold invoice properties
+    var elements = ['input', 'select', 'textarea']; // array of html element names to iterate through.
 
-// Get the header values TODO: Refactor this!!
-    var invoice = {};
-    header.find('input').each(function() {
-      var key = $(this).attr('name');
-      var val = $(this).val();
-      addKey(invoice, key, val); // Add each input field to the invoice object
+    // Map over all the html elements in the elements array and add their values to the
+    // invoice object.
+    _.map(elements, function(element) {
+      header.find(element).each(function() {
+        var key = $(this).attr('name');
+        var val = $(this).val();
+        addKey(invoice, key, val);
+      });
     });
 
-    header.find('select').each(function() {
-      var key = $(this).attr('name');
-      var val = $(this).val();
-      addKey(invoice, key, val); // Add each selection field to the invoice object
-
-      console.log(key + ": " + val);
-    });
-
-    header.find('textarea').each(function() {
-      var key = $(this).attr('name');
-      var val = $(this).val();
-      addKey(invoice, key, val); // Add each textarea field to invoice object
-    });
-
-    var vendorNumber = parseInt(invoice.vendorNumber);
-    console.log('vendorNumber = ' + 0);
-
+    // Insert the invoice
     var invoiceId = Invoices.insert(invoice, function (err) {
       if (err) {
-        console.log("failed" + vendorNumber);
+        console.log("failed to insert invoice");
         alert(err);
       } else {
         console.log(invoiceId);
-        console.log("vendor number: " + vendorNumber + " found");
+        console.log("invoice inserted");
 
         // Get the invoice rows
         var invoiceLineNumber = 0;  // set counter variable for invoice line
@@ -125,7 +122,7 @@ Template.invoiceSubmitForm.events({
           });
         });
 
-        // After the invoice lines are inserted, set the GL account...
+        /******** After the invoice lines are inserted, set the GL account... **************/
 
         // Find an invoice line for the current invoice and get the store number
         // for the GL account.
@@ -158,6 +155,7 @@ Template.invoiceSubmitForm.events({
         };
         console.log("invoiceProperties.glAccount: " + invoiceProperties.glAccount);
 
+        // Update the invoice with the additional invoiceProperties
         Invoices.update(invoiceId, {$set: invoiceProperties}, function(err) {
           if (err) {
             alert(err)
@@ -166,6 +164,7 @@ Template.invoiceSubmitForm.events({
           }
         });
 
+        // Redirect the router to the newly created invoice's page.
         Router.go('invoicePage', {_id: invoiceId});
 
         return invoiceId;
