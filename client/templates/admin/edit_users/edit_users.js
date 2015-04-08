@@ -25,11 +25,6 @@ Template.editUsers.events({
     }
   },
 
-  'click .edit-user': function() {
-    // Edit users events here
-
-  },
-
   'click .delete-user': function() {
     // Delete the user
     if (confirm("Are you sure you want to delete this user?")) {
