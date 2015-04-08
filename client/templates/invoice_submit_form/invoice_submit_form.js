@@ -96,7 +96,7 @@ Template.invoiceSubmitForm.events({
 
             addKey(line, key, val); // Custom function to add key value pairs to line obj.
             var invoiceLineProperties = {
-              lineTotal: numeral(unitCost * quantity).format('00.00'),
+              //lineTotal: numeral(unitCost * quantity).format('00.00'),
               invoiceLineNumber: invoiceLineNumber,
               invoiceId: invoiceId
             };

@@ -66,12 +66,12 @@ Template.invoiceEdit.events({
         store: parseInt($tds.eq(0).val()),
         itemClass: $tds.eq(1).val(),
         unitCost: numeral(unitCost).format('00.00'),
-        lineRetailCost: numeral(lineRetailCost).format('00.00'),
+        lineRetailCost: numeral(lineRetailCost).format('00.00') || 0,
         quantity: quantity,
         style: $tds.eq(5).val(),
         sku: $tds.eq(6).val(),
         description: $tds.eq(7).val(),
-        lineTotal: numeral(unitCost * quantity).format('00.00'),
+        lineTotal: numeral(unitCost * quantity).format('00.00')
       };
       console.log("unitCost: " + invoiceLine.unitCost);
       console.log("lineRetailCost: " + invoiceLine.lineRetailCost);
@@ -79,7 +79,7 @@ Template.invoiceEdit.events({
 
       var lineTotalVar = numeral(unitCost * quantity).format('00.00');
       invoiceAmount += numeral().unformat(lineTotalVar);
-      retailCost += numeral().unformat(lineRetailCost * quantity);
+      retailCost += numeral().unformat(lineRetailCost * quantity) || 0;
       totalQuantity += quantity;
 
       if ($(this).attr('id')) {
@@ -96,7 +96,7 @@ Template.invoiceEdit.events({
       //
       var invoiceProperties = {
         totalCost: numeral(invoiceAmount).format('00.00'),
-        retailCost: numeral(retailCost).format('00.00'),
+        retailCost: numeral(retailCost).format('00.00') || 0,
         totalQuantity: totalQuantity,
         status: 'pending'
       };
