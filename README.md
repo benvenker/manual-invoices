@@ -4,18 +4,16 @@ ap-portal
 This application is a portal for the Accounts Payable division. It's current aims are to provide functionality to suppor the following business needs:
 
  - A centralized location to house and create documentation related to Acounts Payable (AP) business processes and job functions.
- - A more automated, controlled process of manual invoice entry for the HBC AP Offshore team.
+ - A more automated, controlled process of manual invoice entry for the AP Offshore team.
 
 Some initial background information follows below.
 
-<!-- TODO: add verbiage on training portal -->
-
 ## Current State of Manual Invoice Entry
-Currently, HBC and Saks Fifth Avenue serve several non-[EDI](https://en.wikipedia.org/wiki/Electronic_data_interchange) vendors. What this means is that these vendors do not (or cannot) send their invoices electronically, in the EDI format.
+Currently, retailers serve several non-[EDI](https://en.wikipedia.org/wiki/Electronic_data_interchange) vendors. What this means is that these vendors do not (or cannot) send their invoices electronically, in the EDI format.
 
 The business process to support these vendors is the following:
-1. Vendors input their invoice invoices in a pre-formatted spreadsheet, provided by HBC/Saks.
-2. HBC IT offshore team copies the contents of the vendor's into an identically formatted spreadsheet, but one that is located inside the HBC network.
+1. Vendors input their invoice invoices in a pre-formatted spreadsheet.
+2. IT offshore team copies the contents of the vendor's into an identically formatted spreadsheet, but one that is located inside the HBC network.
 3. Many of these invoices must be approved by a U.S.-based manager, but no workflow functionality exists in the spreadsheet currently.
 4. Once approved, the invoice can be "submitted", which entails the spreadsheet input being converted into a `.dat` file in the EDI format, which is saved on a LAN drive, for pickup by an automated process that sends it a Common Interface Upload (CIU).
 
