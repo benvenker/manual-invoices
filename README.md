@@ -1,7 +1,7 @@
 ap-portal
 =========
 
-This application is a portal for the HBC Accounts Payable division. It's current aims are to provide functionality to suppor the following business needs:
+This application is a portal for the Accounts Payable division. It's current aims are to provide functionality to suppor the following business needs:
 
  - A centralized location to house and create documentation related to Acounts Payable (AP) business processes and job functions.
  - A more automated, controlled process of manual invoice entry for the HBC AP Offshore team.
